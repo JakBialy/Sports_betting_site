@@ -19,18 +19,21 @@ public @Data class User {
 
     @NotEmpty
     @Column(nullable = false, unique = true)
+    // in forms named e-mail
     private String username;
 
     private String firstName;
 
     private String lastName;
 
-    private String email;
+    private String nick;
 
     @NotEmpty
     private String password;
 
     private boolean enabled;
+
+    private long money;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),

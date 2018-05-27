@@ -19,20 +19,22 @@
 <body class="bg-dark">
 
 
-<div class="container" th:action="@{/login.html}" method="post">
+<div class="container" >
     <div class="card card-login mx-auto mt-5">
         <div class="card-header">Login</div>
         <div class="card-body">
-            <form>
+            <form th:action="@{/login}" method="post">
                 <div class="form-group">
                     <label for="username">Email address</label>
-                    <input class="form-control" type="text" id="username" name="username" autofocus="autofocus" aria-describedby="emailHelp" placeholder="Enter email">
+                    <input class="form-control" type="text" id="username" name="username" autofocus="autofocus" placeholder="Enter email">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input class="form-control" id="password" type="password" name="password" placeholder="Password">
                 </div>
-                <input type="submit" value="Log in" />
+                <div class="text-center">
+                    <input type="submit" value="Log in" />
+                </div>
             </form>
             <div class="text-center">
                 <a class="d-block small mt-3" href="/register">Register an Account</a>

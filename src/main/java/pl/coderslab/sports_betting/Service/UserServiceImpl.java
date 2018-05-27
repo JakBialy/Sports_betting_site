@@ -51,6 +51,7 @@ public class UserServiceImpl implements UserService {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEnabled(true);
+        user.setMoney(100);
 
         Role role = roleService.getOrCreate(DEFAULT_USER_ROLE_NAME);
         Set<Role> roles = new HashSet<>(Collections.singletonList(role));

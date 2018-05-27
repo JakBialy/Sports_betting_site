@@ -21,14 +21,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .anyRequest().authenticated()
                 .antMatchers("/index").authenticated()
                 .antMatchers("/resources/**").permitAll().anyRequest().permitAll()
+                .antMatchers("/login", "/register", "/logout").permitAll()
+                // now for easier prototyping
+                .antMatchers("/**").authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .permitAll()
-                .defaultSuccessUrl("/index");
+                .defaultSuccessUrl("/index")
+                  .and()
+                .logout()
+                .logoutSuccessUrl("/login");
 
     }
 
@@ -38,3 +42,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 }
+
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http.authorizeRequests()
+//                .antMatchers("/login", "/register").permitAll() // anonym can login or register
+//                .antMatchers("/").access("hasRole('USER')") // home page is not allowed if not user is logged in
+//                .and().formLogin().loginPage("/login")
+//                .and()
+//                .logout().logoutSuccessUrl("/register");
+//
+//        http.csrf().disable();
+//    }
