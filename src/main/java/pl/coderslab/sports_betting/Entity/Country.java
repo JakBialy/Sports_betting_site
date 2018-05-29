@@ -1,5 +1,6 @@
 package pl.coderslab.sports_betting.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,8 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "countries")
-public @Data
-class Country {
+public @Data class Country {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

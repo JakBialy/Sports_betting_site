@@ -1,4 +1,4 @@
-package pl.coderslab.sports_betting.Service;
+package pl.coderslab.sports_betting.Service.Security;
 
 
 import pl.coderslab.sports_betting.Entity.Role;

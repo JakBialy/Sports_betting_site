@@ -1,9 +1,9 @@
 package pl.coderslab.sports_betting.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "teams")
@@ -26,12 +26,13 @@ class Team {
 
     @ManyToOne
     @JoinColumn(name = "league_id")
+    @JsonBackReference
     League league;
 
-    @OneToMany(mappedBy="homeTeam")
-    private List<Match> homeTeamGames;
-
-    @OneToMany(mappedBy="awayTeam")
-    private List<Match> awayTeamGames;
+//    @OneToMany(mappedBy="homeTeam")
+//    private List<Match> homeTeamGames;
+//
+//    @OneToMany(mappedBy="awayTeam")
+//    private List<Match> awayTeamGames;
 
 }
