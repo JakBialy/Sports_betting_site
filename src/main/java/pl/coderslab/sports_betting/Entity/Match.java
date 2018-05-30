@@ -39,6 +39,6 @@ class Match {
     @JsonBackReference
     Team awayTeam;
 
-//    @OneToOne(mappedBy="match")
-//    private Odds odds;
+    @OneToOne(mappedBy="match")
+    private Odds odds;
 }

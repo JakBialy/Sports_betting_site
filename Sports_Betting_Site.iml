@@ -122,5 +122,6 @@
     <orderEntry type="library" name="Maven: org.yaml:snakeyaml:android:1.19" level="project" />
     <orderEntry type="library" name="Maven: com.github.mifmif:generex:1.0.2" level="project" />
     <orderEntry type="library" name="Maven: dk.brics.automaton:automaton:1.11-8" level="project" />
+    <orderEntry type="library" name="Maven: org.decimal4j:decimal4j:1.0.3" level="project" />
   </component>
 </module>

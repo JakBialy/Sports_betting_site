@@ -3,10 +3,7 @@ package pl.coderslab.sports_betting.Controller.RestApiController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.coderslab.sports_betting.Entity.League;
 import pl.coderslab.sports_betting.Entity.Team;
-import pl.coderslab.sports_betting.Service.LeagueService;
-import pl.coderslab.sports_betting.Service.MatchService;
 import pl.coderslab.sports_betting.Service.TeamService;
 
 import java.util.List;
