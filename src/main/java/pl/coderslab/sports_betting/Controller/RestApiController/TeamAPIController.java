@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/team")
-public class MatchAPIController {
+public class TeamAPIController {
 
     @Autowired
     TeamService teamService;

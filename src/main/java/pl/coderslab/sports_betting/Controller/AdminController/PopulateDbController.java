@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pl.coderslab.sports_betting.Service.CountryService;
 import pl.coderslab.sports_betting.Service.LeagueService;
+import pl.coderslab.sports_betting.Service.MatchService;
 import pl.coderslab.sports_betting.Service.TeamService;
 
 @Controller
@@ -21,6 +22,9 @@ public class PopulateDbController {
 
     @Autowired
     TeamService teamService;
+
+    @Autowired
+    MatchService matchService;
 
     @GetMapping(path = "/countries")
     @ResponseBody
@@ -41,5 +45,12 @@ public class PopulateDbController {
     public String teamsInDb() {
         teamService.populateDb();
         return "Teams are in DB now! :)";
+    }
+
+    @GetMapping(path = "/matches")
+    @ResponseBody
+    public String matchesInDb() {
+        matchService.populateDb();
+        return "Matches are in DB now! :)";
     }
 }

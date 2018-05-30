@@ -31,7 +31,7 @@ public class TeamService {
             } else{
                 league = leagueRepository.findOneByName("Randomship");
             }
-            for (int j = 0; j <=10 ; j++) {
+            for (int j = 1; j <=10 ; j++) {
             Team team = new Team();
             team.setTeam("aaa");
             team.setLeague(league);

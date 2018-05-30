@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "teams")
@@ -29,10 +30,10 @@ class Team {
     @JsonBackReference
     League league;
 
-//    @OneToMany(mappedBy="homeTeam")
-//    private List<Match> homeTeamGames;
-//
-//    @OneToMany(mappedBy="awayTeam")
-//    private List<Match> awayTeamGames;
+    @OneToMany(mappedBy="homeTeam")
+    private List<Match> homeTeamGames;
+
+    @OneToMany(mappedBy="awayTeam")
+    private List<Match> awayTeamGames;
 
 }
