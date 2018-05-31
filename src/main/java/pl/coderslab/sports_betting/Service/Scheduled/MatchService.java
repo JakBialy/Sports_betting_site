@@ -24,7 +24,9 @@ public class MatchService {
     @Autowired
     MatchRepository matchRepository;
 
-    @Scheduled(fixedDelay = 1000*60*10)
+    static int counter = 0;
+
+    @Scheduled(cron = ("0 0/5 * 1/1 * ?"))
     public void startMatches(){
         List<Match> matchList = new ArrayList<>();
         List<Team> teamList = new ArrayList<>();
@@ -43,10 +45,11 @@ public class MatchService {
             for (int j = 1; j <=5 ; j++) {
                 // shuffle teams to make them random every time
                 Match match = new Match();
-                match.setStart(LocalDateTime.now().plusMinutes(5));
-                match.setEnd(LocalDateTime.now().plusMinutes(10));
+                match.setStart(LocalDateTime.now().plusMinutes(3));
+                match.setEnd(LocalDateTime.now().plusMinutes(5));
                 match.setHomeTeam(teamList.get(counter));
                 match.setAwayTeam(teamList.get(1 + counter));
+                match.setStatus("planned");
                 matchList.add(match);
                 counter += 2;
             }
@@ -55,49 +58,62 @@ public class MatchService {
         System.out.println("Another set of matches going on! " + LocalDateTime.now().toString());
     }
 
-    @Scheduled(fixedDelay = 1000*60, initialDelay = 1000*60*6-500)
+    @Scheduled(cron = ("59 3,4,8,9,13,14,18,19,23,24,28,29,33,34,38,39,43,44,48,49,53,54,58,59 * * * ?"))
     public void goalsMaker(){
         List<Match> list = matchRepository.findAllByEndIsGreaterThan(LocalDateTime.now());
-        int counter = 0;
+        counter++;
 
         for (Match match: list) {
-            // wrong counter counting - wrong method
-            counter ++;
             Random r = new Random();
             int goalAway = 0;
             int goalHome = 0;
-            // if there is some number from random - 33% chance to have a goal
-            // it could be any number from 1 to 3
-            if (r.nextInt(3) + 1 == 3) {
-                goalAway = 1;
-            }
-            if (r.nextInt(3) + 1 == 3){
-                goalHome = 1;
+
+            switch ((r.nextInt(3) + 1)) {
+                case 1:
+                    goalAway = 0;
+                    break;
+                case 2:
+                    goalAway = 1;
+                    break;
+                case 3:
+                    goalAway = 2;
             }
 
-            if (counter <= 20){
+            switch ((r.nextInt(3) + 1)) {
+                case 1:
+                    goalHome = 2;
+                    break;
+                case 2:
+                    goalHome = 1;
+                    break;
+                case 3:
+                    goalHome = 0;
+            }
+
+            if (!(counter % 2 == 0)){
                 match.setAwayHalfScore(match.getAwayHalfScore() + goalAway);
                 match.setHomeHalfScore(match.getHomeHalfScore() + goalHome);
                 match.setAwayScore(match.getAwayHalfScore());
                 match.setHomeScore(match.getHomeHalfScore());
-
-            }  else if (counter > 30){
+                match.setStatus("Second Half");
+            }  else if ((counter % 2 == 0)){
                 match.setAwayScore(match.getAwayScore() + goalAway);
                 match.setHomeScore(match.getHomeScore() + goalHome);
+                match.setStatus("Full Time");
             }
-
             matchRepository.save(match);
-            if (counter % 50 == 0){
-                try {
-                    TimeUnit.MINUTES.sleep(6);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
         }
-        System.out.println("Another set of goals going on! " + LocalDateTime.now().toString() + " " + counter);
-
+        System.out.println("Another set of goals going on! " + LocalDateTime.now().toString());
     }
 
+    @Scheduled(cron = ("0 3,8,13,18,23,28,33,38,43,48,53,58 * * * ?"))
+    public void matchStartStatus(){
+        List<Match> matchList1 = matchRepository.findAllByEndIsGreaterThan(LocalDateTime.now());
+        for (Match load: matchList1) {
+            load.setStatus("First Half");
+            matchRepository.save(load);
+        }
+        System.out.println("Match started!" + LocalDateTime.now().toString());
+    }
 
 }

@@ -9,5 +9,6 @@ import java.util.List;
 public interface MatchRepository extends JpaRepository<Match, Long> {
     List<Match> findAllByStartIsGreaterThan(LocalDateTime localDateTime);
     List<Match> findAllByEndIsGreaterThan(LocalDateTime localDateTime);
+    List<Match> findAllByEndIsLessThan(LocalDateTime localDateTime);
 
 }

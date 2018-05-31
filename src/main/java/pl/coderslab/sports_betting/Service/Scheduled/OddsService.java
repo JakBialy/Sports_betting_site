@@ -22,7 +22,7 @@ public class OddsService {
     @Autowired
     OddsRepository oddsRepository;
 
-    @Scheduled(fixedRate = 1000*60*10, initialDelay = 1000)
+    @Scheduled(cron = ("1 0/5 * 1/1 * ?"))
     public void makeOdds() {
         List<Match> list = matchRepository.findAllByStartIsGreaterThan(LocalDateTime.now());
         for (Match load: list) {
