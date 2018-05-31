@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pl.coderslab.sports_betting.Service.CountryService;
 import pl.coderslab.sports_betting.Service.LeagueService;
-import pl.coderslab.sports_betting.Service.Scheduled.MatchService;
 import pl.coderslab.sports_betting.Service.TeamService;
 
 @Controller

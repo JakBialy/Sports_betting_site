@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Header.html :: header"></div>
+
+    <h2 th:text="| Team : ${team.team} League: ${team.league.name} Country: ${team.league.country.name}|">Team</h2>
+
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th> Home team </th>
+                        <th> Home score </th>
+                        <th> Home half score </th>
+
+                        <th> Away team </th>
+                        <th> Away score </th>
+                        <th> Away half score </th>
+                        <th> Status </th>
+
+                        <th> Start </th>
+                        <th> End </th>
+                        <th> Bet!</th>
+
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="match: ${homeMatches}">
+                        <td th:text="${match.homeTeam.team}">HomeTeam Name</td>
+                        <td th:text="${match.homeScore}">HomeTeam Name</td>
+                        <td th:text="${match.homeHalfScore}">HomeTeam Name</td>
+
+                        <td th:text="${match.awayTeam.team}">AwayTeam Name</td>
+                        <td th:text="${match.awayScore}">HomeTeam Name</td>
+                        <td th:text="${match.awayHalfScore}">HomeTeam Name</td>
+
+                        <td th:text="${match.status}">Status</td>
+                        <td th:text="${#temporals.format(match.start, 'dd-MM-yyyy HH:mm')}">Start</td>
+                        <td th:text="${#temporals.format(match.end, 'dd-MM-yyyy HH:mm')}">End</td>
+                        <td> <a th:href="@{/bet/match/{id}(id=${match.id})}">Bet!</a> </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+<div th:replace="Footer.html :: footer"></div>
+

@@ -16,7 +16,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 @Service
-public class MatchService {
+public class ScheduledMatchService {
 
     @Autowired
     TeamRepository teamRepository;

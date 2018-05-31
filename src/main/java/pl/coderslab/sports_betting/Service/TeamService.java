@@ -10,6 +10,7 @@ import pl.coderslab.sports_betting.Repository.TeamRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class TeamService {
@@ -46,6 +47,19 @@ public class TeamService {
 
     public List<Team> allTeams(){
         return teamRepository.findAll();
+    }
+
+    public List<Team> findTeamsByLeagueId(Long leagueId){
+        return teamRepository.findAllByLeagueId(leagueId);
+    }
+
+    public Team findTeamById(Long teamID){
+        Optional<Team> team = teamRepository.findById(teamID);
+        Team team1 = new Team();
+        if (team.isPresent()) {
+            team1 = team.get();
+        }
+        return team1;
     }
 
 }

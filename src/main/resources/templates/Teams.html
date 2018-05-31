@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Header.html :: header"></div>
+
+    <h2 th:text="|League:${league.name} Country: ${league.country.name}|">Teams</h2>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th> Team </th>
+                        <!--<th> Position </th>-->
+                        <th> Wins </th>
+                        <th> Draws </th>
+                        <th> Lost </th>
+                        <th> Team games </th>
+
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="team: ${teams}">
+                        <td th:text="${team.team}">Team Name</td>
+                        <td th:text="${team.wins}">League Name</td>
+                        <td th:text="${team.draws}">HomeTeam Name</td>
+                        <td th:text="${team.lost}">AwayTeam Name</td>
+                        <td> <a th:href="@{/football/team/{id}(id=${team.id})}">Team matches!</a> </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+<div th:replace="Footer.html :: footer"></div>

@@ -7,6 +7,7 @@ import pl.coderslab.sports_betting.Repository.CountryRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class CountryService {
@@ -32,4 +33,12 @@ public class CountryService {
         return countryRepository.findAll();
     }
 
+    public Country getCountryById (Long Countryid){
+        Optional<Country> country = countryRepository.findById(Countryid);
+        Country country1 = new Country();
+        if (country.isPresent()) {
+            country1 = country.get();
+        }
+        return country1;
+    }
 }

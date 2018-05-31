@@ -24,6 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/index").authenticated()
                 .antMatchers("/admin/**").authenticated()
                 .antMatchers("/api/**").authenticated()
+                .antMatchers("/football/**").authenticated()
                 .antMatchers("/resources/**").permitAll().anyRequest().permitAll()
                 .antMatchers("/login", "/register", "/logout").permitAll()
                 // now for easier prototyping

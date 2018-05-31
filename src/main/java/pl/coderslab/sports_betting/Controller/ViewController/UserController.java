@@ -1,4 +1,4 @@
-package pl.coderslab.sports_betting.Controller;
+package pl.coderslab.sports_betting.Controller.ViewController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

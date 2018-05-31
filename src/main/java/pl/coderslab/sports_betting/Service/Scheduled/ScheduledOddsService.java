@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Random;
 
 @Service
-public class OddsService {
+public class ScheduledOddsService {
 
     @Autowired
     MatchRepository matchRepository;
