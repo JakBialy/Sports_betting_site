@@ -3,6 +3,7 @@ package pl.coderslab.sports_betting.Service;
 import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import pl.coderslab.sports_betting.Entity.League;
 import pl.coderslab.sports_betting.Entity.Team;
 import pl.coderslab.sports_betting.Repository.LeagueRepository;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Service
 public class TeamService {
 
     @Autowired

@@ -59,7 +59,6 @@ public class UserServiceImpl implements UserService {
         Role role = roleService.getOrCreate(DEFAULT_USER_ROLE_NAME);
         Set<Role> roles = new HashSet<>(Collections.singletonList(role));
         user.setRoles(roles);
-
         userRepository.save(user);
     }
 
