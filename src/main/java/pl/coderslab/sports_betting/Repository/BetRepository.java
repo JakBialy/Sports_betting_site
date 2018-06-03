@@ -1,4 +1,7 @@
 package pl.coderslab.sports_betting.Repository;
 
-public interface BetRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import pl.coderslab.sports_betting.Entity.Bet;
+
+public interface BetRepository extends JpaRepository<Bet, Long> {
 }

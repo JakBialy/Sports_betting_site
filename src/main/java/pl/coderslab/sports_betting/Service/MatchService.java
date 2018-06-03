@@ -36,4 +36,9 @@ public class MatchService {
         List<Match> list = matchRepository.findAllByAwayTeamIdOrderByStart(teamId);
         return list;
     }
+
+    public Match findById(Long teamId){
+        Match match = matchRepository.getOne(teamId);
+        return match;
+    }
 }

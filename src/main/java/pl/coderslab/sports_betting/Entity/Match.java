@@ -5,6 +5,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "matches")
@@ -41,4 +43,7 @@ class Match {
 
     @OneToOne(mappedBy="match")
     private Odds odds;
+
+    @OneToMany(mappedBy="match")
+    private List<Bet> betList = new ArrayList<>();
 }

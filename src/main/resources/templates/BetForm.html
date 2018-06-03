@@ -2,16 +2,32 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:replace="Header.html :: header"></div>
 
-<h2> Welcome ... There should be user name :) </h2>
+<h2> Here are your option for betting match .... vs .... in League ... Country </h2>
 
+    <form th:action="@{/bet/form}" th:object="${bet}"	method="post">
 
-<h2> Sports to bet:</h2>
-<a class="d-block -medium mt-3" href="/football">Football</a>
+        <select th:field="*{type}">
+            <option th:value="Win" th:text="Win"> Win </option>
+            <option th:value="Draw" th:text="Draw"> Draw </option>
+            <option th:value="Lost" th:text="Lost"> Lost </option>
+        </select>
 
+        <div>
+            <label for="money">Amount of money</label>
+            <input class="form-control"  th:field="*{money}" id="money" type="number" name="money" placeholder="Amount of money">
+        </div>
 
+        <select th:field="*{team}" >
+            <option th:value="${matchData.homeTeam.id}" th:text="${matchData.homeTeam.team}"> Home Team</option>
+            <option th:value="${matchData.awayTeam.id}" th:text="${matchData.awayTeam.team}"> Away Team</option>
+        </select>
 
+        <input type="hidden" th:value="${matchData.id}" th:attr="name='match'" />
+
+        <div class="text-center">
+            <input type="submit" value="Make bet!" />
+        </div>
+            </form>
 
 
 <div th:replace="Footer.html :: footer"></div>
-
-

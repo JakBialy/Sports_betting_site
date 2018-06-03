@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,9 +32,12 @@ class Team {
     League league;
 
     @OneToMany(mappedBy="homeTeam")
-    private List<Match> homeTeamGames;
+    private List<Match> homeTeamGames = new ArrayList<>();
 
     @OneToMany(mappedBy="awayTeam")
-    private List<Match> awayTeamGames;
+    private List<Match> awayTeamGames = new ArrayList<>();
+
+    @OneToMany(mappedBy="team")
+    private List<Bet> bets = new ArrayList<>();
 
 }

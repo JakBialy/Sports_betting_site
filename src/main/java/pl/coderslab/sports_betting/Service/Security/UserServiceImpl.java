@@ -1,5 +1,6 @@
 package pl.coderslab.sports_betting.Service.Security;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.coderslab.sports_betting.Entity.Role;
@@ -7,7 +8,9 @@ import pl.coderslab.sports_betting.Entity.User;
 import pl.coderslab.sports_betting.Repository.UserRepository;
 
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import java.math.BigInteger;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -51,12 +54,20 @@ public class UserServiceImpl implements UserService {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEnabled(true);
-        user.setMoney(100);
+        user.setMoney(BigInteger.valueOf(100));
 
         Role role = roleService.getOrCreate(DEFAULT_USER_ROLE_NAME);
         Set<Role> roles = new HashSet<>(Collections.singletonList(role));
         user.setRoles(roles);
 
         userRepository.save(user);
+    }
+
+    public void userDetailsToSession (HttpSession httpSession){
+        User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        httpSession.setAttribute("firstName", user.getFirstName());
+        httpSession.setAttribute("lastName", user.getLastName());
+        httpSession.setAttribute("money", user.getMoney());
+        httpSession.setAttribute("nick", user.getNick());
     }
 }
