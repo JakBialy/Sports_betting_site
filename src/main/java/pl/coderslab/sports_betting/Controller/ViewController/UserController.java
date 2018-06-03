@@ -5,12 +5,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.sports_betting.Entity.Bet;
+import pl.coderslab.sports_betting.Entity.Transaction;
 import pl.coderslab.sports_betting.Entity.User;
 import pl.coderslab.sports_betting.Service.BetService;
+import pl.coderslab.sports_betting.Service.TransactionService;
 import pl.coderslab.sports_betting.Service.Security.UserService;
 
 
@@ -18,33 +18,61 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "/user")
 public class UserController {
 
     @Autowired
     UserService userService;
     @Autowired
     BetService betService;
+    @Autowired
+    TransactionService transactionService;
 
-    @GetMapping("/register")
-    public String userForm(Model model) {
-        model.addAttribute("user", new User());
-        return "Register";
-    }
-
-    @PostMapping("/register")
-    public String userFormSave(@Valid @ModelAttribute User user, BindingResult result){
-        if(result.hasErrors()){
-            return "Register";
-        }
-        userService.saveUser(user);
-        return "redirect:/login";
-    }
-
-    @GetMapping("/user/bets")
+    @GetMapping("/bets")
     public String userBets(Model model){
         User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
         List<Bet> list = betService.findAllByUser(user);
         model.addAttribute("bets", list);
         return "BetList";
     }
+
+    @GetMapping("/Founds")
+    public String addFounds(Model model){
+        User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("user", user);
+        return "TransactionIndex";
+    }
+
+    @GetMapping("/creditAdd")
+    public String addFoundsFromCard(Model model){
+        model.addAttribute("transaction", new Transaction());
+        return "TransactionCardAdd";
+    }
+
+    @PostMapping("/creditAdd")
+    public String addFoundsFromCard(@Valid @ModelAttribute Transaction transaction, BindingResult result) {
+        if(result.hasErrors()){
+            return "TransactionCardAdd";
+        }
+        transactionService.saveTransaction(transaction);
+        return "redirect:/football";
+    }
+
+    @GetMapping("/userInfo")
+    public String userInfo(Model model){
+        User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("user", user);
+        return "UserInfo";
+    }
+
+    @GetMapping("/transactionHistory/{id}")
+    public String transactionHistory(@PathVariable Long id, Model model){
+        List<Transaction> list= transactionService.findAllByUserId(id);
+        model.addAttribute("transactions", list);
+        return "TransactionsList";
+    }
 }
+
+/*
+/user/transactionHistory/{id}(id=${user.id})
+ */

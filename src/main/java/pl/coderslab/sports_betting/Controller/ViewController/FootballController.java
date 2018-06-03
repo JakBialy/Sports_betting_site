@@ -57,4 +57,10 @@ public class FootballController {
         model.addAttribute("awayMatches", matchService.awayMatches(id));
         return "TeamMatchesList";
     }
+
+    @GetMapping("/match/{id}")
+    public String singleMatch(@PathVariable Long id, Model model){
+        model.addAttribute("match", matchService.findById(id));
+        return "Match";
+    }
 }

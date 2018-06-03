@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Header.html :: header"></div>
+
+<h4 th:text="|${session.firstName}, please write below your card details :|" class="text-center"> Welcome </h4>
+
+
+
+<div class="text-center">
+
+    <form th:action="@{/user/creditAdd}" th:object="${transaction}"	method="post">
+    <div>
+        <label for="money">Amount of money</label>
+        <input th:field="*{amount}" id="money" type="number" name="money" placeholder="Amount of money">
+    </div>
+        
+        <input type="hidden" th:attr="name='type'" th:value="Card" id="type">
+
+    <div>
+        <label class="input-title" for="c-number">Card Number*</label>
+        <input type="text" name="c-number" id="c-number"  placeholder="XXXX XXXX XXXX XXXX" maxlength="16" required>
+    </div>
+
+    <div>
+        <label for="c-name" class="input-title cardholder-name">Name on card*</label>
+        <input type="text" name="c-number" id="c-name"  placeholder="John Doe" required>
+    </div>
+
+    <div>
+        <label>Expiry Date*</label>
+        <select name="month">
+            <option>01</option>
+            <option>02</option>
+            <option>03</option>
+            <option>04</option>
+            <option>05</option>
+            <option>06</option>
+            <option>07</option>
+            <option>08</option>
+            <option>09</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+        </select>
+
+        <select name="year">
+            <option>15</option>
+            <option>16</option>
+            <option>17</option>
+            <option>18</option>
+            <option>19</option>
+            <option>20</option>
+            <option>21</option>
+            <option>22</option>
+            <option>23</option>
+            <option>24</option>
+            <option>24</option>
+            <option>25</option>
+        </select>
+    </div>
+
+    <div>
+        <label  >CVV Code*</label>
+        <input type="text" id="cvv-code" placeholder="000" maxlength="3" required>
+    </div>
+
+        <div>
+            <input type="submit" value="Accept" />
+        </div>
+    </form>
+</div>
+
+<div th:replace="Footer.html :: footer"></div>
+
+

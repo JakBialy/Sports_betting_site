@@ -67,7 +67,6 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         httpSession.setAttribute("firstName", user.getFirstName());
         httpSession.setAttribute("lastName", user.getLastName());
-        httpSession.setAttribute("money", user.getMoney());
         httpSession.setAttribute("nick", user.getNick());
     }
 }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Header.html :: header"></div>
+
+<p class="text-center"> <strong>Your details: </strong></p>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <tr>
+                    <th>First Name</th>
+                    <td th:text="${user.firstName}"></td>
+                </tr>
+
+                <tr>
+                    <th>Last Name</th>
+                    <td th:text="${user.lastName}"></td>
+                </tr>
+
+                <tr>
+                    <th>E-mail</th>
+                    <td th:text="${user.username}"></td>
+                </tr>
+
+                <tr>
+                    <th>Nickname</th>
+                    <td th:text="${user.nick}"></td>
+                </tr>
+
+                <tr>
+                    <th>Transaction history</th>
+                    <td> <a th:href="@{/user/transactionHistory/{id}(id=${user.id})}"> Link </a> </td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div th:replace="Footer.html :: footer"></div>
+
+

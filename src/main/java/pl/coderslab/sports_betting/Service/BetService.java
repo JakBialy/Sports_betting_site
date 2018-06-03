@@ -22,6 +22,9 @@ public class BetService {
 
     public void saveBet(Bet bet){
         User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+       // it is subtrackting but there is no validation!
+        user.setMoney(user.getMoney().subtract(bet.getMoney()));
+
         bet.setUser(user);
         bet.setDate(LocalDateTime.now());
 

@@ -44,4 +44,7 @@ public @Data class User {
 
     @OneToMany(mappedBy="user")
     private List<Bet> bets = new ArrayList<>();
+
+    @OneToMany(mappedBy="user")
+    private List<Transaction> transactions = new ArrayList<>();
 }

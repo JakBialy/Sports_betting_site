@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Header.html :: header"></div>
+
+<h3 class="text-center"> Here you can load your account: </h3>
+<p th:text="|On your account is ${user.money}|" class="text-center"></p>
+<p class="text-center"> Below you can find several method to charge your accounts : </p>
+<hr>
+<a class="btn btn-primary btn-block" href="/user/creditAdd">Credit Card</a>
+<a class="btn btn-primary btn-block" href="/user/transferAdd">Bank Transfer</a>
+<a class="btn btn-primary btn-block" href="/user/cryptoAdd">Cryptocurrencies</a>
+<hr>
+
+<p class="text-center"> Below you can find methods to take money back from your accounts : </p>
+<hr>
+<a class="btn btn-primary btn-block" href="/user/transferGet">Bank Transfer</a>
+<a class="btn btn-primary btn-block" href="/user/cryptoGet">Cryptocurrencies</a>
+<hr>
+<div th:replace="Footer.html :: footer"></div>
