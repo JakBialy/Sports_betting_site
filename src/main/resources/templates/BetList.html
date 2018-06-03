@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Header.html :: header"></div>
+
+<h3> Your bets : </h3>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th> Type </th>
+                    <th> Money</th>
+                    <th> Date </th>
+                    <th> Winner </th>
+                    <th> Link to Match </th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+                <tr th:each="bet: ${bets}">
+                    <td th:text="${bet.type}">Bet type</td>
+                    <td th:text="${bet.money}">Bet money</td>
+                    <td th:text="${#temporals.format(bet.date, 'dd-MM-yyyy HH:mm')}">Start</td>
+
+                    <td th:switch="${bet.winner}">
+                        <span th:case='null' >No result yet!</span>
+                        <span th:case='true' >Win</span>
+                        <span th:case='false' >Lost</span>
+                    </td>
+                    <td> <a th:href="@{/football/match/{id}(id=${bet.match.id})}">See match details</a> </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div th:replace="Footer.html :: footer"></div>

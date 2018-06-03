@@ -26,6 +26,8 @@ class Bet {
 
     private LocalDateTime date;
 
+    private Boolean winner;
+
     @ManyToOne
     @JoinColumn(name = "match_id")
     @JsonBackReference

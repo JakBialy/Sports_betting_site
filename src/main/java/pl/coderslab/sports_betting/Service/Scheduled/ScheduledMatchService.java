@@ -24,7 +24,7 @@ public class ScheduledMatchService {
     @Autowired
     MatchRepository matchRepository;
 
-    static int counter = 0;
+    private static int staticCounter = 0;
 
     @Scheduled(cron = ("0 0/5 * 1/1 * ?"))
     public void startMatches() {
@@ -58,10 +58,10 @@ public class ScheduledMatchService {
         System.out.println("Another set of matches going on! " + LocalDateTime.now().toString());
     }
 
-    @Scheduled(cron = ("59 3,4,8,9,13,14,18,19,23,24,28,29,33,34,38,39,43,44,48,49,53,54,58,59 * * * ?"))
+    @Scheduled(cron = ("57 3,4,8,9,13,14,18,19,23,24,28,29,33,34,38,39,43,44,48,49,53,54,58,59 * * * ?"))
     public void goalsMaker() {
         List<Match> list = matchRepository.findAllByEndIsGreaterThan(LocalDateTime.now());
-        counter++;
+        staticCounter++;
 
         for (Match match : list) {
             Random r = new Random();
@@ -90,13 +90,13 @@ public class ScheduledMatchService {
                     goalHome = 0;
             }
 
-            if (!(counter % 2 == 0)) {
+            if (!(staticCounter % 2 == 0)) {
                 match.setAwayHalfScore(match.getAwayHalfScore() + goalAway);
                 match.setHomeHalfScore(match.getHomeHalfScore() + goalHome);
                 match.setAwayScore(match.getAwayHalfScore());
                 match.setHomeScore(match.getHomeHalfScore());
                 match.setStatus("Second Half");
-            } else if ((counter % 2 == 0)) {
+            } else if ((staticCounter % 2 == 0)) {
                 match.setAwayScore(match.getAwayScore() + goalAway);
                 match.setHomeScore(match.getHomeScore() + goalHome);
                 match.setStatus("Full Time");
@@ -116,9 +116,9 @@ public class ScheduledMatchService {
         System.out.println("Match started!" + LocalDateTime.now().toString());
     }
 
-    @Scheduled(cron = ("0 0,5,10,15,20,25,30,35,40,45,50,55 * * * ?"))
+    @Scheduled(cron = ("58 4,9,14,19,24,29,34,39,44,49,54,59 * * * ?"))
     public void matchesResult() {
-        List<Match> list = matchRepository.findAllByEndIsGreaterThan(LocalDateTime.now().minusSeconds(1));
+        List<Match> list = matchRepository.findAllByEndIsGreaterThan(LocalDateTime.now());
 
         for (Match match: list) {
          int away = match.getAwayScore();
@@ -160,6 +160,6 @@ public class ScheduledMatchService {
                 teamRepository.save(team);
             }
         }
-        System.out.println("Results are ready!");
+        System.out.println("Results are ready!" + LocalDateTime.now());
     }
 }

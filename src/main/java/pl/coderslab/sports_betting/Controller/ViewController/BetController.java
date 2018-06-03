@@ -1,19 +1,15 @@
 package pl.coderslab.sports_betting.Controller.ViewController;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.sports_betting.Entity.Bet;
-import pl.coderslab.sports_betting.Entity.User;
 import pl.coderslab.sports_betting.Service.MatchService;
-import pl.coderslab.sports_betting.Service.Security.BetService;
+import pl.coderslab.sports_betting.Service.BetService;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/bet")

@@ -2,14 +2,43 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:replace="Header.html :: header"></div>
 
-<h2> Here are your option for betting match .... vs .... in League ... Country </h2>
+<h2 th:text="| You are betting in match ${matchData.homeTeam.team} vs ${matchData.awayTeam.team} in ${matchData.awayTeam.league.name}|"> betting info</h2>
 
+<p> Odds : </p>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th th:text="|${matchData.homeTeam.team} wins|"> odds </th>
+                    <th th:text="|${matchData.awayTeam.team} wins|"> odds </th>
+                    <th> Draw </th>
+                    <!--<th> Odds half etc</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${matchData.odds.oddHome}"> odds</td>
+                    <td th:text="${matchData.odds.oddAway}"> odds</td>
+                    <td th:text="${matchData.odds.oddX}"> odds</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<!--Betting form-->
     <form th:action="@{/bet/form}" th:object="${bet}"	method="post">
 
         <select th:field="*{type}">
-            <option th:value="Win" th:text="Win"> Win </option>
+            <option th:value="homeWin" th:text="|${matchData.homeTeam.team} wins|"> Win </option>
+            <option th:value="awayWin" th:text="|${matchData.awayTeam.team} wins|"> Win </option>
             <option th:value="Draw" th:text="Draw"> Draw </option>
-            <option th:value="Lost" th:text="Lost"> Lost </option>
         </select>
 
         <div>
@@ -17,10 +46,11 @@
             <input class="form-control"  th:field="*{money}" id="money" type="number" name="money" placeholder="Amount of money">
         </div>
 
-        <select th:field="*{team}" >
-            <option th:value="${matchData.homeTeam.id}" th:text="${matchData.homeTeam.team}"> Home Team</option>
-            <option th:value="${matchData.awayTeam.id}" th:text="${matchData.awayTeam.team}"> Away Team</option>
-        </select>
+        <!--<select th:field="*{team}">-->
+            <!--<option th:value="${matchData.homeTeam.id}" th:text="|${matchData.homeTeam.team} wins|"> Home Team</option>-->
+            <!--<option th:value="${matchData.awayTeam.id}" th:text="|${matchData.awayTeam.team} wins|"> Away Team</option>-->
+            <!--<option th:value="NULL" th:text="Draw"> Draw</option>-->
+        <!--</select>-->
 
         <input type="hidden" th:value="${matchData.id}" th:attr="name='match'" />
 

@@ -10,6 +10,7 @@ import pl.coderslab.sports_betting.Repository.UserRepository;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collections;
 import java.util.HashSet;
@@ -54,7 +55,7 @@ public class UserServiceImpl implements UserService {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEnabled(true);
-        user.setMoney(BigInteger.valueOf(100));
+        user.setMoney(BigDecimal.valueOf(100));
 
         Role role = roleService.getOrCreate(DEFAULT_USER_ROLE_NAME);
         Set<Role> roles = new HashSet<>(Collections.singletonList(role));
