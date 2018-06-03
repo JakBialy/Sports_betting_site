@@ -32,6 +32,11 @@ class Match {
     int awayHalfScore;
 
     @ManyToOne
+    @JoinColumn(name = "winner_id")
+    @JsonBackReference
+    Team winner;
+
+    @ManyToOne
     @JoinColumn(name = "homeTeam_id")
     @JsonBackReference
     Team homeTeam;

@@ -24,7 +24,7 @@ public class TeamService {
     public void populateDb(){
         List<Team> list = new ArrayList<>();
         League league = new League();
-        Faker faker	=	new Faker();
+        Faker faker	= new Faker();
 
         for (int i = 1; i <=2 ; i++) {
             if (i == 1) {
@@ -50,7 +50,7 @@ public class TeamService {
     }
 
     public List<Team> findTeamsByLeagueId(Long leagueId){
-        return teamRepository.findAllByLeagueId(leagueId);
+        return teamRepository.findAllByLeagueIdOrderByPosition(leagueId);
     }
 
     public Team findTeamById(Long teamID){

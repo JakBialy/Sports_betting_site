@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface TeamRepository extends JpaRepository<Team, Long> {
     List<Team> findAllByLeague_Name (String name);
-    List<Team> findAllByLeagueId (Long id);
+    List<Team> findAllByLeagueIdOrderByPosition (Long id);
 }

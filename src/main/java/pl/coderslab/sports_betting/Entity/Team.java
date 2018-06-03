@@ -37,6 +37,9 @@ class Team {
     @OneToMany(mappedBy="awayTeam")
     private List<Match> awayTeamGames = new ArrayList<>();
 
+    @OneToMany(mappedBy="winner")
+    private List<Match> wonGames = new ArrayList<>();
+
     @OneToMany(mappedBy="team")
     private List<Bet> bets = new ArrayList<>();
 

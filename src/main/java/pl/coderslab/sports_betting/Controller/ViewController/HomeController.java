@@ -20,7 +20,4 @@ public class HomeController {
         userService.userDetailsToSession(httpSession);
         return "Index";
     }
-
-
-
 }
