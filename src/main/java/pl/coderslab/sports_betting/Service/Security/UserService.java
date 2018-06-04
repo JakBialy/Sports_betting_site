@@ -17,7 +17,6 @@ public interface UserService {
 
     void userDetailsToSession (HttpSession httpSession);
 
-    void editUser(User user);
+    public void editUser(String username, String firstName, String lastName, String nick, String password);
 
-
-    }
+}

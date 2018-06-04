@@ -14,6 +14,7 @@ import pl.coderslab.sports_betting.Service.TransactionService;
 import pl.coderslab.sports_betting.Service.Security.UserService;
 
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +39,17 @@ public class UserController {
     }
 
     @GetMapping("/Founds")
+    public String addFounds(Model model, HttpSession httpSession) {
+        User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("user", user);
+            return "TransactionIndex";
+    }
+
+    @GetMapping("/noFounds")
     public String addFounds(Model model) {
         User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("user", user);
+        model.addAttribute("money", 0);
         return "TransactionIndex";
     }
 
@@ -83,13 +92,7 @@ public class UserController {
 
     @PostMapping("/userSettings")
     public String userSettings(@RequestParam String username, String firstName, String lastName, String nick, String password) {
-        User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
-        user.setUsername(username);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setNick(nick);
-        user.setPassword(password);
-        userService.editUser(user);
+        userService.editUser(username,firstName,lastName,nick,password);
         return "redirect:/user/userInfo";
     }
 }

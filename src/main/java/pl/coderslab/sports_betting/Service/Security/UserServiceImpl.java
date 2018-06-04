@@ -63,7 +63,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void editUser(User user){
+    public void editUser(String username, String firstName, String lastName, String nick, String password){
+        User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        user.setUsername(username);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setNick(nick);
+        user.setPassword(password);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }

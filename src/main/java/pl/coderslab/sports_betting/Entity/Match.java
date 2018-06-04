@@ -1,6 +1,8 @@
 package pl.coderslab.sports_betting.Entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -50,5 +52,11 @@ class Match {
     private Odds odds;
 
     @OneToMany(mappedBy="match")
+    // blocking list of bets for external API
     private List<Bet> betList = new ArrayList<>();
+
+    @JsonIgnore
+    public List<Bet> getBetList() {
+        return betList;
+    }
 }

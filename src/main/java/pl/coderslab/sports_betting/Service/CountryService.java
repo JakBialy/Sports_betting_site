@@ -33,8 +33,8 @@ public class CountryService {
         return countryRepository.findAll();
     }
 
-    public Country getCountryById (Long Countryid){
-        Optional<Country> country = countryRepository.findById(Countryid);
+    public Country getCountryById (Long countryId){
+        Optional<Country> country = countryRepository.findById(countryId);
         Country country1 = new Country();
         if (country.isPresent()) {
             country1 = country.get();

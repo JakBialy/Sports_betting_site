@@ -2,8 +2,10 @@ package pl.coderslab.sports_betting.Controller.RestApiController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.coderslab.sports_betting.Entity.Country;
 import pl.coderslab.sports_betting.Entity.League;
 import pl.coderslab.sports_betting.Service.LeagueService;
 
@@ -17,9 +19,18 @@ public class LeagueAPIController {
     LeagueService leagueService;
 
     @RequestMapping(path = "/all")
-    public List<League> sample() {
+    public List<League> getAllLeagues() {
         return	leagueService.allLeagues();
     }
 
-    // should be sth like in API Footbal, exact id = exact country, match, league etc
+    @RequestMapping(path = "/country/{id}")
+    public List<League> getAllLeagues(Long id) {
+        return	leagueService.findLeagueByCountryId(id);
+    }
+
+    // leagues 5,6
+    @RequestMapping(path = "/{id}")
+    public League getLeagueById(@PathVariable Long id) {
+        return leagueService.findLeagueById(id);
+    }
 }

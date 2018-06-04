@@ -13,4 +13,6 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
     List<Match> findAllByStatus (String status);
     List<Match> findAllByHomeTeamIdOrderByStart(Long id);
     List<Match> findAllByAwayTeamIdOrderByStart(Long id);
+    List<Match> findAllByStartIsBetween(LocalDateTime localDateTime1, LocalDateTime localDateTime2);
+
 }

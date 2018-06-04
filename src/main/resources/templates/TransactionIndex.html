@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:replace="Header.html :: header"></div>
 
+    <h2 th:if="${money == 0}" class="text-center" >No money! Please load your account!</h2>
+
 <h3 class="text-center"> Here you can load your account: </h3>
 <p th:text="|On your account is ${user.money}|" class="text-center"></p>
 <p class="text-center"> Below you can find several method to charge your accounts : </p>
