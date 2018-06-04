@@ -40,4 +40,9 @@ public class BetService {
         List<Bet> list = betRepository.findAllByUser(user);
         return list;
     }
+
+    public List<Bet> findAllByUserId(Long userId){
+        List<Bet> list = betRepository.findAllByUserId(userId);
+        return list;
+    }
 }

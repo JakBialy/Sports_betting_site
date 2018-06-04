@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Header.html :: header"></div>
+
+<p class="text-center"> <strong>Your details: </strong></p>
+<p class="text-center"> Please not that in case of changing username you will have to re-login </p>
+
+<form th:action="@{/user/userSettings}" th:object="${user}"	method="post">
+
+    <div>
+        <label for="username">Change e-mail</label>
+        <input class="form-control"  th:field="*{username}" id="username" type="text" name="username" placeholder="Username">
+        <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"> error message</p>
+    </div>
+
+    <div>
+        <label for="firstname">Change first name</label>
+        <input class="form-control"  th:field="*{firstName}" id="firstname" type="text" name="firstname" placeholder="First name">
+        <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"> error message</p>
+    </div>
+
+    <div>
+        <label for="lastname">Change last name</label>
+        <input class="form-control"  th:field="*{lastName}" id="lastname" type="text" name="lastname" placeholder="Last name">
+        <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"> error message</p>
+    </div>
+
+    <div>
+        <label for="nick">Change nick</label>
+        <input class="form-control"  th:field="*{nick}" id="nick" type="text" name="nick" placeholder="Your nick">
+        <p th:if="${#fields.hasErrors('nick')}" th:errors="*{nick}"> error message</p>
+    </div>
+
+    <div>
+        <label for="password">Change password</label>
+        <input class="form-control" th:field="*{password}" id="password" type="text" name="password" placeholder="Your password">
+    </div>
+
+    <div class="text-center">
+        <input type="submit" value="Change settings" />
+    </div>
+
+</form>
+
+
+<div th:replace="Footer.html :: footer"></div>
+
+

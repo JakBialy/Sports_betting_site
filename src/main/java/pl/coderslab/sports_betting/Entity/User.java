@@ -30,7 +30,6 @@ public @Data class User {
 
     private String nick;
 
-    @NotEmpty
     private String password;
 
     private boolean enabled;

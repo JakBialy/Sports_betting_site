@@ -15,6 +15,7 @@ import pl.coderslab.sports_betting.Service.Security.UserService;
 
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,7 +30,7 @@ public class UserController {
     TransactionService transactionService;
 
     @GetMapping("/bets")
-    public String userBets(Model model){
+    public String userBets(Model model) {
         User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
         List<Bet> list = betService.findAllByUser(user);
         model.addAttribute("bets", list);
@@ -37,21 +38,21 @@ public class UserController {
     }
 
     @GetMapping("/Founds")
-    public String addFounds(Model model){
+    public String addFounds(Model model) {
         User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("user", user);
         return "TransactionIndex";
     }
 
     @GetMapping("/creditAdd")
-    public String addFoundsFromCard(Model model){
+    public String addFoundsFromCard(Model model) {
         model.addAttribute("transaction", new Transaction());
         return "TransactionCardAdd";
     }
 
     @PostMapping("/creditAdd")
     public String addFoundsFromCard(@Valid @ModelAttribute Transaction transaction, BindingResult result) {
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return "TransactionCardAdd";
         }
         transactionService.saveTransaction(transaction);
@@ -59,20 +60,37 @@ public class UserController {
     }
 
     @GetMapping("/userInfo")
-    public String userInfo(Model model){
+    public String userInfo(Model model) {
         User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("user", user);
         return "UserInfo";
     }
 
     @GetMapping("/transactionHistory/{id}")
-    public String transactionHistory(@PathVariable Long id, Model model){
-        List<Transaction> list= transactionService.findAllByUserId(id);
+    public String transactionHistory(@PathVariable Long id, Model model) {
+        List<Transaction> list = transactionService.findAllByUserId(id);
         model.addAttribute("transactions", list);
         return "TransactionsList";
     }
+
+    @GetMapping("/userSettings")
+    public String userSettings(Model model) {
+        User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
+        user.setPassword("");
+        model.addAttribute("user", user);
+        return "UserSettings";
+    }
+
+    @PostMapping("/userSettings")
+    public String userSettings(@RequestParam String username, String firstName, String lastName, String nick, String password) {
+        User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
+        user.setUsername(username);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setNick(nick);
+        user.setPassword(password);
+        userService.editUser(user);
+        return "redirect:/user/userInfo";
+    }
 }
 
-/*
-/user/transactionHistory/{id}(id=${user.id})
- */

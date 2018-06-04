@@ -17,4 +17,7 @@ public interface UserService {
 
     void userDetailsToSession (HttpSession httpSession);
 
+    void editUser(User user);
+
+
     }

@@ -52,7 +52,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(User user) {
-
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEnabled(true);
         user.setMoney(BigDecimal.valueOf(100));
@@ -60,6 +59,12 @@ public class UserServiceImpl implements UserService {
         Role role = roleService.getOrCreate(DEFAULT_USER_ROLE_NAME);
         Set<Role> roles = new HashSet<>(Collections.singletonList(role));
         user.setRoles(roles);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void editUser(User user){
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 

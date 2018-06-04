@@ -29,8 +29,18 @@
                 </tr>
 
                 <tr>
+                    <th>Money</th>
+                    <td th:text="${user.money}"></td>
+                </tr>
+
+                <tr>
                     <th>Transaction history</th>
                     <td> <a th:href="@{/user/transactionHistory/{id}(id=${user.id})}"> Link </a> </td>
+                </tr>
+
+                <tr>
+                    <th>Betting history</th>
+                    <td> <a th:href="@{/user/bets}"> Link </a> </td>
                 </tr>
 
             </table>
