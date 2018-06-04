@@ -88,6 +88,11 @@
             <version>0.14</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+        </dependency>
+
         <!--to round decimal values-->
         <dependency>
             <groupId>org.decimal4j</groupId>

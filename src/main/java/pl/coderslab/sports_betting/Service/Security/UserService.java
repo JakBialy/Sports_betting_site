@@ -15,6 +15,8 @@ public interface UserService {
 
     void saveUser(User user);
 
+    void saveAdmin(User user);
+
     void userDetailsToSession (HttpSession httpSession);
 
     public void editUser(String username, String firstName, String lastName, String nick, String password);

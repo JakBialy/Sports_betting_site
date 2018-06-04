@@ -22,11 +22,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/index").authenticated()
-                .antMatchers("/admin/**").authenticated()
-                .antMatchers("/api/**").authenticated()
+                .antMatchers("/api/**").hasRole("ADMIN")
                 .antMatchers("/football/**").authenticated()
                 .antMatchers("/resources/**").permitAll().anyRequest().permitAll()
                 .antMatchers("/login", "/register", "/logout").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 // now for easier prototyping
                 .antMatchers("/**").authenticated()
                 .and()
@@ -36,7 +36,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                   .and()
                 .logout()
                 .logoutSuccessUrl("/login");
-
     }
 
 

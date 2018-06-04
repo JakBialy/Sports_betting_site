@@ -1,4 +1,4 @@
-<div th:fragment="nav" xmlns:th="http://www.w3.org/1999/xhtml" th:remove="tag">
+<div th:fragment="nav" xmlns:th="http://www.w3.org/1999/xhtml" th:remove="tag" xmlns:sec="http://www.w3.org/1999/xhtml">
     <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
@@ -20,7 +20,6 @@
                     <span class="nav-link-text">Football</span>
                 </a>
             </li>
-
 
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
@@ -63,11 +62,17 @@
                             <span class="nav-link-text">Favorites</span>
                         </a>
                     </li>
-
                 </ul>
             </li>
-        </ul>
 
+            <li sec:authorize="hasAuthority('ROLE_ADMIN')" class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+                <a class="nav-link" href="/admin">
+                    <i class="fa fa-fw fa-angellist"></i>
+                    <span class="nav-link-text">Admin Control Panel</span>
+                </a>
+            </li>
+
+        </ul>
         <ul class="navbar-nav sidenav-toggler">
             <li class="nav-item">
                 <a class="nav-link text-center" id="sidenavToggler">

@@ -35,6 +35,8 @@ public class AppStartup implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         if (userService.getNumUsers() == 0L) {
             userService.saveUser(testUser());
+            userService.saveAdmin(testAdmin1());
+
         }
         countryService.populateDb();
         leagueService.populateDb();
@@ -48,6 +50,17 @@ public class AppStartup implements ApplicationRunner {
         user.setNick("bialy93");
         user.setFirstName("Jakub");
         user.setLastName("Bialy");
+        user.setEnabled(true);
+        return user;
+    }
+
+    private User testAdmin1() {
+        User user = new User();
+        user.setUsername("admin@admin.com");
+        user.setPassword("123");
+        user.setNick("adminAdmin");
+        user.setFirstName("Admin");
+        user.setLastName("Adminowicz");
         user.setEnabled(true);
         return user;
     }
