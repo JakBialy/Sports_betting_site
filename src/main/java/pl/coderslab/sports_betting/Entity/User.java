@@ -3,7 +3,9 @@ package pl.coderslab.sports_betting.Entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -21,15 +23,24 @@ public @Data class User {
 
     @NotEmpty
     @Column(nullable = false, unique = true)
+    @Email
     // in forms named e-mail
     private String username;
 
+    @NotEmpty
+    @Size(min = 2, max = 30)
     private String firstName;
 
+    @NotEmpty
+    @Size(min = 2, max = 30)
     private String lastName;
 
+    @NotEmpty
+    @Size(min = 2, max = 30)
     private String nick;
 
+    @NotEmpty
+    @Size(min = 3, max = 255)
     private String password;
 
     private boolean enabled;

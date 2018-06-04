@@ -17,7 +17,7 @@ public class CountryAPIController {
     @Autowired
     CountryService countryService;
 
-    @RequestMapping(path = "/all")
+    @GetMapping(path = "/all")
     public	List<Country> getAllCountries() {
         return	countryService.allCountries();
     }
@@ -25,7 +25,7 @@ public class CountryAPIController {
     /*
     countries: 3,4
      */
-    @RequestMapping(path = "/{id}")
+    @GetMapping(path = "/{id}")
     public	Country getCountryById(@PathVariable Long id) {
         return countryService.getCountryById(id);
     }

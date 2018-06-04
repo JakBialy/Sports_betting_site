@@ -18,18 +18,18 @@ public class LeagueAPIController {
     @Autowired
     LeagueService leagueService;
 
-    @RequestMapping(path = "/all")
+    @GetMapping(path = "/all")
     public List<League> getAllLeagues() {
         return	leagueService.allLeagues();
     }
 
-    @RequestMapping(path = "/country/{id}")
+    @GetMapping(path = "/country/{id}")
     public List<League> getAllLeagues(Long id) {
         return	leagueService.findLeagueByCountryId(id);
     }
 
     // leagues 5,6
-    @RequestMapping(path = "/{id}")
+    @GetMapping(path = "/{id}")
     public League getLeagueById(@PathVariable Long id) {
         return leagueService.findLeagueById(id);
     }

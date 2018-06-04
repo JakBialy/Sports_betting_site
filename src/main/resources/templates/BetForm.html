@@ -4,8 +4,53 @@
 
 <h2 th:text="| You are betting in match ${matchData.homeTeam.team} vs ${matchData.awayTeam.team} in ${matchData.awayTeam.league.name}|"> betting info</h2>
 
-<p> Odds : </p>
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th> Home team </th>
+                    <th> Home score </th>
+                    <th> Home half score </th>
 
+                    <th> Away team </th>
+                    <th> Away score </th>
+                    <th> Away half score </th>
+                    <th> Status </th>
+                    <th> Winner </th>
+
+                    <th> Start </th>
+                    <th> End </th>
+                    <!--<th> Bet!</th>-->
+
+                </tr>
+                </thead>
+
+                <tbody>
+                <td th:text="${matchData.homeTeam.team}">HomeTeam Name</td>
+                <td th:text="${matchData.homeScore}">HomeTeam Name</td>
+                <td th:text="${matchData.homeHalfScore}">HomeTeam Name</td>
+
+                <td th:text="${matchData.awayTeam.team}">AwayTeam Name</td>
+                <td th:text="${matchData.awayScore}">HomeTeam Name</td>
+                <td th:text="${matchData.awayHalfScore}">HomeTeam Name</td>
+
+                <td th:text="${matchData.status}">Status</td>
+                <td th:switch="${matchData.winner}">
+                    <span th:case='null' >No result yet!</span>
+                    <span th:case='true' th:text="${matchData.winner.team}" >Win</span>
+                </td>
+                <td th:text="${#temporals.format(matchData.start, 'dd-MM-yyyy HH:mm')}">Start</td>
+                <td th:text="${#temporals.format(matchData.end, 'dd-MM-yyyy HH:mm')}">End</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<p> Odds : </p>
 <div class="card mb-3">
     <div class="card-body">
         <div class="table-responsive">
@@ -33,24 +78,22 @@
 
 
 <!--Betting form-->
-    <form th:action="@{/bet/form}" th:object="${bet}"	method="post">
+    <form th:action="@{/bet/match/}" th:object="${bet}"	method="post">
 
+    <label> Bet type:</label>
         <select th:field="*{type}">
             <option th:value="homeWin" th:text="|${matchData.homeTeam.team} wins|"> Win </option>
             <option th:value="awayWin" th:text="|${matchData.awayTeam.team} wins|"> Win </option>
             <option th:value="Draw" th:text="Draw"> Draw </option>
         </select>
 
+        <p th:text="|Your account has: ${user.money}|"></p>
         <div>
-            <label for="money">Amount of money</label>
+            <label for="money">Amount of money to bet:</label>
             <input class="form-control"  th:field="*{money}" id="money" type="number" name="money" placeholder="Amount of money">
+            <p th:if="${#fields.hasErrors('money')}" th:errors="*{money}"> error message</p>
         </div>
 
-        <!--<select th:field="*{team}">-->
-            <!--<option th:value="${matchData.homeTeam.id}" th:text="|${matchData.homeTeam.team} wins|"> Home Team</option>-->
-            <!--<option th:value="${matchData.awayTeam.id}" th:text="|${matchData.awayTeam.team} wins|"> Away Team</option>-->
-            <!--<option th:value="NULL" th:text="Draw"> Draw</option>-->
-        <!--</select>-->
 
         <input type="hidden" th:value="${matchData.id}" th:attr="name='match'" />
 

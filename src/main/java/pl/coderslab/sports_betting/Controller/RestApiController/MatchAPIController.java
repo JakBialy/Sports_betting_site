@@ -1,6 +1,7 @@
 package pl.coderslab.sports_betting.Controller.RestApiController;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,27 +21,27 @@ public class MatchAPIController {
     @Autowired
     MatchService matchService;
 
-    @RequestMapping(path = "/all")
+    @GetMapping(path = "/all")
     public List<Match> getAllMatches() {
         return	matchService.allMatches();
     }
 
-    @RequestMapping(path = "/live")
+    @GetMapping(path = "/live")
     public List<Match> getAllLive() {
         return	matchService.liveMatches();
     }
 
-    @RequestMapping(path = "/home/{id}")
+    @GetMapping(path = "/home/{id}")
     public List<Match> getAllHomeByTeam (@PathVariable Long id) {
         return	matchService.homeMatches(id);
     }
 
-    @RequestMapping(path = "/away/{id}")
+    @GetMapping(path = "/away/{id}")
     public List<Match> getAllAwayByTeam(@PathVariable Long id) {
         return	matchService.awayMatches(id);
     }
 
-    @RequestMapping(path = "/betweenDate/{date1}/{date2}")
+    @GetMapping(path = "/betweenDate/{date1}/{date2}")
     public List<Match> getAllAwayByStartBetween(@PathVariable String date1,@PathVariable String date2) {
         return	matchService.findMatchesWhereStartIsBetween(date1, date2);
     }

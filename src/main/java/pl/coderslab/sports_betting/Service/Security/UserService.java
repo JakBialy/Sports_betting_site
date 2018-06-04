@@ -21,4 +21,7 @@ public interface UserService {
 
     public void editUser(String username, String firstName, String lastName, String nick, String password);
 
-}
+    public void deleteUser(Long id);
+
+
+    }

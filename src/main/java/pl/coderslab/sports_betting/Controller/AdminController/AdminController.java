@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.sports_betting.Entity.Country;
 import pl.coderslab.sports_betting.Service.CountryService;
@@ -39,5 +40,11 @@ public class AdminController {
     public String getAllUsers(Model model) {
         model.addAttribute("users",  userService.findAll());
         return "AdminUserList";
+    }
+
+    @GetMapping("/userDelete/{id}")
+    public String deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return "redirect:/admin/users";
     }
 }

@@ -93,4 +93,8 @@ public class UserServiceImpl implements UserService {
         httpSession.setAttribute("lastName", user.getLastName());
         httpSession.setAttribute("nick", user.getNick());
     }
+
+    public void deleteUser(Long id){
+        userRepository.deleteById(id);
+    }
 }
