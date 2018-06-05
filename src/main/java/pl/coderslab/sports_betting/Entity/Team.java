@@ -43,4 +43,7 @@ class Team {
     @OneToMany(mappedBy="team")
     private List<Bet> bets = new ArrayList<>();
 
+// can be a problem for swagger
+//    @ManyToMany(mappedBy="favoriteTeams")
+//    private List<User> users = new ArrayList<>();
 }

@@ -95,5 +95,24 @@ public class UserController {
         userService.editUser(username,firstName,lastName,nick,password);
         return "redirect:/user/userInfo";
     }
+
+    @GetMapping("/addFavorite/{id}")
+    public String addFavorite(@PathVariable Long id) {
+        userService.addToFavorites(id);
+        return "redirect:/user/favorites";
+    }
+
+    @GetMapping("/favorites")
+    public String showFavorites(Model model) {
+        User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("user", user);
+        return "UserFavorites";
+    }
+
+    @GetMapping("/favoriteRemove/{id}")
+    public String removeFavorite(@PathVariable Long id) {
+        userService.removeFromFavorite(id);
+        return "redirect:/user/favorites";
+    }
 }
 

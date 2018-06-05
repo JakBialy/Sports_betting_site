@@ -1,5 +1,6 @@
 package pl.coderslab.sports_betting.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -57,4 +58,7 @@ public @Data class User {
 
     @OneToMany(mappedBy="user")
     private List<Transaction> transactions = new ArrayList<>();
+
+    @ManyToMany
+    private List<Team> favoriteTeams = new ArrayList<>();
 }

@@ -23,5 +23,8 @@ public interface UserService {
 
     public void deleteUser(Long id);
 
+    public void addToFavorites(Long id);
+
+    public void removeFromFavorite(Long id);
 
     }

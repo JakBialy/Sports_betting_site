@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Header.html :: header"></div>
+
+<h3 th:text="|Welcome ${session.firstName}|"> Welcome </h3>
+<hr>
+
+<h2> Sports to bet:</h2>
+<a class="d-block -medium mt-3" href="/football">Football</a>
+
+
+
+<div th:replace="Footer.html :: footer"></div>
+
+

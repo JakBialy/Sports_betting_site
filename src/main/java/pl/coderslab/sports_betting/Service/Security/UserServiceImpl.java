@@ -1,10 +1,13 @@
 package pl.coderslab.sports_betting.Service.Security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.coderslab.sports_betting.Entity.Role;
+import pl.coderslab.sports_betting.Entity.Team;
 import pl.coderslab.sports_betting.Entity.User;
+import pl.coderslab.sports_betting.Repository.TeamRepository;
 import pl.coderslab.sports_betting.Repository.UserRepository;
 
 
@@ -12,14 +15,14 @@ import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
+
+    @Autowired
+    TeamRepository teamRepository;
 
     private static final String DEFAULT_USER_ROLE_NAME = "ROLE_USER";
     private static final String ADMIN = "ROLE_ADMIN";
@@ -94,7 +97,32 @@ public class UserServiceImpl implements UserService {
         httpSession.setAttribute("nick", user.getNick());
     }
 
+    @Override
     public void deleteUser(Long id){
         userRepository.deleteById(id);
     }
+
+    @Override
+    public void addToFavorites(Long id){
+        User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        List<Team> teams = user.getFavoriteTeams();
+        Optional<Team> teamOpt = teamRepository.findById(id);
+        Team team = teamOpt.get();
+        if (!(teams.contains(team))){
+            teams.add(team);
+            user.setFavoriteTeams(teams);
+            userRepository.save(user);
+        }
+    }
+
+    @Override
+    public void removeFromFavorite(Long id){
+        User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        List<Team> teams = user.getFavoriteTeams();
+        Optional<Team> team = teamRepository.findById(id);
+        teams.remove(team.get());
+        user.setFavoriteTeams(teams);
+        userRepository.save(user);
+    }
+
 }

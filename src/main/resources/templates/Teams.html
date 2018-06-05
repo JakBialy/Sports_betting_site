@@ -2,7 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:replace="Header.html :: header"></div>
 
-    <h2 th:text="|League:${league.name} Country: ${league.country.name}|">Teams</h2>
+    <h3 th:text="|League:${league.name} Country: ${league.country.name}|">Teams</h3>
+
+
 
     <div class="card mb-3">
         <div class="card-body">
@@ -15,8 +17,7 @@
                         <th> Wins </th>
                         <th> Draws </th>
                         <th> Lost </th>
-                        <th> Team games </th>
-
+                        <th> Team details </th>
                     </tr>
                     </thead>
 
@@ -27,7 +28,7 @@
                         <td th:text="${team.wins}">League Name</td>
                         <td th:text="${team.draws}">HomeTeam Name</td>
                         <td th:text="${team.lost}">AwayTeam Name</td>
-                        <td> <a th:href="@{/football/team/{id}(id=${team.id})}">Team matches!</a> </td>
+                        <td> <a th:href="@{/football/team/{id}(id=${team.id})}">Team details</a> </td>
                     </tr>
                     </tbody>
                 </table>

@@ -9,6 +9,7 @@ import pl.coderslab.sports_betting.Entity.User;
 import pl.coderslab.sports_betting.Repository.BetRepository;
 import pl.coderslab.sports_betting.Repository.UserRepository;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class BetService {
     @Autowired
     UserRepository userRepository;
 
+    @Transactional
     public void saveBet(Bet bet){
         User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         user.setMoney(user.getMoney().subtract(bet.getMoney()));

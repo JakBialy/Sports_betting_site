@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Header.html :: header"></div>
+
+<p class="text-center"> <strong>Your Favorite teams: </strong></p>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th> Team </th>
+                    <th> Position </th>
+                    <th> Wins </th>
+                    <th> Draws </th>
+                    <th> Lost </th>
+                    <th> Team details </th>
+                    <th> Remove from favorites </th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="team: ${user.favoriteTeams}">
+                    <td th:text="${team.team}">Team Name</td>
+                    <td th:text="${team.position}">Team Position</td>
+                    <td th:text="${team.wins}">League Name</td>
+                    <td th:text="${team.draws}">HomeTeam Name</td>
+                    <td th:text="${team.lost}">AwayTeam Name</td>
+                    <td> <a th:href="@{/football/team/{id}(id=${team.id})}">Team details</a> </td>
+                    <td> <a th:href="@{/user/favoriteRemove/{id}(id=${team.id})}">Remove</a> </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div th:replace="Footer.html :: footer"></div>
+
+
