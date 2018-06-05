@@ -7,16 +7,17 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.sports_betting.Entity.Bet;
+import pl.coderslab.sports_betting.Entity.Message;
 import pl.coderslab.sports_betting.Entity.Transaction;
 import pl.coderslab.sports_betting.Entity.User;
 import pl.coderslab.sports_betting.Service.BetService;
+import pl.coderslab.sports_betting.Service.MessageService;
 import pl.coderslab.sports_betting.Service.TransactionService;
 import pl.coderslab.sports_betting.Service.Security.UserService;
 
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,20 +30,22 @@ public class UserController {
     BetService betService;
     @Autowired
     TransactionService transactionService;
+    @Autowired
+    MessageService messageService;
 
     @GetMapping("/bets")
     public String userBets(Model model) {
         User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
         List<Bet> list = betService.findAllByUser(user);
         model.addAttribute("bets", list);
-        return "BetList";
+        return "User/UserBetList";
     }
 
     @GetMapping("/Founds")
     public String addFounds(Model model, HttpSession httpSession) {
         User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("user", user);
-            return "TransactionIndex";
+            return "User/UserTransactionIndex";
     }
 
     @GetMapping("/noFounds")
@@ -50,36 +53,36 @@ public class UserController {
         User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("user", user);
         model.addAttribute("money", 0);
-        return "TransactionIndex";
+        return "User/UserTransactionIndex";
     }
 
     @GetMapping("/creditAdd")
     public String addFoundsFromCard(Model model) {
         model.addAttribute("transaction", new Transaction());
-        return "TransactionCardAdd";
+        return "User/UserTransactionCardAdd";
     }
 
     @PostMapping("/creditAdd")
     public String addFoundsFromCard(@Valid @ModelAttribute Transaction transaction, BindingResult result) {
         if (result.hasErrors()) {
-            return "TransactionCardAdd";
+            return "User/UserTransactionCardAdd";
         }
         transactionService.saveTransaction(transaction);
-        return "redirect:/football";
+        return "redirect:/user/userInfo";
     }
 
     @GetMapping("/userInfo")
     public String userInfo(Model model) {
         User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("user", user);
-        return "UserInfo";
+        return "User/UserInfo";
     }
 
     @GetMapping("/transactionHistory/{id}")
     public String transactionHistory(@PathVariable Long id, Model model) {
         List<Transaction> list = transactionService.findAllByUserId(id);
         model.addAttribute("transactions", list);
-        return "TransactionsList";
+        return "User/UserTransactionsList";
     }
 
     @GetMapping("/userSettings")
@@ -87,7 +90,7 @@ public class UserController {
         User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
         user.setPassword("");
         model.addAttribute("user", user);
-        return "UserSettings";
+        return "User/UserSettings";
     }
 
     @PostMapping("/userSettings")
@@ -106,7 +109,7 @@ public class UserController {
     public String showFavorites(Model model) {
         User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("user", user);
-        return "UserFavorites";
+        return "User/UserFavorites";
     }
 
     @GetMapping("/favoriteRemove/{id}")
@@ -118,7 +121,7 @@ public class UserController {
     @GetMapping("/all")
     public String showAllUsers(Model model) {
         model.addAttribute("users", userService.findAllWithoutActiveUser());
-        return "UserListFriends";
+        return "User/UserListFriends";
     }
 
     @GetMapping("/addFriend/{id}")
@@ -130,6 +133,31 @@ public class UserController {
     @GetMapping("/friends")
     public String addToFriend(Model model) {
         model.addAttribute("friends",userService.getAllUserFriends());
-        return "UserFriends";
+        return "User/UserFriends";
+    }
+
+    @GetMapping("/addMessage")
+    public String messageForm(Model model) {
+        model.addAttribute("message", new Message());
+        User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("user", user);
+        return "User/UserMessageForm";
+    }
+
+    @PostMapping("/addMessage")
+    public String messageFormSave(@Valid @ModelAttribute Message message, BindingResult result){
+        if(result.hasErrors()){
+            return "User/UserMessageForm";
+        }
+        messageService.saveMessage(message);
+        return "redirect:/user/messages";
+    }
+
+    @GetMapping("/messages")
+    public String showUserMessages(Model model) {
+        User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("received", messageService.getAllReceivedMessages(user.getId()));
+        model.addAttribute("send", messageService.getAllSendMessages(user.getId()));
+        return "User/UserMessagesList";
     }
 }

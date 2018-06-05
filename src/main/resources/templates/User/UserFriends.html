@@ -11,7 +11,6 @@
                 <thead>
                 <tr>
                     <th> Nick </th>
-                    <th> Send message </th>
                     <!--<th> Bet together! </th>-->
                 </tr>
 
@@ -20,7 +19,6 @@
                 <tbody>
                 <tr th:each="user: ${friends}">
                     <td th:text="${user.nick}">Nick</td>
-                    <td> <a th:href="@{/user/message/{id}(id=${user.id})}">Add</a> </td>
                     <!--<td> <a th:href="@{/user/message/{id}(id=${user.id})}">Add</a> </td>-->
                 </tr>
                 </tbody>
@@ -28,5 +26,8 @@
         </div>
     </div>
 </div>
+
+<td> <a th:href="@{/user/addMessage}">Send Message</a> </td>
+
 
 <div th:replace="Footer.html :: footer"></div>

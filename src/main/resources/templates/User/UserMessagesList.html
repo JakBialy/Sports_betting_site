@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Header.html :: header"></div>
+
+<h3> Add to friends: </h3>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th> To </th>
+                    <th> Content </th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+                <tr th:each="message: ${send}">
+                    <td th:text="${message.receiver.nick}">Nick</td>
+                    <td th:text="${message.text}">Nick</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th> From </th>
+                    <th> Content </th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+                <tr th:each="message: ${received}">
+                    <td th:text="${message.sender.nick}">Nick</td>
+                    <td th:text="${message.text}">Nick</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<td> <a th:href="@{/user/addMessage}">Send Message</a> </td>
+
+
+<div th:replace="Footer.html :: footer"></div>

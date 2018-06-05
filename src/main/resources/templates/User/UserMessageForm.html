@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Header.html :: header"></div>
+
+<!--message form-->
+<form th:action="@{/user/addMessage/}" th:object="${message}"	method="post">
+
+    <label> To user:</label>
+    <select th:field="*{receiver}" >
+        <option th:each="user : ${user.getFriends()}"
+                th:value="${user.id}" th:text="${user.nick}"> User Nick</option>
+    </select>
+
+    <div>
+        <label for="text">Message text:</label>
+        <input class="form-control"  th:field="*{text}" id="text" type="text" name="text" placeholder="Write your message">
+        <p th:if="${#fields.hasErrors('text')}" th:errors="*{text}"> error message</p>
+    </div>
+
+    <input type="hidden" th:value="${user.id}" th:attr="name='sender'" />
+    <input type="hidden" th:value="false" th:attr="name='open'" />
+
+    <div class="text-center">
+        <input type="submit" value="Make bet!" />
+    </div>
+</form>
+
+<div th:replace="Footer.html :: footer"></div>
+
+

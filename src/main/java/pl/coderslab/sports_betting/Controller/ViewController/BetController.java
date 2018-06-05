@@ -1,7 +1,5 @@
 package pl.coderslab.sports_betting.Controller.ViewController;
 
-import com.sun.deploy.net.HttpResponse;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -36,7 +34,7 @@ public class BetController {
         model.addAttribute("matchData", matchService.findById(id));
         model.addAttribute("bet", new Bet());
         model.addAttribute("user", userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName()));
-        return "BetForm";
+        return "Bets/BetForm";
     }
 
     @PostMapping("/match")

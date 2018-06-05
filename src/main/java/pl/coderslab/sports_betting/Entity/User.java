@@ -75,4 +75,10 @@ public @Data class User {
             inverseJoinColumns=@JoinColumn(name="personId")
     )
     private List<User> friendOf;
+
+    @OneToMany(mappedBy = "sender")
+    private List<Message> send = new ArrayList<>();
+
+    @OneToMany(mappedBy = "receiver")
+    private List<Message> received = new ArrayList<>();
 }

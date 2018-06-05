@@ -146,6 +146,19 @@ public class UserServiceImpl implements UserService {
 
     public List<User> getAllUserFriends(){
         User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        return user.getFriends();
+        List<User> friends = user.getFriends();
+        List<User> friendOf = user.getFriendOf();
+        List<User> all = new ArrayList<>();
+        for (User load: friends) {
+            if (!(all.contains(load))){
+                all.add(load);
+            } }
+
+        for (User load: friendOf) {
+            if (!(all.contains(load))){
+                all.add(load);
+        } }
+        return all;
     }
+
 }
