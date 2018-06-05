@@ -61,4 +61,18 @@ public @Data class User {
 
     @ManyToMany
     private List<Team> favoriteTeams = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(name="friends",
+            joinColumns=@JoinColumn(name="personId"),
+            inverseJoinColumns=@JoinColumn(name="friendId")
+    )
+    private List<User> friends;
+
+    @ManyToMany
+    @JoinTable(name="friends",
+            joinColumns=@JoinColumn(name="friendId"),
+            inverseJoinColumns=@JoinColumn(name="personId")
+    )
+    private List<User> friendOf;
 }

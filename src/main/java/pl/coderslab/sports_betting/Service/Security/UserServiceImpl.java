@@ -106,8 +106,7 @@ public class UserServiceImpl implements UserService {
     public void addToFavorites(Long id){
         User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         List<Team> teams = user.getFavoriteTeams();
-        Optional<Team> teamOpt = teamRepository.findById(id);
-        Team team = teamOpt.get();
+        Team team = teamRepository.getOne(id);
         if (!(teams.contains(team))){
             teams.add(team);
             user.setFavoriteTeams(teams);
@@ -119,10 +118,20 @@ public class UserServiceImpl implements UserService {
     public void removeFromFavorite(Long id){
         User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         List<Team> teams = user.getFavoriteTeams();
-        Optional<Team> team = teamRepository.findById(id);
-        teams.remove(team.get());
+        Team team = teamRepository.getOne(id);
+        teams.remove(team);
         user.setFavoriteTeams(teams);
         userRepository.save(user);
     }
 
+    public void addToFriends(Long id){
+        User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        List<User> friends = user.getFriends();
+        User friend = userRepository.getOne(id);
+        if (!(friends.contains(friend))){
+            friends.add(friend);
+            user.setFriends(friends);
+            userRepository.save(user);
+        }
+    }
 }

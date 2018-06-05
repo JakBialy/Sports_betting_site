@@ -1,5 +1,8 @@
 package pl.coderslab.sports_betting.Service.Security;
 
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import pl.coderslab.sports_betting.Entity.User;
 
 import javax.servlet.http.HttpSession;
@@ -27,4 +30,5 @@ public interface UserService {
 
     public void removeFromFavorite(Long id);
 
-    }
+    public void addToFriends(Long id);
+}

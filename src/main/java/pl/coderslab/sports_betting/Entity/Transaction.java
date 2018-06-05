@@ -18,7 +18,6 @@ class Transaction {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @NotEmpty
     LocalDateTime created;
 
     @NotNull

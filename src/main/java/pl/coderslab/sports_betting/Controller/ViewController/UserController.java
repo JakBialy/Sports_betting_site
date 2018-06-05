@@ -114,5 +114,18 @@ public class UserController {
         userService.removeFromFavorite(id);
         return "redirect:/user/favorites";
     }
+
+    @GetMapping("/all")
+    public String showAllUsers(Model model) {
+        model.addAttribute("users", userService.findAll());
+        return "UserListFriends";
+    }
+
+    @GetMapping("/addFriend/{id}")
+    public String addToFriend(@PathVariable Long id, Model model) {
+        userService.addToFriends(id);
+        return "Football";
+    }
 }
 
+// http://localhost:8080/user/addFriend/2
