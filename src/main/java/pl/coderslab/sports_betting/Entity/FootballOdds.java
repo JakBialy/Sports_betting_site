@@ -6,9 +6,9 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "odds")
+@Table(name = "footballOdds")
 public @Data
-class Odds {
+class FootballOdds {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,5 +29,5 @@ class Odds {
     @OneToOne
     @JoinColumn(name = "match_id")
     @JsonBackReference
-    private Match match;
+    private FootballMatch footballMatch;
 }

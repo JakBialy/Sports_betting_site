@@ -2,7 +2,6 @@ package pl.coderslab.sports_betting.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import pl.coderslab.sports_betting.Entity.Bet;
 import pl.coderslab.sports_betting.Entity.User;
@@ -29,9 +28,9 @@ public class BetService {
         bet.setUser(user);
         bet.setDate(LocalDateTime.now());
         if(bet.getType().equals("homeWin")){
-            bet.setTeam(bet.getMatch().getHomeTeam());
+            bet.setFootballTeam(bet.getFootballMatch().getHomeFootballTeam());
         } else if (bet.getType().equals("awayWin")){
-            bet.setTeam(bet.getMatch().getAwayTeam());
+            bet.setFootballTeam(bet.getFootballMatch().getAwayFootballTeam());
         }
         betRepository.save(bet);
     }

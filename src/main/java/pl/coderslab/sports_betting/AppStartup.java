@@ -4,15 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-import pl.coderslab.sports_betting.Entity.Country;
 import pl.coderslab.sports_betting.Entity.User;
 import pl.coderslab.sports_betting.Service.CountryService;
-import pl.coderslab.sports_betting.Service.LeagueService;
+import pl.coderslab.sports_betting.Service.FootballLeagueService;
 import pl.coderslab.sports_betting.Service.Security.UserService;
-import pl.coderslab.sports_betting.Service.TeamService;
-
-import java.util.ArrayList;
-import java.util.List;
+import pl.coderslab.sports_betting.Service.FootballTeamService;
 
 @Component
 public class AppStartup implements ApplicationRunner {
@@ -22,9 +18,9 @@ public class AppStartup implements ApplicationRunner {
     @Autowired
     CountryService countryService;
     @Autowired
-    LeagueService leagueService;
+    FootballLeagueService footballLeagueService;
     @Autowired
-    TeamService teamService;
+    FootballTeamService footballTeamService;
 
     @Autowired
     public AppStartup(UserService userService) {
@@ -40,8 +36,8 @@ public class AppStartup implements ApplicationRunner {
 
         }
         countryService.populateDb();
-        leagueService.populateDb();
-        teamService.populateDb();
+        footballLeagueService.populateDb();
+        footballTeamService.populateDb();
     }
 
     private User testUser1() {

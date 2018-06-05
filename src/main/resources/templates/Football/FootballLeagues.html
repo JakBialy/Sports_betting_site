@@ -11,13 +11,13 @@
                     <thead>
                     <tr>
                         <th>Leagues : </th>
-                        <th>Go to teams!</th>
+                        <th>Go to footballTeams!</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="league: ${leagues}">
-                        <td th:text="${league.name}">League Name</td>
-                        <td> <a th:href="@{/football/league/{id}(id=${league.id})}">League Teams</a> </td>
+                    <tr th:each="footballLeague: ${leagues}">
+                        <td th:text="${footballLeague.name}">League Name</td>
+                        <td> <a th:href="@{/football/league/{id}(id=${footballLeague.id})}">League Teams</a> </td>
                     </tr>
                     </tbody>
                 </table>

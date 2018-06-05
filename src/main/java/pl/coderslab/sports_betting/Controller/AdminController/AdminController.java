@@ -7,13 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.coderslab.sports_betting.Entity.Country;
 import pl.coderslab.sports_betting.Service.CountryService;
-import pl.coderslab.sports_betting.Service.LeagueService;
+import pl.coderslab.sports_betting.Service.FootballLeagueService;
 import pl.coderslab.sports_betting.Service.Security.UserService;
-import pl.coderslab.sports_betting.Service.TeamService;
-
-import java.util.List;
+import pl.coderslab.sports_betting.Service.FootballTeamService;
 
 @Controller
 @RequestMapping("/admin")
@@ -23,10 +20,10 @@ public class AdminController {
     CountryService countryService;
 
     @Autowired
-    LeagueService leagueService;
+    FootballLeagueService footballLeagueService;
 
     @Autowired
-    TeamService teamService;
+    FootballTeamService footballTeamService;
 
     @Autowired
     UserService userService;

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:replace="Header.html :: header"></div>
 
-<p class="text-center"> <strong>Your Favorite teams: </strong></p>
+<p class="text-center"> <strong>Your Favorite footballTeams: </strong></p>
 
 <div class="card mb-3">
     <div class="card-body">
@@ -21,14 +21,14 @@
                 </thead>
 
                 <tbody>
-                <tr th:each="team: ${user.favoriteTeams}">
-                    <td th:text="${team.team}">Team Name</td>
-                    <td th:text="${team.position}">Team Position</td>
-                    <td th:text="${team.wins}">League Name</td>
-                    <td th:text="${team.draws}">HomeTeam Name</td>
-                    <td th:text="${team.lost}">AwayTeam Name</td>
-                    <td> <a th:href="@{/football/team/{id}(id=${team.id})}">Team details</a> </td>
-                    <td> <a th:href="@{/user/favoriteRemove/{id}(id=${team.id})}">Remove</a> </td>
+                <tr th:each="footballTeam: ${user.favoriteFootballTeams}">
+                    <td th:text="${footballTeam.team}">Team Name</td>
+                    <td th:text="${footballTeam.position}">Team Position</td>
+                    <td th:text="${footballTeam.wins}">League Name</td>
+                    <td th:text="${footballTeam.draws}">HomeTeam Name</td>
+                    <td th:text="${footballTeam.lost}">AwayTeam Name</td>
+                    <td> <a th:href="@{/football/team/{id}(id=${footballTeam.id})}">Team details</a> </td>
+                    <td> <a th:href="@{/user/favoriteRemove/{id}(id=${footballTeam.id})}">Remove</a> </td>
                 </tr>
                 </tbody>
             </table>

@@ -4,14 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import pl.coderslab.sports_betting.Entity.Bet;
-import pl.coderslab.sports_betting.Entity.Odds;
+import pl.coderslab.sports_betting.Entity.FootballOdds;
 import pl.coderslab.sports_betting.Entity.User;
 import pl.coderslab.sports_betting.Repository.BetRepository;
 import pl.coderslab.sports_betting.Repository.UserRepository;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,29 +24,29 @@ public class ScheduledBetService {
 
     @Scheduled(cron = ("59 4,9,14,19,24,29,34,39,44,49,54,59 * * * ?"))
     public void checkingBets(){
-        List<Bet> betList = betRepository.findAllByMatchEndIsGreaterThan(LocalDateTime.now());
+        List<Bet> betList = betRepository.findAllByFootballMatchEndIsGreaterThan(LocalDateTime.now());
         for (Bet bet: betList) {
-            Odds odds = bet.getMatch().getOdds();
+            FootballOdds footballOdds = bet.getFootballMatch().getFootballOdds();
             User user = bet.getUser();
 
             if(bet.getType().equals("homeWin")){
-                if(bet.getMatch().getWinner() == bet.getMatch().getHomeTeam()){
+                if(bet.getFootballMatch().getWinner() == bet.getFootballMatch().getHomeFootballTeam()){
                     bet.setWinner(true);
-                    BigDecimal winOdd = BigDecimal.valueOf(odds.getOddHome());
+                    BigDecimal winOdd = BigDecimal.valueOf(footballOdds.getOddHome());
                     moneyToUser(bet, user, winOdd);
                 }
 
             } else if(bet.getType().equals("awayWin")){
-                if(bet.getMatch().getWinner() == bet.getMatch().getAwayTeam()){
+                if(bet.getFootballMatch().getWinner() == bet.getFootballMatch().getAwayFootballTeam()){
                     bet.setWinner(true);
-                    BigDecimal winOdd = BigDecimal.valueOf(odds.getOddAway());
+                    BigDecimal winOdd = BigDecimal.valueOf(footballOdds.getOddAway());
                     moneyToUser(bet, user, winOdd);
                 }
 
             } else if(bet.getType().equals("Draw")){
-                if(bet.getMatch().getWinner() == null){
+                if(bet.getFootballMatch().getWinner() == null){
                     bet.setWinner(true);
-                    BigDecimal winOdd = BigDecimal.valueOf(odds.getOddX());
+                    BigDecimal winOdd = BigDecimal.valueOf(footballOdds.getOddX());
                     moneyToUser(bet, user, winOdd);
                 }
             }

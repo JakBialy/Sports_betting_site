@@ -12,6 +12,7 @@
                 <tr>
                     <th> Type </th>
                     <th> Money</th>
+                    <!--<th> To Win</th>-->
                     <th> Date </th>
                     <th> Winner </th>
                     <th> Link to Match </th>
@@ -30,7 +31,7 @@
                         <span th:case='true' >Win</span>
                         <span th:case='false' >Lost</span>
                     </td>
-                    <td> <a th:href="@{/football/match/{id}(id=${bet.match.id})}">See match details</a> </td>
+                    <td> <a th:href="@{/football/footballMatch/{id}(id=${bet.footballMatch.id})}">See footballMatch details</a> </td>
                 </tr>
                 </tbody>
             </table>

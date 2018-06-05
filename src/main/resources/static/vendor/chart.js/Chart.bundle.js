@@ -2713,7 +2713,7 @@ function computeMonthsParse () {
         mixedPieces.push(this.monthsShort(mom, ''));
     }
     // Sorting makes sure if one month (or abbr) is a prefix of another it
-    // will match the longer piece.
+    // will footballMatch the longer piece.
     shortPieces.sort(cmpLenRev);
     longPieces.sort(cmpLenRev);
     mixedPieces.sort(cmpLenRev);
@@ -3273,7 +3273,7 @@ function computeWeekdaysParse () {
         mixedPieces.push(longp);
     }
     // Sorting makes sure if one weekday (or abbr) is a prefix of another it
-    // will match the longer piece.
+    // will footballMatch the longer piece.
     minPieces.sort(cmpLenRev);
     shortPieces.sort(cmpLenRev);
     longPieces.sort(cmpLenRev);
@@ -3718,7 +3718,7 @@ function configFromISO(config) {
         if (match[3]) {
             for (i = 0, l = isoTimes.length; i < l; i++) {
                 if (isoTimes[i][1].exec(match[3])) {
-                    // match[2] should be 'T' or space
+                    // footballMatch[2] should be 'T' or space
                     timeFormat = (match[2] || ' ') + isoTimes[i][0];
                     break;
                 }
@@ -4656,7 +4656,7 @@ function createDuration (input, key) {
             h  : toInt(match[HOUR])                         * sign,
             m  : toInt(match[MINUTE])                       * sign,
             s  : toInt(match[SECOND])                       * sign,
-            ms : toInt(absRound(match[MILLISECOND] * 1000)) * sign // the millisecond decimal point is included in the match
+            ms : toInt(absRound(match[MILLISECOND] * 1000)) * sign // the millisecond decimal point is included in the footballMatch
         };
     } else if (!!(match = isoRegex.exec(input))) {
         sign = (match[1] === '-') ? -1 : 1;
@@ -10237,7 +10237,7 @@ function getDistanceMetricForAxis(axis) {
 
 function indexMode(chart, e, options) {
 	var position = getRelativePosition(e, chart);
-	// Default axis for index mode is 'x' to match old behaviour
+	// Default axis for index mode is 'x' to footballMatch old behaviour
 	options.axis = options.axis || 'x';
 	var distanceMetric = getDistanceMetricForAxis(options.axis);
 	var items = options.intersect ? getIntersectItems(chart, position) : getNearestItems(chart, position, false, distanceMetric);

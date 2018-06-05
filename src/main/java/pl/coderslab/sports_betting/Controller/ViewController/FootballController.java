@@ -7,59 +7,60 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.sports_betting.Service.CountryService;
-import pl.coderslab.sports_betting.Service.LeagueService;
-import pl.coderslab.sports_betting.Service.MatchService;
-import pl.coderslab.sports_betting.Service.TeamService;
+import pl.coderslab.sports_betting.Service.FootballLeagueService;
+import pl.coderslab.sports_betting.Service.FootballMatchService;
+import pl.coderslab.sports_betting.Service.FootballTeamService;
 
 @Controller
 @RequestMapping(value = "/football")
 public class FootballController {
 
     @Autowired
-    MatchService matchService;
+    FootballMatchService footballMatchService;
     @Autowired
     CountryService countryService;
     @Autowired
-    LeagueService leagueService;
+    FootballLeagueService footballLeagueService;
     @Autowired
-    TeamService teamService;
+    FootballTeamService footballTeamService;
 
 
     @GetMapping("")
     public String homeFootball(Model model) {
 
         model.addAttribute("countries", countryService.allCountries());
-        model.addAttribute("nextMatches", matchService.plannedMatches());
-        model.addAttribute("liveMatches", matchService.liveMatches());
+        model.addAttribute("nextMatches", footballMatchService.plannedMatches());
+        model.addAttribute("liveMatches", footballMatchService.liveMatches());
 
         return "Football/Football";
     }
 
     @GetMapping("/country/{id}")
     public String countriesLeagues(@PathVariable Long id, Model model) {
-        model.addAttribute("leagues", leagueService.findLeagueByCountryId(id));
+        model.addAttribute("leagues", footballLeagueService.findLeagueByCountryId(id));
         model.addAttribute("country", countryService.getCountryById(id));
         return "Football/FootballLeagues";
     }
 
     @GetMapping("/league/{id}")
     public String leagueTeams(@PathVariable Long id, Model model) {
-        model.addAttribute("league", leagueService.findLeagueById(id));
-        model.addAttribute("teams", teamService.findTeamsByLeagueId(id));
+        model.addAttribute("league", footballLeagueService.findLeagueById(id));
+        model.addAttribute("teams", footballTeamService.findTeamsByLeagueId(id));
         return "Football/FootballTeams";
     }
 
     @GetMapping("/team/{id}")
     public String teamMatches(@PathVariable Long id, Model model) {
-        model.addAttribute("team", teamService.findTeamById(id));
-        model.addAttribute("homeMatches", matchService.homeMatches(id));
-        model.addAttribute("awayMatches", matchService.awayMatches(id));
+        model.addAttribute("team", footballTeamService.findTeamById(id));
+        model.addAttribute("homeMatches", footballMatchService.homeMatches(id));
+        model.addAttribute("awayMatches", footballMatchService.awayMatches(id));
         return "Football/TeamMatchesList";
     }
 
     @GetMapping("/match/{id}")
     public String singleMatch(@PathVariable Long id, Model model){
-        model.addAttribute("match", matchService.findById(id));
-        return "Football/FotballMatch";
+        model.addAttribute("match", footballMatchService.findById(id));
+        return "Football/FootballMatch";
     }
 }
+

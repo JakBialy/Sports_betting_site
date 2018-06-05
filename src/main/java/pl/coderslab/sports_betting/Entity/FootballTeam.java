@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "teams")
+@Table(name = "footballTeams")
 public @Data
-class Team {
+class FootballTeam {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,21 +29,21 @@ class Team {
     @ManyToOne
     @JoinColumn(name = "league_id")
     @JsonBackReference
-    League league;
+    FootballLeague footballLeague;
 
-    @OneToMany(mappedBy="homeTeam")
-    private List<Match> homeTeamGames = new ArrayList<>();
+    @OneToMany(mappedBy="homeFootballTeam")
+    private List<FootballMatch> homeTeamGames = new ArrayList<>();
 
-    @OneToMany(mappedBy="awayTeam")
-    private List<Match> awayTeamGames = new ArrayList<>();
+    @OneToMany(mappedBy="awayFootballTeam")
+    private List<FootballMatch> awayTeamGames = new ArrayList<>();
 
     @OneToMany(mappedBy="winner")
-    private List<Match> wonGames = new ArrayList<>();
+    private List<FootballMatch> wonGames = new ArrayList<>();
 
-    @OneToMany(mappedBy="team")
+    @OneToMany(mappedBy="footballTeam")
     private List<Bet> bets = new ArrayList<>();
 
 // can be a problem for swagger
-//    @ManyToMany(mappedBy="favoriteTeams")
+//    @ManyToMany(mappedBy="footballTeams")
 //    private List<User> users = new ArrayList<>();
 }

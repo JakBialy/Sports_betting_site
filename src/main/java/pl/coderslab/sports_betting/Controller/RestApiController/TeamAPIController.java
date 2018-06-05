@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.coderslab.sports_betting.Entity.Team;
-import pl.coderslab.sports_betting.Service.TeamService;
+import pl.coderslab.sports_betting.Entity.FootballTeam;
+import pl.coderslab.sports_betting.Service.FootballTeamService;
 
 import java.util.List;
 
@@ -15,22 +15,22 @@ import java.util.List;
 public class TeamAPIController {
 
     @Autowired
-    TeamService teamService;
+    FootballTeamService footballTeamService;
 
     @GetMapping(path = "/all")
-    public List<Team> getAllTeams() {
-        return	teamService.allTeams();
+    public List<FootballTeam> getAllTeams() {
+        return	footballTeamService.allTeams();
     }
 
     @GetMapping(path = "/league/{id}")
-    public List<Team> getTeamsByLeagueId(@PathVariable Long id) {
-        return	teamService.findTeamsByLeagueId(id);
+    public List<FootballTeam> getTeamsByLeagueId(@PathVariable Long id) {
+        return	footballTeamService.findTeamsByLeagueId(id);
     }
 
     @GetMapping(path = "/{id}")
-    public Team getTeamById(@PathVariable Long id) {
-        return	teamService.findTeamById(id);
+    public FootballTeam getTeamById(@PathVariable Long id) {
+        return	footballTeamService.findTeamById(id);
     }
 
-    // should be sth like in API Footbal, exact id = exact country, match, league etc
+    // should be sth like in API Footbal, exact id = exact country, footballMatch, footballLeague etc
 }

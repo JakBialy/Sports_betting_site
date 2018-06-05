@@ -22,13 +22,13 @@
                     </thead>
 
                     <tbody>
-                    <tr th:each="team: ${teams}">
-                        <td th:text="${team.team}">Team Name</td>
-                        <td th:text="${team.position}">Team Position</td>
-                        <td th:text="${team.wins}">League Name</td>
-                        <td th:text="${team.draws}">HomeTeam Name</td>
-                        <td th:text="${team.lost}">AwayTeam Name</td>
-                        <td> <a th:href="@{/football/team/{id}(id=${team.id})}">Team details</a> </td>
+                    <tr th:each="footballTeam: ${teams}">
+                        <td th:text="${footballTeam.team}">Team Name</td>
+                        <td th:text="${footballTeam.position}">Team Position</td>
+                        <td th:text="${footballTeam.wins}">League Name</td>
+                        <td th:text="${footballTeam.draws}">HomeTeam Name</td>
+                        <td th:text="${footballTeam.lost}">AwayTeam Name</td>
+                        <td> <a th:href="@{/football/team/{id}(id=${footballTeam.id})}">Team details</a> </td>
                     </tr>
                     </tbody>
                 </table>

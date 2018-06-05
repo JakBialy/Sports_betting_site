@@ -10,8 +10,8 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "leagues")
-public @Data class League {
+@Table(name = "footballLeagues")
+public @Data class FootballLeague {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,7 +25,7 @@ public @Data class League {
     @JsonBackReference
     Country country;
 
-    @OneToMany(mappedBy = "league")
-    List<Team> teams = new ArrayList<>();
+    @OneToMany(mappedBy = "footballLeague")
+    List<FootballTeam> footballTeams = new ArrayList<>();
 
 }

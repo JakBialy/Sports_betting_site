@@ -8,7 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.sports_betting.Entity.Bet;
 import pl.coderslab.sports_betting.Entity.User;
-import pl.coderslab.sports_betting.Service.MatchService;
+import pl.coderslab.sports_betting.Service.FootballMatchService;
 import pl.coderslab.sports_betting.Service.BetService;
 import pl.coderslab.sports_betting.Service.Security.UserService;
 
@@ -21,7 +21,7 @@ import java.math.BigDecimal;
 public class BetController {
 
     @Autowired
-    MatchService matchService;
+    FootballMatchService footballMatchService;
 
     @Autowired
     BetService betService;
@@ -31,7 +31,7 @@ public class BetController {
 
     @GetMapping("/match/{id}")
     public String betForm(@PathVariable Long id, Model model) {
-        model.addAttribute("matchData", matchService.findById(id));
+        model.addAttribute("matchData", footballMatchService.findById(id));
         model.addAttribute("bet", new Bet());
         model.addAttribute("user", userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName()));
         return "Bets/BetForm";
@@ -40,7 +40,7 @@ public class BetController {
     @PostMapping("/match")
     public String postForm(@Valid @ModelAttribute Bet bet, BindingResult result) {
         if(result.hasErrors()){
-            return "redirect:/bet/match/" + bet.getMatch().getId();
+            return "redirect:/bet/match/" + bet.getFootballMatch().getId();
         }
         User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
         BigDecimal balance = user.getMoney().subtract(bet.getMoney());

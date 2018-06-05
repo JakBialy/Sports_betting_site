@@ -137,13 +137,13 @@
 		
 		/**
 		 * Almost identical to $ in operation, but in this case returns the data for the matched
-		 * rows - as such, the jQuery selector used should match TR row nodes or TD/TH cell nodes
+		 * rows - as such, the jQuery selector used should footballMatch TR row nodes or TD/TH cell nodes
 		 * rather than any descendants, so the data can be obtained for the row/cell. If matching
 		 * rows are found, the data returned is the original data array/object that was used to
 		 * create the row (or a generated array if from a DOM source).
 		 *
 		 * This method is often useful in-combination with $ where both functions are given the
-		 * same parameters and the array indexes will match identically.
+		 * same parameters and the array indexes will footballMatch identically.
 		 *  @param {string|node|jQuery} sSelector jQuery selector or node collection to act on
 		 *  @param {object} [oOpts] Optional parameters for modifying the rows to be included
 		 *  @param {string} [oOpts.filter=none] Select elements that meet the current filter
@@ -429,7 +429,7 @@
 		 */
 		this.fnDraw = function( complete )
 		{
-			// Note that this isn't an exact match to the old call to _fnDraw - it takes
+			// Note that this isn't an exact footballMatch to the old call to _fnDraw - it takes
 			// into account the new data, but can hold position.
 			this.api( true ).draw( complete );
 		};
@@ -744,7 +744,7 @@
 		
 		/**
 		 * Sort the table by a particular column
-		 *  @param {int} iCol the data index to sort on. Note that this will not match the
+		 *  @param {int} iCol the data index to sort on. Note that this will not footballMatch the
 		 *    'display index' if you have hidden data entries
 		 *  @dtopt API
 		 *  @deprecated Since v1.10
@@ -931,7 +931,7 @@
 				}
 			
 				/* If the element we are initialising has the same ID as a table which was previously
-				 * initialised, but the table nodes don't match (from before) then we destroy the old
+				 * initialised, but the table nodes don't footballMatch (from before) then we destroy the old
 				 * instance by simply deleting it. This is under the assumption that the table has been
 				 * destroyed by other methods. Anyone using non-id selectors will need to do this manually
 				 */
@@ -2199,7 +2199,7 @@
 	
 	
 	/**
-	 * Get an array of column indexes that match a given property
+	 * Get an array of column indexes that footballMatch a given property
 	 *  @param {object} oSettings dataTables settings object
 	 *  @param {string} sParam Parameter in aoColumns to look for - typically
 	 *    bVisible or bSearchable
@@ -2261,7 +2261,7 @@
 							break;
 						}
 	
-						// Only a single match is needed for html type since it is
+						// Only a single footballMatch is needed for html type since it is
 						// bottom of the pile and very similar to string
 						if ( detectedType === 'html' ) {
 							break;
@@ -2539,7 +2539,7 @@
 	}
 	
 	
-	// Private variable that is used to match action syntax in the data property object
+	// Private variable that is used to footballMatch action syntax in the data property object
 	var __reArray = /\[.*?\]$/;
 	var __reFn = /\(\)$/;
 	
@@ -4080,7 +4080,7 @@
 	 * Data the data from the server (nuking the old) and redraw the table
 	 *  @param {object} oSettings dataTables settings object
 	 *  @param {object} json json data return from the server.
-	 *  @param {string} json.sEcho Tracking flag for DataTables to match requests
+	 *  @param {string} json.sEcho Tracking flag for DataTables to footballMatch requests
 	 *  @param {int} json.iTotalRecords Number of records in the data set, not accounting for filtering
 	 *  @param {int} json.iTotalDisplayRecords Number of records in the data set, accounting for filtering
 	 *  @param {array} json.aaData The data to display on this page
@@ -5357,7 +5357,7 @@
 	
 		// "Hide" the header and footer that we used for the sizing. We need to keep
 		// the content of the cell so that the width applied to the header and body
-		// both match, but we want to hide it completely. We want to also fix their
+		// both footballMatch, but we want to hide it completely. We want to also fix their
 		// width to what they currently are
 		_fnApplyToChildren( function(nSizer, i) {
 			nSizer.innerHTML = '<div class="dataTables_sizing" style="height:0;overflow:hidden;">'+headerContent[i]+'</div>';
@@ -5938,7 +5938,7 @@
 		if ( _fnDataSource( oSettings ) != 'ssp' && aSort.length !== 0 )
 		{
 			// Create a value - key array of the current row positions such that we can use their
-			// current position during the sort, if values match, in order to perform stable sorting
+			// current position during the sort, if values footballMatch, in order to perform stable sorting
 			for ( i=0, iLen=displayMaster.length ; i<iLen ; i++ ) {
 				aiOrig[ displayMaster[i] ] = i;
 			}
@@ -5957,7 +5957,7 @@
 			 *    return oSort['numeric-asc']( aiOrig[a], aiOrig[b] );
 			 *  }
 			 * Basically we have a test for each sorting column, if the data in that column is equal,
-			 * test the next column. If all columns match, then we use a numeric sort on the row
+			 * test the next column. If all columns footballMatch, then we use a numeric sort on the row
 			 * positions in the original data array to provide a stable sort.
 			 *
 			 * Note - I know it seems excessive to have two sorting methods, but the first is around
@@ -7900,7 +7900,7 @@
 	
 			// ID selector. Want to always be able to select rows by id, regardless
 			// of if the tr element has been created or not, so can't rely upon
-			// jQuery here - hence a custom implementation. This does not match
+			// jQuery here - hence a custom implementation. This does not footballMatch
 			// Sizzle's fast selector or HTML4 - in HTML5 the ID can be anything,
 			// but to select it using a CSS selector engine (like Sizzle or
 			// querySelect) it would need to need to be escaped for some characters.
@@ -8386,7 +8386,7 @@
 	var __re_column_selector = /^([^:]+):(name|visIdx|visible)$/;
 	
 	
-	// r1 and r2 are redundant - but it means that the parameters match for the
+	// r1 and r2 are redundant - but it means that the parameters footballMatch for the
 	// iterator callback in columns().data()
 	var __columnData = function ( settings, column, r1, r2, rows ) {
 		var a = [];
@@ -8455,7 +8455,7 @@
 						return [ _fnVisibleToColumnIndex( settings, idx ) ];
 	
 					case 'name':
-						// match by name. `names` is column index complete and in order
+						// footballMatch by name. `names` is column index complete and in order
 						return $.map( names, function (name, i) {
 							return name === match[1] ? i : null;
 						} );
@@ -9711,7 +9711,7 @@
 		 * Partner property to mData which is used (only when defined) to get
 		 * the data - i.e. it is basically the same as mData, but without the
 		 * 'set' option, and also the data fed to it is the result from mData.
-		 * This is the rendering method to match the data method of mData.
+		 * This is the rendering method to footballMatch the data method of mData.
 		 *  @type function|int|string|null
 		 *  @default null
 		 */
@@ -10300,7 +10300,7 @@
 		/**
 		 * Enable or disable filtering of data. Filtering in DataTables is "smart" in
 		 * that it allows the end user to input multiple words (space separated) and
-		 * will match a row containing those words, even if not in the order that was
+		 * will footballMatch a row containing those words, even if not in the order that was
 		 * specified (this allow matching across multiple columns). Note that if you
 		 * wish to use filtering in DataTables this must remain 'true' - to remove the
 		 * default filtering input box and retain filtering abilities, please use
@@ -10568,7 +10568,7 @@
 		 * Enable or disable state saving. When enabled HTML5 `localStorage` will be
 		 * used to save table display information such as pagination information,
 		 * display length, filtering and sorting. As such when the end user reloads
-		 * the page the display display will match what thy had previously set up.
+		 * the page the display display will footballMatch what thy had previously set up.
 		 *
 		 * Due to the use of `localStorage` the default state saving is not supported
 		 * in IE6 or 7. If state saving is required in those browsers, use
@@ -11420,7 +11420,7 @@
 	
 			/**
 			 * Display information string for when the table is empty. Typically the
-			 * format of this string should match `info`.
+			 * format of this string should footballMatch `info`.
 			 *  @type string
 			 *  @default Showing 0 to 0 of 0 entries
 			 *
@@ -11724,7 +11724,7 @@
 		 * defined, but all other parameters are optional. When `regex` is true,
 		 * the search string will be treated as a regular expression, when false
 		 * (default) it will be treated as a straight string. When `smart`
-		 * DataTables will use it's smart filtering methods (to word match at
+		 * DataTables will use it's smart filtering methods (to word footballMatch at
 		 * any point in the data), when false this will not be done.
 		 *  @namespace
 		 *  @extends DataTable.models.oSearch
@@ -13123,7 +13123,7 @@
 	
 		/**
 		 * Array referencing the nodes which are used for the features. The
-		 * parameters of this object match what is allowed by sDom - i.e.
+		 * parameters of this object footballMatch what is allowed by sDom - i.e.
 		 *   <ul>
 		 *     <li>'l' - Length changing</li>
 		 *     <li>'f' - Filtering input</li>
@@ -14238,7 +14238,7 @@
 			 *
 			 * And returning:
 			 *
-			 * * `{*}` Ordering match: <0 if first parameter should be sorted lower
+			 * * `{*}` Ordering footballMatch: <0 if first parameter should be sorted lower
 			 *   than the second parameter, ===0 if the two parameters are equal and
 			 *   >0 if the first parameter should be sorted height than the second
 			 *   parameter.

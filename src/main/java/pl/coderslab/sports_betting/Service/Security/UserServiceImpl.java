@@ -1,21 +1,19 @@
 package pl.coderslab.sports_betting.Service.Security;
 
-import com.github.javafaker.Friends;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.coderslab.sports_betting.Entity.FootballTeam;
 import pl.coderslab.sports_betting.Entity.Role;
-import pl.coderslab.sports_betting.Entity.Team;
 import pl.coderslab.sports_betting.Entity.User;
-import pl.coderslab.sports_betting.Repository.TeamRepository;
+import pl.coderslab.sports_betting.Repository.FootballTeamRepository;
 import pl.coderslab.sports_betting.Repository.UserRepository;
 
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.*;
 
 @Service
@@ -23,7 +21,7 @@ import java.util.*;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    TeamRepository teamRepository;
+    FootballTeamRepository footballTeamRepository;
 
     private static final String DEFAULT_USER_ROLE_NAME = "ROLE_USER";
     private static final String ADMIN = "ROLE_ADMIN";
@@ -114,11 +112,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addToFavorites(Long id){
         User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        List<Team> teams = user.getFavoriteTeams();
-        Team team = teamRepository.getOne(id);
-        if (!(teams.contains(team))){
-            teams.add(team);
-            user.setFavoriteTeams(teams);
+        List<FootballTeam> footballTeams = user.getFavoriteFootballTeams();
+        FootballTeam footballTeam = footballTeamRepository.getOne(id);
+        if (!(footballTeams.contains(footballTeam))){
+            footballTeams.add(footballTeam);
+            user.setFavoriteFootballTeams(footballTeams);
             userRepository.save(user);
         }
     }
@@ -126,10 +124,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void removeFromFavorite(Long id){
         User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        List<Team> teams = user.getFavoriteTeams();
-        Team team = teamRepository.getOne(id);
-        teams.remove(team);
-        user.setFavoriteTeams(teams);
+        List<FootballTeam> footballTeams = user.getFavoriteFootballTeams();
+        FootballTeam footballTeam = footballTeamRepository.getOne(id);
+        footballTeams.remove(footballTeam);
+        user.setFavoriteFootballTeams(footballTeams);
         userRepository.save(user);
     }
 

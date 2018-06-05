@@ -1,6 +1,5 @@
 package pl.coderslab.sports_betting.Entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,7 +7,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -60,7 +58,7 @@ public @Data class User {
     private List<Transaction> transactions = new ArrayList<>();
 
     @ManyToMany
-    private List<Team> favoriteTeams = new ArrayList<>();
+    private List<FootballTeam> favoriteFootballTeams = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name="friends",

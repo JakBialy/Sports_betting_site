@@ -1,6 +1,5 @@
 package pl.coderslab.sports_betting.Entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,5 +20,5 @@ public @Data class Country {
     String name;
 
     @OneToMany(mappedBy = "country")
-    List<League> leagues = new ArrayList<>();
+    List<FootballLeague> footballLeagues = new ArrayList<>();
 }

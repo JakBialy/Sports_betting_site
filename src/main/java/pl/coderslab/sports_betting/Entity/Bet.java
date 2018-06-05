@@ -7,7 +7,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -34,7 +33,7 @@ class Bet {
     @ManyToOne
     @JoinColumn(name = "match_id")
     @JsonBackReference
-    Match match;
+    FootballMatch footballMatch;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -44,5 +43,5 @@ class Bet {
     @ManyToOne
     @JoinColumn(name = "team_id")
     @JsonBackReference
-    Team team;
+    FootballTeam footballTeam;
 }

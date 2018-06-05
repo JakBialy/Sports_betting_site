@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface BetRepository extends JpaRepository<Bet, Long> {
-    List<Bet> findAllByMatchEndIsGreaterThan (LocalDateTime localDateTime);
-    List<Bet> findAllByMatch_StatusIsNotLike (String notFinished);
+    List<Bet> findAllByFootballMatchEndIsGreaterThan(LocalDateTime localDateTime);
+    List<Bet> findAllByFootballMatch_StatusIsNotLike(String notFinished);
     List<Bet> findAllByUser (User user);
     List<Bet> findAllByUserId (Long Id);
 
