@@ -117,15 +117,19 @@ public class UserController {
 
     @GetMapping("/all")
     public String showAllUsers(Model model) {
-        model.addAttribute("users", userService.findAll());
+        model.addAttribute("users", userService.findAllWithoutActiveUser());
         return "UserListFriends";
     }
 
     @GetMapping("/addFriend/{id}")
-    public String addToFriend(@PathVariable Long id, Model model) {
+    public String addToFriend(@PathVariable Long id) {
         userService.addToFriends(id);
-        return "Football";
+        return "redirect:/user/friends";
+    }
+
+    @GetMapping("/friends")
+    public String addToFriend(Model model) {
+        model.addAttribute("friends",userService.getAllUserFriends());
+        return "UserFriends";
     }
 }
-
-// http://localhost:8080/user/addFriend/2

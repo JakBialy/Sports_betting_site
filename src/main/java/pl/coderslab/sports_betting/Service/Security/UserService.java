@@ -31,4 +31,9 @@ public interface UserService {
     public void removeFromFavorite(Long id);
 
     public void addToFriends(Long id);
-}
+
+    public List<User> findAllWithoutActiveUser();
+
+    public List<User> getAllUserFriends();
+
+    }

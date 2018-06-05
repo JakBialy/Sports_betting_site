@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:replace="Header.html :: header"></div>
 
-<h3> Add to friends: </h3>
+<h3> Your friends: </h3>
 
 <div class="card mb-3">
     <div class="card-body">
@@ -11,15 +11,17 @@
                 <thead>
                 <tr>
                     <th> Nick </th>
-                    <th> Add to friends </th>
+                    <th> Send message </th>
+                    <!--<th> Bet together! </th>-->
                 </tr>
 
                 </thead>
 
                 <tbody>
-                <tr th:each="user: ${users}">
+                <tr th:each="user: ${friends}">
                     <td th:text="${user.nick}">Nick</td>
-                    <td> <a th:href="@{/user/addFriend/{id}(id=${user.id})}">Add</a> </td>
+                    <td> <a th:href="@{/user/message/{id}(id=${user.id})}">Add</a> </td>
+                    <!--<td> <a th:href="@{/user/message/{id}(id=${user.id})}">Add</a> </td>-->
                 </tr>
                 </tbody>
             </table>

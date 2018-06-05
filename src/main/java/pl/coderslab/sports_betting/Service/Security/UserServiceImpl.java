@@ -1,5 +1,6 @@
 package pl.coderslab.sports_betting.Service.Security;
 
+import com.github.javafaker.Friends;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -48,6 +49,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public List<User> findAllWithoutActiveUser() {
+        List<User> list = findAll();
+        User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        list.remove(user);
+        return list;
     }
 
     @Override
@@ -133,5 +142,10 @@ public class UserServiceImpl implements UserService {
             user.setFriends(friends);
             userRepository.save(user);
         }
+    }
+
+    public List<User> getAllUserFriends(){
+        User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        return user.getFriends();
     }
 }

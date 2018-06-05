@@ -12,6 +12,4 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findAllByEnabledTrue();
 
     User findOneByUsername(String username);
-
-
 }
