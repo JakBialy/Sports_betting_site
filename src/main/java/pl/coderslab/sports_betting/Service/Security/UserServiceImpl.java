@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.coderslab.sports_betting.Entity.FootballTeam;
+import pl.coderslab.sports_betting.Entity.Football.FootballTeam;
 import pl.coderslab.sports_betting.Entity.Role;
 import pl.coderslab.sports_betting.Entity.User;
-import pl.coderslab.sports_betting.Repository.FootballTeamRepository;
+import pl.coderslab.sports_betting.Repository.Fotball.FootballTeamRepository;
 import pl.coderslab.sports_betting.Repository.UserRepository;
 
 

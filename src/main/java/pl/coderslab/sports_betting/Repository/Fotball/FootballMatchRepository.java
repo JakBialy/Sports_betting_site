@@ -1,7 +1,7 @@
-package pl.coderslab.sports_betting.Repository;
+package pl.coderslab.sports_betting.Repository.Fotball;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pl.coderslab.sports_betting.Entity.FootballMatch;
+import pl.coderslab.sports_betting.Entity.Football.FootballMatch;
 
 import java.time.LocalDateTime;
 import java.util.List;

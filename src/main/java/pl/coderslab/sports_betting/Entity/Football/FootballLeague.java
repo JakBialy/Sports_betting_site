@@ -1,4 +1,4 @@
-package pl.coderslab.sports_betting.Entity;
+package pl.coderslab.sports_betting.Entity.Football;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;

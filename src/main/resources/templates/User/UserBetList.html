@@ -21,17 +21,17 @@
                 </thead>
 
                 <tbody>
-                <tr th:each="bet: ${bets}">
-                    <td th:text="${bet.type}">Bet type</td>
-                    <td th:text="${bet.money}">Bet money</td>
-                    <td th:text="${#temporals.format(bet.date, 'dd-MM-yyyy HH:mm')}">Start</td>
+                <tr th:each="footballBet: ${bets}">
+                    <td th:text="${footballBet.type}">Bet type</td>
+                    <td th:text="${footballBet.money}">Bet money</td>
+                    <td th:text="${#temporals.format(footballBet.date, 'dd-MM-yyyy HH:mm')}">Start</td>
 
-                    <td th:switch="${bet.winner}">
+                    <td th:switch="${footballBet.winner}">
                         <span th:case='null' >No result yet!</span>
                         <span th:case='true' >Win</span>
                         <span th:case='false' >Lost</span>
                     </td>
-                    <td> <a th:href="@{/football/footballMatch/{id}(id=${bet.footballMatch.id})}">See footballMatch details</a> </td>
+                    <td> <a th:href="@{/football/match/{id}(id=${footballBet.footballMatch.id})}">See footballMatch details</a> </td>
                 </tr>
                 </tbody>
             </table>

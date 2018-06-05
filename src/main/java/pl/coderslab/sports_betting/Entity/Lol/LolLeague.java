@@ -1,6 +1,7 @@
-package pl.coderslab.sports_betting.Entity;
+package pl.coderslab.sports_betting.Entity.Lol;
 
 import lombok.Data;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -9,8 +10,8 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "countries")
-public @Data class Country {
+@Table(name = "lolLeagues")
+public @Data class LolLeague {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,6 +20,7 @@ public @Data class Country {
     @NotEmpty
     String name;
 
-    @OneToMany(mappedBy = "country")
-    List<FootballLeague> footballLeagues = new ArrayList<>();
+    @OneToMany(mappedBy = "lolLeague")
+    List<LolTeam> lolTeams = new ArrayList<>();
+
 }

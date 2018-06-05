@@ -1,4 +1,4 @@
-package pl.coderslab.sports_betting.Entity;
+package pl.coderslab.sports_betting.Entity.Football;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -52,10 +52,10 @@ class FootballMatch {
 
     @OneToMany(mappedBy="footballMatch")
     // blocking list of bets for external API
-    private List<Bet> betList = new ArrayList<>();
+    private List<FootballBet> footballBetList = new ArrayList<>();
 
     @JsonIgnore
-    public List<Bet> getBetList() {
-        return betList;
+    public List<FootballBet> getFootballBetList() {
+        return footballBetList;
     }
 }

@@ -1,10 +1,10 @@
-package pl.coderslab.sports_betting.Service;
+package pl.coderslab.sports_betting.Service.Football;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.coderslab.sports_betting.Entity.FootballLeague;
+import pl.coderslab.sports_betting.Entity.Football.FootballLeague;
 import pl.coderslab.sports_betting.Repository.CountryRepository;
-import pl.coderslab.sports_betting.Repository.FootballLeagueRepository;
+import pl.coderslab.sports_betting.Repository.Fotball.FootballLeagueRepository;
 
 import java.util.ArrayList;
 import java.util.List;

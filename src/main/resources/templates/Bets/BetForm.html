@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:replace="Header.html :: header"></div>
 
-<h2 th:text="| You are betting in footballMatch ${matchData.homeFootballTeam.footballTeam} vs ${matchData.awayFootballTeam.footballTeam} in ${matchData.awayFootballTeam.footballLeague.name}|"> betting info</h2>
+<h2 th:text="| You are betting in footballMatch ${matchData.homeFootballTeam.team} vs ${matchData.awayFootballTeam.team} in ${matchData.awayFootballTeam.footballLeague.name}|"> betting info</h2>
 
 <div class="card mb-3">
     <div class="card-body">
@@ -22,24 +22,24 @@
 
                     <th> Start </th>
                     <th> End </th>
-                    <!--<th> Bet!</th>-->
+                    <!--<th> FootballBet!</th>-->
 
                 </tr>
                 </thead>
 
                 <tbody>
-                <td th:text="${matchData.homeFootballTeam.footballTeam}">HomeTeam Name</td>
+                <td th:text="${matchData.homeFootballTeam.team}">HomeTeam Name</td>
                 <td th:text="${matchData.homeScore}">HomeTeam Name</td>
                 <td th:text="${matchData.homeHalfScore}">HomeTeam Name</td>
 
-                <td th:text="${matchData.awayFootballTeam.footballTeam}">AwayTeam Name</td>
+                <td th:text="${matchData.awayFootballTeam.team}">AwayTeam Name</td>
                 <td th:text="${matchData.awayScore}">HomeTeam Name</td>
                 <td th:text="${matchData.awayHalfScore}">HomeTeam Name</td>
 
                 <td th:text="${matchData.status}">Status</td>
                 <td th:switch="${matchData.winner}">
                     <span th:case='null' >No result yet!</span>
-                    <span th:case='true' th:text="${matchData.winner.footballTeam}" >Win</span>
+                    <span th:case='true' th:text="${matchData.winner.team}" >Win</span>
                 </td>
                 <td th:text="${#temporals.format(matchData.start, 'dd-MM-yyyy HH:mm')}">Start</td>
                 <td th:text="${#temporals.format(matchData.end, 'dd-MM-yyyy HH:mm')}">End</td>
@@ -57,8 +57,8 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                 <tr>
-                    <th th:text="|${matchData.homeFootballTeam.footballTeam} wins|"> footballOdds </th>
-                    <th th:text="|${matchData.awayFootballTeam.footballTeam} wins|"> footballOdds </th>
+                    <th th:text="|${matchData.homeFootballTeam.team} wins|"> footballOdds </th>
+                    <th th:text="|${matchData.awayFootballTeam.team} wins|"> footballOdds </th>
                     <th> Draw </th>
                     <!--<th> FootballOdds half etc</th>-->
                 </tr>
@@ -82,14 +82,14 @@
 
     <label> Bet type:</label>
         <select th:field="*{type}">
-            <option th:value="homeWin" th:text="|${matchData.homeFootballTeam.footballTeam} wins|"> Win </option>
-            <option th:value="awayWin" th:text="|${matchData.awayFootballTeam.footballTeam} wins|"> Win </option>
+            <option th:value="homeWin" th:text="|${matchData.homeFootballTeam.team} wins|"> Win </option>
+            <option th:value="awayWin" th:text="|${matchData.awayFootballTeam.team} wins|"> Win </option>
             <option th:value="Draw" th:text="Draw"> Draw </option>
         </select>
 
         <p th:text="|Your account has: ${user.money}|"></p>
         <div>
-            <label for="money">Amount of money to bet:</label>
+            <label for="money">Amount of money to footballBet:</label>
             <input class="form-control"  th:field="*{money}" id="money" type="number" name="money" placeholder="Amount of money">
             <p th:if="${#fields.hasErrors('money')}" th:errors="*{money}"> error message</p>
         </div>
@@ -98,7 +98,7 @@
         <input type="hidden" th:value="${matchData.id}" th:attr="name='footballMatch'" />
 
         <div class="text-center">
-            <input type="submit" value="Make bet!" />
+            <input type="submit" value="Make footballBet!" />
         </div>
             </form>
 

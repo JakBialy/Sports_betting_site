@@ -1,12 +1,12 @@
-package pl.coderslab.sports_betting.Service;
+package pl.coderslab.sports_betting.Service.Football;
 
 import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.coderslab.sports_betting.Entity.FootballLeague;
-import pl.coderslab.sports_betting.Entity.FootballTeam;
-import pl.coderslab.sports_betting.Repository.FootballLeagueRepository;
-import pl.coderslab.sports_betting.Repository.FootballTeamRepository;
+import pl.coderslab.sports_betting.Entity.Football.FootballLeague;
+import pl.coderslab.sports_betting.Entity.Football.FootballTeam;
+import pl.coderslab.sports_betting.Repository.Fotball.FootballLeagueRepository;
+import pl.coderslab.sports_betting.Repository.Fotball.FootballTeamRepository;
 
 import java.util.ArrayList;
 import java.util.List;

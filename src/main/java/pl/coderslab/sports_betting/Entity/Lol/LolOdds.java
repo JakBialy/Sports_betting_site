@@ -1,4 +1,4 @@
-package pl.coderslab.sports_betting.Entity;
+package pl.coderslab.sports_betting.Entity.Lol;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
@@ -6,9 +6,9 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "footballOdds")
+@Table(name = "lolOdds")
 public @Data
-class FootballOdds {
+class LolOdds {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,16 +18,10 @@ class FootballOdds {
 
     private Double oddHome;
 
-    private Double oddHomeHalf;
-
-    private Double oddX;
-
     private Double oddAway;
-
-    private Double oddAwayHalf;
 
     @OneToOne
     @JoinColumn(name = "match_id")
     @JsonBackReference
-    private FootballMatch footballMatch;
+    private LolMatch lolMatch;
 }

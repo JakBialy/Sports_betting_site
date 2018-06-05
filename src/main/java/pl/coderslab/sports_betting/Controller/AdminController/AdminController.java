@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.sports_betting.Service.CountryService;
-import pl.coderslab.sports_betting.Service.FootballLeagueService;
+import pl.coderslab.sports_betting.Service.Football.FootballLeagueService;
 import pl.coderslab.sports_betting.Service.Security.UserService;
-import pl.coderslab.sports_betting.Service.FootballTeamService;
+import pl.coderslab.sports_betting.Service.Football.FootballTeamService;
 
 @Controller
 @RequestMapping("/admin")

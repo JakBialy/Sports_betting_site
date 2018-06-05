@@ -1,16 +1,17 @@
-package pl.coderslab.sports_betting.Entity;
+package pl.coderslab.sports_betting.Entity.Lol;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "footballTeams")
+@Table(name = "lolTeams")
 public @Data
-class FootballTeam {
+class LolTeam {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,26 +23,24 @@ class FootballTeam {
 
     int wins;
 
-    int draws;
-
     int lost;
 
     @ManyToOne
     @JoinColumn(name = "league_id")
     @JsonBackReference
-    FootballLeague footballLeague;
+    LolLeague lolLeague;
 
-    @OneToMany(mappedBy="homeFootballTeam")
-    private List<FootballMatch> homeTeamGames = new ArrayList<>();
+    @OneToMany(mappedBy="homeLolTeam")
+    private List<LolMatch> homeTeamGames = new ArrayList<>();
 
-    @OneToMany(mappedBy="awayFootballTeam")
-    private List<FootballMatch> awayTeamGames = new ArrayList<>();
+    @OneToMany(mappedBy="awayLolTeam")
+    private List<LolMatch> awayTeamGames = new ArrayList<>();
 
     @OneToMany(mappedBy="winner")
-    private List<FootballMatch> wonGames = new ArrayList<>();
+    private List<LolMatch> wonGames = new ArrayList<>();
 
-    @OneToMany(mappedBy="footballTeam")
-    private List<Bet> bets = new ArrayList<>();
+    @OneToMany(mappedBy="lolTeam")
+    private List<LolBet> lolBets = new ArrayList<>();
 
 // can be a problem for swagger
 //    @ManyToMany(mappedBy="footballTeams")

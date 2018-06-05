@@ -1,15 +1,18 @@
-package pl.coderslab.sports_betting.Service.Scheduled;
+package pl.coderslab.sports_betting.Service.Football;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import pl.coderslab.sports_betting.Entity.FootballMatch;
-import pl.coderslab.sports_betting.Entity.FootballTeam;
-import pl.coderslab.sports_betting.Repository.FootballMatchRepository;
-import pl.coderslab.sports_betting.Repository.FootballTeamRepository;
+import pl.coderslab.sports_betting.Entity.Football.FootballMatch;
+import pl.coderslab.sports_betting.Entity.Football.FootballTeam;
+import pl.coderslab.sports_betting.Repository.Fotball.FootballMatchRepository;
+import pl.coderslab.sports_betting.Repository.Fotball.FootballTeamRepository;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 import static java.util.Comparator.comparing;
 

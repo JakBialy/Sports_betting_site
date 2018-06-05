@@ -1,6 +1,8 @@
 package pl.coderslab.sports_betting.Entity;
 
 import lombok.Data;
+import pl.coderslab.sports_betting.Entity.Football.FootballBet;
+import pl.coderslab.sports_betting.Entity.Football.FootballTeam;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -52,7 +54,7 @@ public @Data class User {
     private Set<Role> roles;
 
     @OneToMany(mappedBy="user")
-    private List<Bet> bets = new ArrayList<>();
+    private List<FootballBet> footballBets = new ArrayList<>();
 
     @OneToMany(mappedBy="user")
     private List<Transaction> transactions = new ArrayList<>();

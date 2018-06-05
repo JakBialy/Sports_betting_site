@@ -22,7 +22,7 @@
 
                     <th> Start </th>
                     <th> End </th>
-                    <!--<th> Bet!</th>-->
+                    <!--<th> FootballBet!</th>-->
 
                 </tr>
                 </thead>
@@ -43,7 +43,7 @@
                     </td>
                     <td th:text="${#temporals.format(match.start, 'dd-MM-yyyy HH:mm')}">Start</td>
                     <td th:text="${#temporals.format(match.end, 'dd-MM-yyyy HH:mm')}">End</td>
-                    <!--<td> <a th:href="@{/bet/footballMatch/{id}(id=${footballMatch.id})}">Bet!</a> </td>-->
+                    <!--<td> <a th:href="@{/bet/footballMatch/{id}(id=${footballMatch.id})}">FootballBet!</a> </td>-->
                 </tr>
                 </tbody>
             </table>

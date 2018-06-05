@@ -48,8 +48,8 @@
                     <tr th:each="footballMatch: ${nextMatches}">
                         <td th:text="${footballMatch.awayFootballTeam.footballLeague.country.name}">Country Name</td>
                         <td th:text="${footballMatch.awayFootballTeam.footballLeague.name}">League Name</td>
-                        <td th:text="${footballMatch.homeFootballTeam.footballTeam}">HomeTeam Name</td>
-                        <td th:text="${footballMatch.awayFootballTeam.footballTeam}">AwayTeam Name</td>
+                        <td th:text="${footballMatch.homeFootballTeam.team}">HomeTeam Name</td>
+                        <td th:text="${footballMatch.awayFootballTeam.team}">AwayTeam Name</td>
                         <td th:text="${#temporals.format(footballMatch.start, 'dd-MM-yyyy HH:mm')}">Start</td>
                         <td th:text="${#temporals.format(footballMatch.end, 'dd-MM-yyyy HH:mm')}">End</td>
                         <td> <a th:href="@{/bet/match/{id}(id=${footballMatch.id})}">Bet!</a> </td>
@@ -85,9 +85,9 @@
                     <tr th:each="footballMatch: ${liveMatches}">
                         <td th:text="${footballMatch.awayFootballTeam.footballLeague.country.name}">Country Name</td>
                         <td th:text="${footballMatch.awayFootballTeam.footballLeague.name}">League Name</td>
-                        <td th:text="${footballMatch.homeFootballTeam.footballTeam}">HomeTeam Name</td>
+                        <td th:text="${footballMatch.homeFootballTeam.team}">HomeTeam Name</td>
                         <td th:text="${footballMatch.homeScore}">HomeTeam Score</td>
-                        <td th:text="${footballMatch.awayFootballTeam.footballTeam}">AwayTeam Name</td>
+                        <td th:text="${footballMatch.awayFootballTeam.team}">AwayTeam Name</td>
                         <td th:text="${footballMatch.awayScore}">AwayTeam Score</td>
                         <td th:text="${footballMatch.status}">Status</td>
                         <td th:text="${#temporals.format(footballMatch.end, 'dd-MM-yyyy HH:mm')}">End</td>

@@ -2,7 +2,7 @@ package pl.coderslab.sports_betting.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.coderslab.sports_betting.Entity.Country;
+import pl.coderslab.sports_betting.Entity.Football.Country;
 import pl.coderslab.sports_betting.Repository.CountryRepository;
 
 import java.util.ArrayList;

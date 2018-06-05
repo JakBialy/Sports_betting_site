@@ -88,7 +88,7 @@
                         <td th:text="${footballMatch.status}">Status</td>
                         <td th:text="${#temporals.format(footballMatch.start, 'dd-MM-yyyy HH:mm')}">Start</td>
                         <td th:text="${#temporals.format(footballMatch.end, 'dd-MM-yyyy HH:mm')}">End</td>
-                        <td> <a th:href="@{/bet/footballMatch/{id}(id=${footballMatch.id})}">Bet!</a> </td>
+                        <td> <a th:href="@{/bet/match/{id}(id=${footballMatch.id})}">Bet!</a> </td>
                     </tr>
                     </tbody>
                 </table>

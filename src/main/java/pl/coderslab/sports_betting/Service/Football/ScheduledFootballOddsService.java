@@ -1,13 +1,13 @@
-package pl.coderslab.sports_betting.Service.Scheduled;
+package pl.coderslab.sports_betting.Service.Football;
 
 import org.decimal4j.util.DoubleRounder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import pl.coderslab.sports_betting.Entity.FootballMatch;
-import pl.coderslab.sports_betting.Entity.FootballOdds;
-import pl.coderslab.sports_betting.Repository.FootballMatchRepository;
-import pl.coderslab.sports_betting.Repository.FootballOddsRepository;
+import pl.coderslab.sports_betting.Entity.Football.FootballMatch;
+import pl.coderslab.sports_betting.Entity.Football.FootballOdds;
+import pl.coderslab.sports_betting.Repository.Fotball.FootballMatchRepository;
+import pl.coderslab.sports_betting.Repository.Fotball.FootballOddsRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;

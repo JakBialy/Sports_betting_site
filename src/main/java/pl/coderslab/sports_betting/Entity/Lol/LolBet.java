@@ -1,7 +1,9 @@
-package pl.coderslab.sports_betting.Entity;
+package pl.coderslab.sports_betting.Entity.Lol;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+
+import pl.coderslab.sports_betting.Entity.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -11,9 +13,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "bets")
+@Table(name = "lolBets")
 public @Data
-class Bet {
+class LolBet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,7 +35,7 @@ class Bet {
     @ManyToOne
     @JoinColumn(name = "match_id")
     @JsonBackReference
-    FootballMatch footballMatch;
+    LolMatch lolMatch;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -43,5 +45,5 @@ class Bet {
     @ManyToOne
     @JoinColumn(name = "team_id")
     @JsonBackReference
-    FootballTeam footballTeam;
+    LolTeam lolTeam;
 }
