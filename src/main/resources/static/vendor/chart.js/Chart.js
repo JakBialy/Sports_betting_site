@@ -9948,7 +9948,7 @@ var helpers = {
 	},
 
 	/**
-	 * Merges source[key] in target[key] only if target[key] is undefined.
+	 * Merges source[apiKey] in target[apiKey] only if target[apiKey] is undefined.
 	 * @private
 	 */
 	_mergerIf: function(key, target, source) {
@@ -9968,7 +9968,7 @@ var helpers = {
 	 * @param {Object} target - The target object in which all sources are merged into.
 	 * @param {Object|Array(Object)} source - Object(s) to merge into `target`.
 	 * @param {Object} [options] - Merging options:
-	 * @param {Function} [options.merger] - The merge method (key, target, source, options)
+	 * @param {Function} [options.merger] - The merge method (apiKey, target, source, options)
 	 * @returns {Object} The `target` object.
 	 */
 	merge: function(target, source, options) {

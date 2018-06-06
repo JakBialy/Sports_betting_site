@@ -547,9 +547,9 @@ var Carousel = function ($$$1) {
   var DATA_API_KEY = '.data-api';
   var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
   var TRANSITION_DURATION = 600;
-  var ARROW_LEFT_KEYCODE = 37; // KeyboardEvent.which value for left arrow key
+  var ARROW_LEFT_KEYCODE = 37; // KeyboardEvent.which value for left arrow apiKey
 
-  var ARROW_RIGHT_KEYCODE = 39; // KeyboardEvent.which value for right arrow key
+  var ARROW_RIGHT_KEYCODE = 39; // KeyboardEvent.which value for right arrow apiKey
 
   var TOUCHEVENT_COMPAT_WAIT = 500; // Time for mouse compat events to fire after touch
 
@@ -1414,15 +1414,15 @@ var Dropdown = function ($$$1) {
   var EVENT_KEY = "." + DATA_KEY;
   var DATA_API_KEY = '.data-api';
   var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
-  var ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
+  var ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) apiKey
 
-  var SPACE_KEYCODE = 32; // KeyboardEvent.which value for space key
+  var SPACE_KEYCODE = 32; // KeyboardEvent.which value for space apiKey
 
-  var TAB_KEYCODE = 9; // KeyboardEvent.which value for tab key
+  var TAB_KEYCODE = 9; // KeyboardEvent.which value for tab apiKey
 
-  var ARROW_UP_KEYCODE = 38; // KeyboardEvent.which value for up arrow key
+  var ARROW_UP_KEYCODE = 38; // KeyboardEvent.which value for up arrow apiKey
 
-  var ARROW_DOWN_KEYCODE = 40; // KeyboardEvent.which value for down arrow key
+  var ARROW_DOWN_KEYCODE = 40; // KeyboardEvent.which value for down arrow apiKey
 
   var RIGHT_MOUSE_BUTTON_WHICH = 3; // MouseEvent.which value for the right button (assuming a right-handed mouse)
 
@@ -1754,11 +1754,11 @@ var Dropdown = function ($$$1) {
 
     Dropdown._dataApiKeydownHandler = function _dataApiKeydownHandler(event) {
       // If not input/textarea:
-      //  - And not a key in REGEXP_KEYDOWN => not a dropdown command
+      //  - And not a apiKey in REGEXP_KEYDOWN => not a dropdown command
       // If input/textarea:
-      //  - If space key => not a dropdown command
-      //  - If key is other than escape
-      //    - If key is not up or down => not a dropdown command
+      //  - If space apiKey => not a dropdown command
+      //  - If apiKey is other than escape
+      //    - If apiKey is not up or down => not a dropdown command
       //    - If trigger inside the menu => not a dropdown command
       if (/input|textarea/i.test(event.target.tagName) ? event.which === SPACE_KEYCODE || event.which !== ESCAPE_KEYCODE && (event.which !== ARROW_DOWN_KEYCODE && event.which !== ARROW_UP_KEYCODE || $$$1(event.target).closest(Selector.MENU).length) : !REGEXP_KEYDOWN.test(event.which)) {
         return;
@@ -1881,7 +1881,7 @@ var Modal = function ($$$1) {
   var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
   var TRANSITION_DURATION = 300;
   var BACKDROP_TRANSITION_DURATION = 150;
-  var ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
+  var ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) apiKey
 
   var Default = {
     backdrop: true,

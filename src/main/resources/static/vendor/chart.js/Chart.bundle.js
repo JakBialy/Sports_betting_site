@@ -1846,7 +1846,7 @@ function createInvalid (flags) {
     return m;
 }
 
-// Plugins that add properties should also add the key here (null value),
+// Plugins that add properties should also add the apiKey here (null value),
 // so we can properly clone ourselves.
 var momentProperties = hooks.momentProperties = [];
 
@@ -3505,7 +3505,7 @@ function loadLocale(name) {
 
 // This function will load locale and then set the global locale.  If
 // no arguments are passed in, it will simply return the current global
-// locale key.
+// locale apiKey.
 function getSetGlobalLocale (key, values) {
     var data;
     if (key) {
@@ -5001,7 +5001,7 @@ function toNow (withoutSuffix) {
     return this.to(createLocal(), withoutSuffix);
 }
 
-// If passed a locale key, it will set the locale for this
+// If passed a locale apiKey, it will set the locale for this
 // instance.  Otherwise, it will return the locale configuration
 // variables for this instance.
 function locale (key) {
@@ -14411,7 +14411,7 @@ var helpers = {
 	},
 
 	/**
-	 * Merges source[key] in target[key] only if target[key] is undefined.
+	 * Merges source[apiKey] in target[apiKey] only if target[apiKey] is undefined.
 	 * @private
 	 */
 	_mergerIf: function(key, target, source) {
@@ -14431,7 +14431,7 @@ var helpers = {
 	 * @param {Object} target - The target object in which all sources are merged into.
 	 * @param {Object|Array(Object)} source - Object(s) to merge into `target`.
 	 * @param {Object} [options] - Merging options:
-	 * @param {Function} [options.merger] - The merge method (key, target, source, options)
+	 * @param {Function} [options.merger] - The merge method (apiKey, target, source, options)
 	 * @returns {Object} The `target` object.
 	 */
 	merge: function(target, source, options) {

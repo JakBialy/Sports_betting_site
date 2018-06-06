@@ -19,6 +19,8 @@ import javax.validation.Valid;
 public class HomeController {
     @Autowired
     UserService userService;
+//    @Autowired
+//    ApiService apiService;
 
     @GetMapping("/index")
     public String index(HttpSession httpSession) {
@@ -26,11 +28,25 @@ public class HomeController {
         return "Index";
     }
 
+    @GetMapping("/api")
+    public String api() {
+        return "API";
+    }
+
+//    @GetMapping("/api/generateKey")
+//    public String generateApiKey(Model model) {
+//        model.addAttribute("key",apiService.giveRandomKey());
+//        return "ShowKey";
+//    }
+
     @GetMapping("/register")
     public String userForm(Model model) {
+
         model.addAttribute("user", new User());
         return "Register";
     }
+
+
 
     @PostMapping("/register")
     public String userFormSave(@Valid @ModelAttribute User user, BindingResult result){

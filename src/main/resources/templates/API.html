@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Header.html :: header"></div>
+
+<p class="text-center" th:text="|Welcome ${session.firstName} Do you want to try our API?|"> Welcome </p>
+
+
+<h2 class="text-center"> Football :</h2>
+
+<a class="btn btn-primary btn-secondary" href="/api/country/all"> All countries</a>
+<a class="btn btn-primary btn-secondary" href="/api/country/6"> Country example</a>
+
+<a class="btn btn-primary btn-secondary" href="/api/league/all"> All leagues</a>
+<a class="btn btn-primary btn-secondary" href="/api/league/8"> League example</a>
+
+<a class="btn btn-primary btn-secondary" href="/api/match/all"> All matches</a>
+<a class="btn btn-primary btn-secondary" href="/api/match/live"> Live matches</a>
+
+<!--<a class="btn btn-primary btn-block" href="/api/match/betweenDate/{date1}/{date2}"> Live matches</a>-->
+
+<h2 class="text-center"> League of Legends </h2>
+
+<a class="btn btn-primary btn-secondary" href="/api/generateKey"> Generate API apiKey</a>
+
+<div th:replace="Footer.html :: footer"></div>
+
+
