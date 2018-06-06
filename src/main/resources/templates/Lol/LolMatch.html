@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:replace="Header.html :: header"></div>
 
-<h2 th:text="| Home footballTeam : ${match.homeFootballTeam.team} Away footballTeam : ${match.awayFootballTeam.team} League: ${match.awayFootballTeam.footballLeague.name} Country: ${match.awayFootballTeam.footballLeague.country.name}|">Team</h2>
+<h2 th:text="| Home footballTeam : ${match.homeLolTeam.team} Away footballTeam : ${match.awayLolTeam.team} League: ${match.awayLolTeam.lolLeague.name}|">Team</h2>
 
 <div class="card mb-3">
     <div class="card-body">
@@ -10,31 +10,26 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                 <tr>
-                    <th> Home footballTeam </th>
-                    <th> Home score </th>
-                    <th> Home half score </th>
-
-                    <th> Away footballTeam </th>
-                    <th> Away score </th>
-                    <th> Away half score </th>
+                    <th> First Team </th>
+                    <th> First score </th>
+                    <th> Second Team </th>
+                    <th> Second score </th>
                     <th> Status </th>
                     <th> Winner </th>
 
                     <th> Start </th>
                     <th> End </th>
-                    <!--<th> FootballBet!</th>-->
+                    <th> Bet!</th>
 
                 </tr>
                 </thead>
 
                 <tbody>
-                    <td th:text="${match.homeFootballTeam.team}">HomeTeam Name</td>
+                    <td th:text="${match.homeLolTeam.team}">HomeTeam Name</td>
                     <td th:text="${match.homeScore}">HomeTeam Name</td>
-                    <td th:text="${match.homeHalfScore}">HomeTeam Name</td>
 
-                    <td th:text="${match.awayFootballTeam.team}">AwayTeam Name</td>
+                    <td th:text="${match.awayLolTeam.team}">AwayTeam Name</td>
                     <td th:text="${match.awayScore}">HomeTeam Name</td>
-                    <td th:text="${match.awayHalfScore}">HomeTeam Name</td>
 
                     <td th:text="${match.status}">Status</td>
                     <td th:switch="${match.winner}">
@@ -43,7 +38,7 @@
                     </td>
                     <td th:text="${#temporals.format(match.start, 'dd-MM-yyyy HH:mm')}">Start</td>
                     <td th:text="${#temporals.format(match.end, 'dd-MM-yyyy HH:mm')}">End</td>
-                    <!--<td> <a th:href="@{/bet/footballMatch/{id}(id=${footballMatch.id})}">FootballBet!</a> </td>-->
+                    <td> <a th:href="@{/lolBet/match/{id}(id=${match.id})}">Bet!</a> </td>
                 </tr>
                 </tbody>
             </table>

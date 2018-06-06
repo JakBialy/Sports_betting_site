@@ -4,6 +4,7 @@
 
 <h3> Your bets : </h3>
 
+<p class="text-center"> <strong>Football</strong> </p>
 <div class="card mb-3">
     <div class="card-body">
         <div class="table-responsive">
@@ -21,7 +22,7 @@
                 </thead>
 
                 <tbody>
-                <tr th:each="footballBet: ${bets}">
+                <tr th:each="footballBet: ${footballBets}">
                     <td th:text="${footballBet.type}">Bet type</td>
                     <td th:text="${footballBet.money}">Bet money</td>
                     <td th:text="${#temporals.format(footballBet.date, 'dd-MM-yyyy HH:mm')}">Start</td>
@@ -31,7 +32,43 @@
                         <span th:case='true' >Win</span>
                         <span th:case='false' >Lost</span>
                     </td>
-                    <td> <a th:href="@{/football/match/{id}(id=${footballBet.footballMatch.id})}">See footballMatch details</a> </td>
+                    <td> <a th:href="@{/football/match/{id}(id=${footballBet.footballMatch.id})}">See Match details</a> </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<p class="text-center"> <strong>League of Legends</strong> </p>
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th> Type </th>
+                    <th> Money</th>
+                    <!--<th> To Win</th>-->
+                    <th> Date </th>
+                    <th> Winner </th>
+                    <th> Link to Match </th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+                <tr th:each="lolBet: ${lolBets}">
+                    <td th:text="${lolBet.type}">Bet type</td>
+                    <td th:text="${lolBet.money}">Bet money</td>
+                    <td th:text="${#temporals.format(lolBet.date, 'dd-MM-yyyy HH:mm')}">Start</td>
+
+                    <td th:switch="${lolBet.winner}">
+                        <span th:case='null' >No result yet!</span>
+                        <span th:case='true' >Win</span>
+                        <span th:case='false' >Lost</span>
+                    </td>
+                    <td> <a th:href="@{/lol/match/{id}(id=${lolBet.lolMatch.id})}">See Match details</a> </td>
                 </tr>
                 </tbody>
             </table>

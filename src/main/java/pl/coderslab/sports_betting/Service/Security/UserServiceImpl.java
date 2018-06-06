@@ -5,9 +5,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.coderslab.sports_betting.Entity.Football.FootballTeam;
+import pl.coderslab.sports_betting.Entity.Lol.LolTeam;
 import pl.coderslab.sports_betting.Entity.Role;
 import pl.coderslab.sports_betting.Entity.User;
 import pl.coderslab.sports_betting.Repository.Fotball.FootballTeamRepository;
+import pl.coderslab.sports_betting.Repository.Lol.LolTeamRepository;
 import pl.coderslab.sports_betting.Repository.UserRepository;
 
 
@@ -22,6 +24,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     FootballTeamRepository footballTeamRepository;
+    @Autowired
+    LolTeamRepository lolTeamRepository;
 
     private static final String DEFAULT_USER_ROLE_NAME = "ROLE_USER";
     private static final String ADMIN = "ROLE_ADMIN";
@@ -110,13 +114,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addToFavorites(Long id){
+    public void addToFootballFavorites(Long id){
         User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         List<FootballTeam> footballTeams = user.getFavoriteFootballTeams();
         FootballTeam footballTeam = footballTeamRepository.getOne(id);
         if (!(footballTeams.contains(footballTeam))){
             footballTeams.add(footballTeam);
             user.setFavoriteFootballTeams(footballTeams);
+            userRepository.save(user);
+        }
+    }
+
+    public void addToLolFavorites(Long id){
+        User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        List<LolTeam> lolTeams = user.getFavoriteLolTeams();
+        LolTeam lolTeam = lolTeamRepository.getOne(id);
+        if (!(lolTeams.contains(lolTeam))){
+            lolTeams.add(lolTeam);
+            user.setFavoriteLolTeams(lolTeams);
             userRepository.save(user);
         }
     }

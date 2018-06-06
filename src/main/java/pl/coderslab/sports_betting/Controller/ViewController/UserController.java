@@ -7,10 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.sports_betting.Entity.Football.FootballBet;
+import pl.coderslab.sports_betting.Entity.Lol.LolBet;
 import pl.coderslab.sports_betting.Entity.Message;
 import pl.coderslab.sports_betting.Entity.Transaction;
 import pl.coderslab.sports_betting.Entity.User;
 import pl.coderslab.sports_betting.Service.Football.FootballBetService;
+import pl.coderslab.sports_betting.Service.Lol.LolBetService;
 import pl.coderslab.sports_betting.Service.MessageService;
 import pl.coderslab.sports_betting.Service.TransactionService;
 import pl.coderslab.sports_betting.Service.Security.UserService;
@@ -29,6 +31,8 @@ public class UserController {
     @Autowired
     FootballBetService footballBetService;
     @Autowired
+    LolBetService lolBetService;
+    @Autowired
     TransactionService transactionService;
     @Autowired
     MessageService messageService;
@@ -36,8 +40,10 @@ public class UserController {
     @GetMapping("/bets")
     public String userBets(Model model) {
         User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
-        List<FootballBet> list = footballBetService.findAllByUser(user);
-        model.addAttribute("bets", list);
+        List<FootballBet> footballBetList = footballBetService.findAllByUser(user);
+        List<LolBet> lolBetList = lolBetService.findAllByUser(user);
+        model.addAttribute("footballBets", footballBetList);
+        model.addAttribute("lolBets", lolBetList);
         return "User/UserBetList";
     }
 
@@ -99,9 +105,15 @@ public class UserController {
         return "redirect:/user/userInfo";
     }
 
-    @GetMapping("/addFavorite/{id}")
-    public String addFavorite(@PathVariable Long id) {
-        userService.addToFavorites(id);
+    @GetMapping("/addFootballFavorite/{id}")
+    public String addFootballFavorite(@PathVariable Long id) {
+        userService.addToFootballFavorites(id);
+        return "redirect:/user/favorites";
+    }
+
+    @GetMapping("/addLolFavorite/{id}")
+    public String addLolFavorite(@PathVariable Long id) {
+        userService.addToLolFavorites(id);
         return "redirect:/user/favorites";
     }
 

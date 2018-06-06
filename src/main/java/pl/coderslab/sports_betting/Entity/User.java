@@ -3,6 +3,7 @@ package pl.coderslab.sports_betting.Entity;
 import lombok.Data;
 import pl.coderslab.sports_betting.Entity.Football.FootballBet;
 import pl.coderslab.sports_betting.Entity.Football.FootballTeam;
+import pl.coderslab.sports_betting.Entity.Lol.LolTeam;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -61,6 +62,9 @@ public @Data class User {
 
     @ManyToMany
     private List<FootballTeam> favoriteFootballTeams = new ArrayList<>();
+
+    @ManyToMany
+    private List<LolTeam> favoriteLolTeams = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name="friends",
