@@ -8,18 +8,18 @@
     <a class="btn btn-primary btn-block" th:href="@{/user/addLolFavorite/{id}(id=${team.id})}">Add to favorite</a>
 
 
-    <h2> Home Matches </h2>
+    <h2> First team Matches </h2>
     <div class="card mb-3">
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                     <tr>
-                        <th> Home lolTeam </th>
-                        <th> Home score </th>
+                        <th> First Team </th>
+                        <th> First score </th>
 
-                        <th> Away lolTeam </th>
-                        <th> Away score </th>
+                        <th> Second Team </th>
+                        <th> Second score </th>
                         <th> Status </th>
 
                         <th> Start </th>
@@ -40,7 +40,16 @@
                         <td th:text="${lolMatch.status}">Status</td>
                         <td th:text="${#temporals.format(lolMatch.start, 'dd-MM-yyyy HH:mm')}">Start</td>
                         <td th:text="${#temporals.format(lolMatch.end, 'dd-MM-yyyy HH:mm')}">End</td>
-                        <!--<td> <a th:href="@{/bet/match/{id}(id=${lolMatch.id})}">Bet!</a> </td>-->
+                        <!--<td> <a th:href="@{/lolBet/match/{id}(id=${lolMatch.id})}">Bet!</a> </td>-->
+
+                        <td th:switch="${lolMatch.status}">
+                        <span th:case="'planned'">
+                        <a th:href="@{/lolBet/match/{id}(id=${lolMatch.id})}">Bet!</a>
+                        </span>
+                            <span th:case="'In game'"> Too late to bet</span>
+                            <span th:case="'Full Time'"> Too late to bet </span>
+                        </td>
+
                     </tr>
                     </tbody>
                 </table>
@@ -48,20 +57,18 @@
         </div>
     </div>
 
-    <h2> Away Matches </h2>
+    <h2> Second team Matches </h2>
     <div class="card mb-3">
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                     <tr>
-                        <th> Home lolTeam </th>
-                        <th> Home score </th>
-                        <th> Home half score </th>
+                        <th> First Team </th>
+                        <th> First score </th>
 
-                        <th> Away lolTeam </th>
-                        <th> Away score </th>
-                        <th> Away half score </th>
+                        <th> Second Team </th>
+                        <th> Second score </th>
                         <th> Status </th>
 
                         <th> Start </th>
@@ -82,7 +89,15 @@
                         <td th:text="${lolMatch.status}">Status</td>
                         <td th:text="${#temporals.format(lolMatch.start, 'dd-MM-yyyy HH:mm')}">Start</td>
                         <td th:text="${#temporals.format(lolMatch.end, 'dd-MM-yyyy HH:mm')}">End</td>
-                        <!--<td> <a th:href="@{/bet/match/{id}(id=${lolMatch.id})}">Bet!</a> </td>-->
+
+                        <td th:switch="${lolMatch.status}">
+                        <span th:case="'planned'">
+                        <a th:href="@{/lolBet/match/{id}(id=${lolMatch.id})}">Bet!</a>
+                        </span>
+                            <span th:case="'In game'"> Too late to bet</span>
+                            <span th:case="'Full Time'"> Too late to bet </span>
+                        </td>
+
                     </tr>
                     </tbody>
                 </table>

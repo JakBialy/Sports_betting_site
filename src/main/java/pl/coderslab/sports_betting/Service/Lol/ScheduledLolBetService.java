@@ -36,7 +36,7 @@ public class ScheduledLolBetService {
             LolOdds lolOdds = lolBet.getLolMatch().getLolOdds();
             User user = lolBet.getUser();
 
-            if(lolBet.getType().equals("homeWin")){
+            if(lolBet.getType().equals("firstWin")){
                 if(lolBet.getLolMatch().getWinner() == lolBet.getLolMatch().getHomeLolTeam()){
                     lolBet.setWinner(true);
                     BigDecimal winOdd = BigDecimal.valueOf(lolOdds.getOddHome());
@@ -45,7 +45,7 @@ public class ScheduledLolBetService {
                     lolBet.setWinner(false);
                 }
 
-            } else if(lolBet.getType().equals("awayWin")){
+            } else if(lolBet.getType().equals("secondWin")){
                 if(lolBet.getLolMatch().getWinner() == lolBet.getLolMatch().getAwayLolTeam()){
                     lolBet.setWinner(true);
                     BigDecimal winOdd = BigDecimal.valueOf(lolOdds.getOddAway());

@@ -35,7 +35,7 @@ public class LolTeamService {
             for (int j = 1; j <=10 ; j++) {
             LolTeam lolTeam = new LolTeam();
             lolTeam.setLolLeague(lolLeague);
-            lolTeam.setTeam(faker.witcher().character());
+            lolTeam.setTeam(faker.esports().team());
             list.add(lolTeam);
             }
         }

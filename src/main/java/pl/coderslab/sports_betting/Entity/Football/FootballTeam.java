@@ -1,6 +1,7 @@
 package pl.coderslab.sports_betting.Entity.Football;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -42,6 +43,12 @@ class FootballTeam {
 
     @OneToMany(mappedBy="footballTeam")
     private List<FootballBet> footballBets = new ArrayList<>();
+
+    @JsonIgnore
+    public List<FootballBet> getFootballBets() {
+        return footballBets;
+    }
+
 
 // can be a problem for swagger
 //    @ManyToMany(mappedBy="footballTeams")

@@ -10,10 +10,10 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                 <tr>
-                    <th> Home footballTeam </th>
+                    <th> First team </th>
                     <th> Home score </th>
 
-                    <th> Away footballTeam </th>
+                    <th> Second </th>
                     <th> Away score </th>
                     <th> Status </th>
                     <th> Winner </th>
@@ -74,8 +74,8 @@
 
     <label> Bet type:</label>
         <select th:field="*{type}">
-            <option th:value="homeWin" th:text="|${matchData.homeLolTeam.team} wins|"> Win </option>
-            <option th:value="awayWin" th:text="|${matchData.awayLolTeam.team} wins|"> Win </option>
+            <option th:value="firstWin" th:text="|${matchData.homeLolTeam.team} wins|"> Win </option>
+            <option th:value="secondWin" th:text="|${matchData.awayLolTeam.team} wins|"> Win </option>
         </select>
 
         <p th:text="|Your account has: ${user.money}|"></p>

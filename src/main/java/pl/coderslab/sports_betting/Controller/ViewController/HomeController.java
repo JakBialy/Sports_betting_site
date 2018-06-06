@@ -22,8 +22,9 @@ public class HomeController {
     KeyApiService keyApiService;
 
     @GetMapping("/index")
-    public String index(HttpSession httpSession) {
+    public String index(Model model,HttpSession httpSession) {
         userService.userDetailsToSession(httpSession);
+        model.addAttribute("favorite",userService.checkFavorite());
         return "Index";
     }
 
@@ -44,8 +45,6 @@ public class HomeController {
         model.addAttribute("user", new User());
         return "Register";
     }
-
-
 
     @PostMapping("/register")
     public String userFormSave(@Valid @ModelAttribute User user, BindingResult result){

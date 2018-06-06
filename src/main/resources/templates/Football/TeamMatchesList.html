@@ -50,7 +50,17 @@
 
                         <td th:text="${#temporals.format(footballMatch.start, 'dd-MM-yyyy HH:mm')}">Start</td>
                         <td th:text="${#temporals.format(footballMatch.end, 'dd-MM-yyyy HH:mm')}">End</td>
-                        <td> <a th:href="@{/footballBet/match/{id}(id=${footballMatch.id})}">Bet!</a> </td>
+                        <!--<td> <a th:href="@{/footballBet/match/{id}(id=${footballMatch.id})}">Bet!</a> </td>-->
+
+                        <td th:switch="${footballMatch.status}">
+                        <span th:case="'planned'">
+                        <a th:href="@{/footballBet/match/{id}(id=${footballMatch.id})}">Bet!</a>
+                        </span>
+                            <span th:case="'First Half'"> Too late to bet</span>
+                            <span th:case="'Second Half'"> Too late to bet</span>
+                            <span th:case="'Full Time'"> Too late to bet </span>
+                        </td>
+
                     </tr>
                     </tbody>
                 </table>
@@ -94,7 +104,17 @@
                         <td th:text="${footballMatch.status}">Status</td>
                         <td th:text="${#temporals.format(footballMatch.start, 'dd-MM-yyyy HH:mm')}">Start</td>
                         <td th:text="${#temporals.format(footballMatch.end, 'dd-MM-yyyy HH:mm')}">End</td>
-                        <td> <a th:href="@{/footballBet/match/{id}(id=${footballMatch.id})}">Bet!</a> </td>
+                        <!--<td> <a th:href="@{/footballBet/match/{id}(id=${footballMatch.id})}">Bet!</a> </td>-->
+
+                        <td th:switch="${footballMatch.status}">
+                        <span th:case="'planned'">
+                        <a th:href="@{/footballBet/match/{id}(id=${footballMatch.id})}">Bet!</a>
+                        </span>
+                            <span th:case="'First Half'"> Too late to bet</span>
+                            <span th:case="'Second Half'"> Too late to bet</span>
+                            <span th:case="'Full Time'"> Too late to bet </span>
+                        </td>
+
                     </tr>
                     </tbody>
                 </table>

@@ -22,8 +22,13 @@
 
                     <th> Start </th>
                     <th> End </th>
-                    <th> Bet!</th>
-
+                    <!--<th> Bet</th>-->
+                    <th th:switch="${match.status}">
+                        <span th:case="'planned'" > Bet! </span>
+                        <span th:case="'First Half'"> In game!</span>
+                        <span th:case="'Second Half'"> In game!</span>
+                        <span th:case="'Full Time'"> Too late to bet </span>
+                    </th>
                 </tr>
                 </thead>
 
@@ -45,7 +50,17 @@
 
                     <td th:text="${#temporals.format(match.start, 'dd-MM-yyyy HH:mm')}">Start</td>
                     <td th:text="${#temporals.format(match.end, 'dd-MM-yyyy HH:mm')}">End</td>
-                    <td> <a th:href="@{/footballBet/match/{id}(id=${match.id})}">Bet!</a> </td>
+                    <!--<td> <a th:href="@{/footballBet/match/{id}(id=${match.id})}">Bet!</a> </td>-->
+
+                    <td th:switch="${match.status}">
+                        <span th:case="'planned'">
+                        <a th:href="@{/footballBet/match/{id}(id=${match.id})}">Bet!</a>
+                        </span>
+                        <span th:case="'First Half'"> Too late to bet</span>
+                        <span th:case="'Second Half'"> Too late to bet</span>
+                        <span th:case="'Full Time'"> Too late to bet </span>
+                    </td>
+
                 </tr>
                 </tbody>
             </table>

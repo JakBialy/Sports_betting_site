@@ -38,5 +38,5 @@ public interface UserService {
 
     public void addToLolFavorites(Long id);
 
-
+    public String checkFavorite();
     }

@@ -24,21 +24,23 @@ public class FootballBetService {
 
     @Transactional
     public void saveBet(FootballBet footballBet){
-        User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        user.setMoney(user.getMoney().subtract(footballBet.getMoney()));
+        if (footballBet.getFootballMatch().getStatus().equals("planned")) {
 
-        footballBet.setUser(user);
-        footballBet.setDate(LocalDateTime.now());
-        if(footballBet.getType().equals("homeWin")){
-            footballBet.setFootballTeam(footballBet.getFootballMatch().getHomeFootballTeam());
-            footballBet.setOdd(BigDecimal.valueOf(footballBet.getFootballMatch().getFootballOdds().getOddHome()));
-        } else if (footballBet.getType().equals("awayWin")){
-            footballBet.setFootballTeam(footballBet.getFootballMatch().getAwayFootballTeam());
-            footballBet.setOdd(BigDecimal.valueOf(footballBet.getFootballMatch().getFootballOdds().getOddAway()));
-        } else {
-            footballBet.setOdd(BigDecimal.valueOf(footballBet.getFootballMatch().getFootballOdds().getOddX()));
+            User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+            user.setMoney(user.getMoney().subtract(footballBet.getMoney()));
+            footballBet.setUser(user);
+            footballBet.setDate(LocalDateTime.now());
+            if (footballBet.getType().equals("homeWin")) {
+                footballBet.setFootballTeam(footballBet.getFootballMatch().getHomeFootballTeam());
+                footballBet.setOdd(BigDecimal.valueOf(footballBet.getFootballMatch().getFootballOdds().getOddHome()));
+            } else if (footballBet.getType().equals("awayWin")) {
+                footballBet.setFootballTeam(footballBet.getFootballMatch().getAwayFootballTeam());
+                footballBet.setOdd(BigDecimal.valueOf(footballBet.getFootballMatch().getFootballOdds().getOddAway()));
+            } else {
+                footballBet.setOdd(BigDecimal.valueOf(footballBet.getFootballMatch().getFootballOdds().getOddX()));
+            }
+            footballBetRepository.save(footballBet);
         }
-        footballBetRepository.save(footballBet);
     }
 
     public List<FootballBet> findAllByUser(User user){

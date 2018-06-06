@@ -31,13 +31,13 @@ public class ApiFiltr implements Filter {
         //forces injection of autowired service
         SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 
-        HttpServletRequest req = (HttpServletRequest) servletRequest;
-        HttpServletResponse res = (HttpServletResponse) servletResponse;
-        String key = req.getParameter("key");
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
+        String key = request.getParameter("key");
         boolean check = this.keyApiService.checkKey(key);
 
         if (check == false) {
-            res.sendError(400, "Please check you APIkey");
+            response.sendError(400, "Please check you APIkey");
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
         }

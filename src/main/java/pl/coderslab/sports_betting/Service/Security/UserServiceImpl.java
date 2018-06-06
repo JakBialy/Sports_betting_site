@@ -2,13 +2,16 @@ package pl.coderslab.sports_betting.Service.Security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.coderslab.sports_betting.Entity.Football.FootballTeam;
 import pl.coderslab.sports_betting.Entity.Lol.LolTeam;
 import pl.coderslab.sports_betting.Entity.Role;
 import pl.coderslab.sports_betting.Entity.User;
+import pl.coderslab.sports_betting.Repository.Fotball.FootballBetRepository;
 import pl.coderslab.sports_betting.Repository.Fotball.FootballTeamRepository;
+import pl.coderslab.sports_betting.Repository.Lol.LolBetRepository;
 import pl.coderslab.sports_betting.Repository.Lol.LolTeamRepository;
 import pl.coderslab.sports_betting.Repository.UserRepository;
 
@@ -26,6 +29,10 @@ public class UserServiceImpl implements UserService {
     FootballTeamRepository footballTeamRepository;
     @Autowired
     LolTeamRepository lolTeamRepository;
+    @Autowired
+    FootballBetRepository footballBetRepository;
+    @Autowired
+    LolBetRepository lolBetRepository;
 
     private static final String DEFAULT_USER_ROLE_NAME = "ROLE_USER";
     private static final String ADMIN = "ROLE_ADMIN";
@@ -172,6 +179,21 @@ public class UserServiceImpl implements UserService {
                 all.add(load);
         } }
         return all;
+    }
+
+    public String checkFavorite(){
+        User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        int footballBetsSize = footballBetRepository.findAll().size();
+        int lolBetsSize = lolBetRepository.findAll().size();
+        String favorite;
+        if (footballBetsSize > lolBetsSize){
+            favorite = "football";
+        } else if (lolBetsSize > footballBetsSize){
+            favorite = "lol";
+        } else {
+            favorite = "no";
+        }
+        return  favorite;
     }
 
 }

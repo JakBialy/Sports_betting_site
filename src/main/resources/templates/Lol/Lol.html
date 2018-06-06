@@ -34,8 +34,8 @@
                     <thead>
                     <tr>
                         <th> League </th>
-                        <th> Home lolTeam </th>
-                        <th> Away lolTeam </th>
+                        <th> First Team </th>
+                        <th> Second Team </th>
                         <th> Start </th>
                         <th> End </th>
                         <th> Bet!</th>
@@ -67,11 +67,13 @@
                     <thead>
                     <tr>
                         <th> League </th>
+                        <th> First Team </th>
                         <th> Home score </th>
+                        <th> Second team </th>
                         <th> Away score </th>
                         <th> Status </th>
                         <th> End </th>
-                        <th> Bet!</th>
+                        <th> Match details</th>
 
                     </tr>
                     </thead>
@@ -85,7 +87,7 @@
                         <td th:text="${lolMatch.awayScore}">AwayTeam Score</td>
                         <td th:text="${lolMatch.status}">Status</td>
                         <td th:text="${#temporals.format(lolMatch.end, 'dd-MM-yyyy HH:mm')}">End</td>
-                        <td> <a th:href="@{/lolBet/match/{id}(id=${lolMatch.id})}">Bet!</a> </td>
+                        <td> <a th:href="@{/lol/match/{id}(id=${lolMatch.id})}">Live results!</a> </td>
                     </tr>
                     </tbody>
                 </table>
@@ -96,13 +98,3 @@
 
 
 <div th:replace="Footer.html :: footer"></div>
-
-<!--<tr	th:each="project: ${projects}">-->
-    <!--<td	th:text="${project.name}"></td>-->
-    <!--<td	th:text="${project.description}"></td>-->
-    <!--<td th:text="${#temporals.format(project.created, 'dd-MM-yyyy HH:mm')}"></td>-->
-    <!--<td	th:text="${project.website}"></td>-->
-    <!--<td	th:text="${project.identity}"></td>-->
-    <!--<td	th:text="${project.active}"></td>-->
-    <!--<td> <a th:href="@{/project/details/{id}(id=${project.id})}">Project Details</a> </td>-->
-<!--</tr>-->

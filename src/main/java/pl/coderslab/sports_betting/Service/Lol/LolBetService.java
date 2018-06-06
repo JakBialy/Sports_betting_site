@@ -23,19 +23,22 @@ public class LolBetService {
 
     @Transactional
     public void saveBet(LolBet lolBet){
-        User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        user.setMoney(user.getMoney().subtract(lolBet.getMoney()));
+        if (lolBet.getLolMatch().getStatus().equals("planned")){
 
-        lolBet.setUser(user);
-        lolBet.setDate(LocalDateTime.now());
-        if(lolBet.getType().equals("homeWin")){
-            lolBet.setLolTeam(lolBet.getLolMatch().getHomeLolTeam());
-            lolBet.setOdd(BigDecimal.valueOf(lolBet.getLolMatch().getLolOdds().getOddHome()));
-        } else if (lolBet.getType().equals("awayWin")){
-            lolBet.setLolTeam(lolBet.getLolMatch().getAwayLolTeam());
-            lolBet.setOdd(BigDecimal.valueOf(lolBet.getLolMatch().getLolOdds().getOddAway()));
+            User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+            user.setMoney(user.getMoney().subtract(lolBet.getMoney()));
+            lolBet.setUser(user);
+            lolBet.setDate(LocalDateTime.now());
+
+            if(lolBet.getType().equals("firstWin")){
+                lolBet.setLolTeam(lolBet.getLolMatch().getHomeLolTeam());
+                lolBet.setOdd(BigDecimal.valueOf(lolBet.getLolMatch().getLolOdds().getOddHome()));
+            } else if (lolBet.getType().equals("secondWin")){
+                lolBet.setLolTeam(lolBet.getLolMatch().getAwayLolTeam());
+                lolBet.setOdd(BigDecimal.valueOf(lolBet.getLolMatch().getLolOdds().getOddAway()));
+            }
+            lolBetRepository.save(lolBet);
         }
-        lolBetRepository.save(lolBet);
     }
 
     public List<LolBet> findAllByUser(User user){
