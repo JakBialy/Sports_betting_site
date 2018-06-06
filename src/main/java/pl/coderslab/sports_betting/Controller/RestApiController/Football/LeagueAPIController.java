@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.coderslab.sports_betting.Entity.Football.FootballLeague;
-import pl.coderslab.sports_betting.Service.Football.FootballLeagueService;
+import pl.coderslab.sports_betting.Service.Football.ServiceImpl.FootballLeagueServiceImpl;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 public class LeagueAPIController {
 
     @Autowired
-    FootballLeagueService footballLeagueService;
+    FootballLeagueServiceImpl footballLeagueService;
 
     @GetMapping(path = "/all")
     public List<FootballLeague> getAllLeagues() {

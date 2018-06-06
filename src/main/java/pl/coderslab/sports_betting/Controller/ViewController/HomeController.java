@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.sports_betting.Entity.User;
-import pl.coderslab.sports_betting.Service.KeyApiService;
-import pl.coderslab.sports_betting.Service.Security.UserService;
+import pl.coderslab.sports_betting.Service.General.Service.KeyApiService;
+import pl.coderslab.sports_betting.Service.Security.Service.UserService;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;

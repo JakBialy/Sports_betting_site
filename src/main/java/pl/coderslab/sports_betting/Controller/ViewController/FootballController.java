@@ -6,10 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.coderslab.sports_betting.Service.CountryService;
-import pl.coderslab.sports_betting.Service.Football.FootballLeagueService;
-import pl.coderslab.sports_betting.Service.Football.FootballMatchService;
-import pl.coderslab.sports_betting.Service.Football.FootballTeamService;
+import pl.coderslab.sports_betting.Service.Football.Service.CountryService;
+import pl.coderslab.sports_betting.Service.Football.Service.FootballLeagueService;
+import pl.coderslab.sports_betting.Service.Football.Service.FootballMatchService;
+import pl.coderslab.sports_betting.Service.Football.Service.FootballTeamService;
+
 
 @Controller
 @RequestMapping(value = "/football")

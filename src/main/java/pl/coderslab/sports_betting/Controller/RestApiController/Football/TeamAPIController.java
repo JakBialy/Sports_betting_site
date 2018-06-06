@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.coderslab.sports_betting.Entity.Football.FootballTeam;
-import pl.coderslab.sports_betting.Service.Football.FootballTeamService;
+import pl.coderslab.sports_betting.Service.Football.Service.FootballTeamService;
 
 import java.util.List;
 

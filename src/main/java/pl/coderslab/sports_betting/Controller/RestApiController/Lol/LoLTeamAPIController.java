@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.coderslab.sports_betting.Entity.Lol.LolTeam;
-import pl.coderslab.sports_betting.Service.Lol.LolTeamService;
+import pl.coderslab.sports_betting.Service.Lol.Service.LolTeamService;
 
 import java.util.List;
 

@@ -8,9 +8,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.sports_betting.Entity.Lol.LolBet;
 import pl.coderslab.sports_betting.Entity.User;
-import pl.coderslab.sports_betting.Service.Lol.LolBetService;
-import pl.coderslab.sports_betting.Service.Lol.LolMatchService;
-import pl.coderslab.sports_betting.Service.Security.UserService;
+import pl.coderslab.sports_betting.Service.Lol.Service.LolBetService;
+import pl.coderslab.sports_betting.Service.Lol.Service.LolMatchService;
+import pl.coderslab.sports_betting.Service.Security.Service.UserService;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;

@@ -5,12 +5,12 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import pl.coderslab.sports_betting.Entity.User;
-import pl.coderslab.sports_betting.Service.CountryService;
-import pl.coderslab.sports_betting.Service.Football.FootballLeagueService;
-import pl.coderslab.sports_betting.Service.Lol.LolLeagueService;
-import pl.coderslab.sports_betting.Service.Lol.LolTeamService;
-import pl.coderslab.sports_betting.Service.Security.UserService;
-import pl.coderslab.sports_betting.Service.Football.FootballTeamService;
+import pl.coderslab.sports_betting.Service.Football.Service.CountryService;
+import pl.coderslab.sports_betting.Service.Football.Service.FootballLeagueService;
+import pl.coderslab.sports_betting.Service.Football.Service.FootballTeamService;
+import pl.coderslab.sports_betting.Service.Lol.Service.LolLeagueService;
+import pl.coderslab.sports_betting.Service.Lol.Service.LolTeamService;
+import pl.coderslab.sports_betting.Service.Security.Service.UserService;
 
 @Component
 public class AppStartup implements ApplicationRunner {

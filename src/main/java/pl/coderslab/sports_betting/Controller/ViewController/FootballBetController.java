@@ -8,9 +8,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.sports_betting.Entity.Football.FootballBet;
 import pl.coderslab.sports_betting.Entity.User;
-import pl.coderslab.sports_betting.Service.Football.FootballMatchService;
-import pl.coderslab.sports_betting.Service.Football.FootballBetService;
-import pl.coderslab.sports_betting.Service.Security.UserService;
+import pl.coderslab.sports_betting.Service.Football.Service.FootballBetService;
+import pl.coderslab.sports_betting.Service.Football.Service.FootballMatchService;
+import pl.coderslab.sports_betting.Service.Security.Service.UserService;
 
 
 import javax.validation.Valid;

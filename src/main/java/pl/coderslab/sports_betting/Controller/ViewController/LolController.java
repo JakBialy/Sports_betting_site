@@ -6,10 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.coderslab.sports_betting.Service.CountryService;
-import pl.coderslab.sports_betting.Service.Lol.LolLeagueService;
-import pl.coderslab.sports_betting.Service.Lol.LolMatchService;
-import pl.coderslab.sports_betting.Service.Lol.LolTeamService;
+import pl.coderslab.sports_betting.Service.Football.Service.CountryService;
+import pl.coderslab.sports_betting.Service.Lol.Service.LolLeagueService;
+import pl.coderslab.sports_betting.Service.Lol.Service.LolMatchService;
+import pl.coderslab.sports_betting.Service.Lol.Service.LolTeamService;
+
 
 @Controller
 @RequestMapping(value = "/lol")

@@ -3,15 +3,13 @@ package pl.coderslab.sports_betting.Filter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
-import pl.coderslab.sports_betting.Entity.KeyApi;
-import pl.coderslab.sports_betting.Service.KeyApiService;
+import pl.coderslab.sports_betting.Service.General.Service.KeyApiService;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Map;
 
 @WebFilter("/api/*")
 public class ApiFiltr implements Filter {

@@ -11,11 +11,11 @@ import pl.coderslab.sports_betting.Entity.Lol.LolBet;
 import pl.coderslab.sports_betting.Entity.Message;
 import pl.coderslab.sports_betting.Entity.Transaction;
 import pl.coderslab.sports_betting.Entity.User;
-import pl.coderslab.sports_betting.Service.Football.FootballBetService;
-import pl.coderslab.sports_betting.Service.Lol.LolBetService;
-import pl.coderslab.sports_betting.Service.MessageService;
-import pl.coderslab.sports_betting.Service.TransactionService;
-import pl.coderslab.sports_betting.Service.Security.UserService;
+import pl.coderslab.sports_betting.Service.Football.Service.FootballBetService;
+import pl.coderslab.sports_betting.Service.General.Service.MessageService;
+import pl.coderslab.sports_betting.Service.General.Service.TransactionService;
+import pl.coderslab.sports_betting.Service.Lol.Service.LolBetService;
+import pl.coderslab.sports_betting.Service.Security.Service.UserService;
 
 
 import javax.servlet.http.HttpSession;
