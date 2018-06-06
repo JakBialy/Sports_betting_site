@@ -196,4 +196,8 @@ public class UserServiceImpl implements UserService {
         return  favorite;
     }
 
+    public User findById(Long id){
+        return userRepository.getOne(id);
+    }
+
 }

@@ -6578,7 +6578,7 @@
 	
 	
 	/**
-	 * Register a callback function. Easily allows a callback function to be added to
+	 * Admin a callback function. Easily allows a callback function to be added to
 	 * an array store of callback functions that can then all be called together.
 	 *  @param {object} oSettings dataTables settings object
 	 *  @param {string} sStore Name of the array storage for the callbacks in oSettings

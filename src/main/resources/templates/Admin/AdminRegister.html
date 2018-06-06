@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Header.html :: header"></div>
+
+<form th:action="@{/admin/createAdmin}" th:object="${user}" method="post">
+    <div class="form-group">
+        <label for="username">Email</label>
+        <input class="form-control" id="username" type="text" th:field="*{username}" placeholder="Enter your email">
+        <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"> error message</p>
+    </div>
+
+    <div class="form-group">
+        <div class="form-row">
+            <div class="col-md-6">
+                <label for="firstName">First name</label>
+                <input class="form-control" id="firstName" th:field="*{firstName}" type="text" placeholder="Enter first name">
+                <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"> error message</p>
+            </div>
+            <div class="col-md-6">
+                <label for="lastName">Last name</label>
+                <input class="form-control" id="lastName" type="text" th:field="*{lastName}" placeholder="Enter last name">
+                <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"> error message</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="nick">Your nick</label>
+        <input class="form-control" id="nick" type="text" th:field="*{nick}" placeholder="Enter nick">
+        <p th:if="${#fields.hasErrors('nick')}" th:errors="*{nick}"> error message</p>
+    </div>
+
+    <div class="form-group">
+        <div class="form-row">
+
+            <div class="col-md-6">
+                <label for="password">Password</label>
+                <input class="form-control" id="password" type="password" th:field="*{password}" placeholder="Password">
+                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> error message</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="text-center">
+        <input type="submit" value="Register an account" />
+    </div>
+</form>
+
+<div th:replace="Footer.html :: footer"></div>

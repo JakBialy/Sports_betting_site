@@ -15,6 +15,8 @@
                     <th> Last name </th>
                     <th> Nick </th>
                     <th> Money </th>
+                    <th> Betting history </th>
+                    <th> Transaction history </th>
                     <th> Delete </th>
                     <!--<th> Active </th>-->
                 </tr>
@@ -28,8 +30,9 @@
                     <td th:text="${user.lastName}">Last name</td>
                     <td th:text="${user.nick}">Nick</td>
                     <td th:text="${user.money}">Money</td>
+                    <td> <a th:href="@{/admin/userBets/{id}(id=${user.id})}">Bets</a> </td>
+                    <td> <a th:href="@{/user/transactionHistory/{id}(id=${user.id})}"> Transactions</a> </td>
                     <td> <a th:href="@{/admin/userDelete/{id}(id=${user.id})}">Delete user</a> </td>
-                    <!--<td> <a th:href="@{/admin/userDisable/{id}(id=${user.id})}">Disable user</a> </td>-->
                 </tr>
                 </tbody>
             </table>

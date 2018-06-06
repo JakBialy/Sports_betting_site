@@ -14,8 +14,8 @@
 
 <td th:switch="${favorite}">
     <span th:case="'no'" > <p class="text-center"> You have no favorite betting sports! </p> </span>
-    <span th:case="'football'"> <a class="btn btn-primary btn-block" href="/football/"></a> Football </span>
-    <span th:case="'lol'"> <a class="btn btn-primary btn-block" href="/lol/"> League of Legends</a> </span>
+    <span th:case="'football'"> <a class="btn btn-primary btn-block" href="/football/">Football</a>  </span>
+    <span th:case="'lol'"> <a class="btn btn-primary btn-block" href="/lol/" > League of Legends</a> </span>
 </td>
 
 <div th:replace="Footer.html :: footer"></div>

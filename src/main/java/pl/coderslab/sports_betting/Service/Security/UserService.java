@@ -16,6 +16,8 @@ public interface UserService {
 
     User findByUserName(String name);
 
+    User findById(Long id);
+
     void saveUser(User user);
 
     void saveAdmin(User user);

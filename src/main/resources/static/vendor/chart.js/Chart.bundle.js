@@ -10560,7 +10560,7 @@ module.exports = function(Chart) {
 		defaults: {},
 
 		/**
-		 * Register a box to a chart.
+		 * Admin a box to a chart.
 		 * A box is simply a reference to an object that requires layout. eg. Scales, Legend, Title.
 		 * @param {Chart} chart - the chart to use
 		 * @param {ILayoutItem} item - the item to add to be layed out
