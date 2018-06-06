@@ -13,4 +13,8 @@ class KeyApi {
 
     @Column(unique = true)
     String code;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    User user;
 }

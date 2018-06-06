@@ -27,12 +27,12 @@ public class HomeController {
         return "Index";
     }
 
-    @GetMapping("/api")
+    @GetMapping("/checkApi")
     public String api() {
         return "API";
     }
 
-    @GetMapping("/api/generateKey")
+    @GetMapping("/checkApi/generateKey")
     public String generateApiKey(Model model) {
         model.addAttribute("key", keyApiService.giveRandomKey());
         return "ShowKey";

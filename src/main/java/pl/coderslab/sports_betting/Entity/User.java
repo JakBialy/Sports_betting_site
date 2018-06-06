@@ -60,6 +60,9 @@ public @Data class User {
     @OneToMany(mappedBy="user")
     private List<Transaction> transactions = new ArrayList<>();
 
+    @OneToMany(mappedBy="user")
+    private List<KeyApi> keyApis = new ArrayList<>();
+
     @ManyToMany
     private List<FootballTeam> favoriteFootballTeams = new ArrayList<>();
 

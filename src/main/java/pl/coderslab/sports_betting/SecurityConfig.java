@@ -23,13 +23,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/index").authenticated()
-                .antMatchers("/api/**").hasRole("ADMIN")
-                .antMatchers("/football/**").authenticated()
-                .antMatchers("/resources/**").permitAll().anyRequest().permitAll()
+                .antMatchers("/api/*").permitAll()
+                .antMatchers("/football/*").authenticated()
+                .antMatchers("/resources/*").permitAll().anyRequest().permitAll()
                 .antMatchers("/login", "/register", "/logout").permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/admin/*").hasRole("ADMIN")
                 // now for easier prototyping
-                .antMatchers("/**").authenticated()
+                .antMatchers("/*").authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")

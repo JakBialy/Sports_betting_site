@@ -1,4 +1,4 @@
-package pl.coderslab.sports_betting;
+package pl.coderslab.sports_betting.Filter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,8 +11,9 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
 
-@WebFilter(urlPatterns = "/api/**")
+@WebFilter("/api/*")
 public class ApiFiltr implements Filter {
 
     @Autowired
@@ -32,14 +33,12 @@ public class ApiFiltr implements Filter {
 
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse res = (HttpServletResponse) servletResponse;
-
         String key = req.getParameter("key");
         boolean check = this.keyApiService.checkKey(key);
 
         if (check == false) {
             res.sendError(400, "Please check you APIkey");
         } else {
-            res.sendRedirect(req.getRequestURI());
             filterChain.doFilter(servletRequest, servletResponse);
         }
     }
