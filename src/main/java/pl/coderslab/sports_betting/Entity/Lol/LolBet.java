@@ -28,6 +28,8 @@ class LolBet {
     @NotNull
     private BigDecimal money;
 
+    private BigDecimal odd;
+
     private LocalDateTime date;
 
     private Boolean winner;

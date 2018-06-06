@@ -13,7 +13,7 @@
                 <tr>
                     <th> Type </th>
                     <th> Money</th>
-                    <!--<th> To Win</th>-->
+                    <th> To Win</th>
                     <th> Date </th>
                     <th> Winner </th>
                     <th> Link to Match </th>
@@ -29,8 +29,8 @@
 
                     <td th:switch="${footballBet.winner}">
                         <span th:case='null' >No result yet!</span>
-                        <span th:case='true' >Win</span>
-                        <span th:case='false' >Lost</span>
+                        <span th:case='true' >Yes</span>
+                        <span th:case='false' >No</span>
                     </td>
                     <td> <a th:href="@{/football/match/{id}(id=${footballBet.footballMatch.id})}">See Match details</a> </td>
                 </tr>
@@ -49,7 +49,7 @@
                 <tr>
                     <th> Type </th>
                     <th> Money</th>
-                    <!--<th> To Win</th>-->
+                    <th> To Win</th>
                     <th> Date </th>
                     <th> Winner </th>
                     <th> Link to Match </th>

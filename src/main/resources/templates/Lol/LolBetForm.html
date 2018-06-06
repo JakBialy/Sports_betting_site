@@ -76,7 +76,6 @@
         <select th:field="*{type}">
             <option th:value="homeWin" th:text="|${matchData.homeLolTeam.team} wins|"> Win </option>
             <option th:value="awayWin" th:text="|${matchData.awayLolTeam.team} wins|"> Win </option>
-            <option th:value="Draw" th:text="Draw"> Draw </option>
         </select>
 
         <p th:text="|Your account has: ${user.money}|"></p>
