@@ -1,7 +1,6 @@
 package pl.coderslab.sports_betting.Controller.ViewController;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.sports_betting.Entity.User;
-import pl.coderslab.sports_betting.Repository.UserRepository;
+import pl.coderslab.sports_betting.Service.KeyApiService;
 import pl.coderslab.sports_betting.Service.Security.UserService;
 
 import javax.servlet.http.HttpSession;
@@ -19,8 +18,8 @@ import javax.validation.Valid;
 public class HomeController {
     @Autowired
     UserService userService;
-//    @Autowired
-//    ApiService apiService;
+    @Autowired
+    KeyApiService keyApiService;
 
     @GetMapping("/index")
     public String index(HttpSession httpSession) {
@@ -33,11 +32,11 @@ public class HomeController {
         return "API";
     }
 
-//    @GetMapping("/api/generateKey")
-//    public String generateApiKey(Model model) {
-//        model.addAttribute("key",apiService.giveRandomKey());
-//        return "ShowKey";
-//    }
+    @GetMapping("/api/generateKey")
+    public String generateApiKey(Model model) {
+        model.addAttribute("key", keyApiService.giveRandomKey());
+        return "ShowKey";
+    }
 
     @GetMapping("/register")
     public String userForm(Model model) {
