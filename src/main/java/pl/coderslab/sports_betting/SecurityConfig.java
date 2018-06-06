@@ -22,22 +22,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/index").authenticated()
-                .antMatchers("/api/*").permitAll()
-                .antMatchers("/football/*").authenticated()
-                .antMatchers("/resources/*").permitAll().anyRequest().permitAll()
-                .antMatchers("/login", "/register", "/logout").permitAll()
-                .antMatchers("/admin/*").hasRole("ADMIN")
-                // now for easier prototyping
-                .antMatchers("/*").authenticated()
+                .antMatchers("/football/**", "/lol/**","/index", "/user/**", "/checkApi/**", "/admin/**", "/logout").authenticated()
+                .antMatchers("/resources/**").permitAll().anyRequest().permitAll()
+                .antMatchers("/login", "/register", "/api/**").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/index")
+                .loginPage("/login").defaultSuccessUrl("/index")
                   .and()
-//                .logout()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
-//                .logoutSuccessUrl("/login");
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
     }
 
 
@@ -46,14 +40,3 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 }
-
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-//                .antMatchers("/login", "/register").permitAll() // anonym can login or register
-//                .antMatchers("/").access("hasRole('USER')") // home page is not allowed if not user is logged in
-//                .and().formLogin().loginPage("/login")
-//                .and()
-//                .logout().logoutSuccessUrl("/register");
-//
-//        http.csrf().disable();
-//    }
