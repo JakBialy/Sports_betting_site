@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:replace="Header.html :: header"></div>
 
-<h2 th:text="| You are betting in footballMatch ${matchData.homeFootballTeam.team} vs ${matchData.awayFootballTeam.team} in ${matchData.awayFootballTeam.footballLeague.name}|"> betting info</h2>
+<h2 th:text="| You are betting in match : ${matchData.homeLolTeam.team} vs ${matchData.awayLolTeam.team} in ${matchData.awayLolTeam.lolLeague.name}|"> betting info</h2>
 
 <div class="card mb-3">
     <div class="card-body">
@@ -12,29 +12,24 @@
                 <tr>
                     <th> Home footballTeam </th>
                     <th> Home score </th>
-                    <th> Home half score </th>
 
                     <th> Away footballTeam </th>
                     <th> Away score </th>
-                    <th> Away half score </th>
                     <th> Status </th>
                     <th> Winner </th>
 
                     <th> Start </th>
                     <th> End </th>
-                    <!--<th> FootballBet!</th>-->
 
                 </tr>
                 </thead>
 
                 <tbody>
-                <td th:text="${matchData.homeFootballTeam.team}">HomeTeam Name</td>
+                <td th:text="${matchData.homeLolTeam.team}">HomeTeam Name</td>
                 <td th:text="${matchData.homeScore}">HomeTeam Name</td>
-                <td th:text="${matchData.homeHalfScore}">HomeTeam Name</td>
 
-                <td th:text="${matchData.awayFootballTeam.team}">AwayTeam Name</td>
+                <td th:text="${matchData.awayLolTeam.team}">AwayTeam Name</td>
                 <td th:text="${matchData.awayScore}">HomeTeam Name</td>
-                <td th:text="${matchData.awayHalfScore}">HomeTeam Name</td>
 
                 <td th:text="${matchData.status}">Status</td>
                 <td th:switch="${matchData.winner}">
@@ -57,17 +52,16 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                 <tr>
-                    <th th:text="|${matchData.homeFootballTeam.team} wins|"> footballOdds </th>
-                    <th th:text="|${matchData.awayFootballTeam.team} wins|"> footballOdds </th>
+                    <th th:text="|${matchData.homeLolTeam.team} wins|"> footballOdds </th>
+                    <th th:text="|${matchData.awayLolTeam.team} wins|"> footballOdds </th>
                     <th> Draw </th>
                     <!--<th> FootballOdds half etc</th>-->
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td th:text="${matchData.footballOdds.oddHome}"> footballOdds</td>
-                    <td th:text="${matchData.footballOdds.oddAway}"> footballOdds</td>
-                    <td th:text="${matchData.footballOdds.oddX}"> footballOdds</td>
+                    <td th:text="${matchData.lolOdds.oddHome}"> footballOdds</td>
+                    <td th:text="${matchData.lolOdds.oddAway}"> footballOdds</td>
                 </tr>
                 </tbody>
             </table>
@@ -78,12 +72,12 @@
 
 
 <!--Betting form-->
-    <form th:action="@{/bet/match/}" th:object="${bet}"	method="post">
+    <form th:action="@{/lolBet/match/}" th:object="${bet}"	method="post">
 
     <label> Bet type:</label>
         <select th:field="*{type}">
-            <option th:value="homeWin" th:text="|${matchData.homeFootballTeam.team} wins|"> Win </option>
-            <option th:value="awayWin" th:text="|${matchData.awayFootballTeam.team} wins|"> Win </option>
+            <option th:value="homeWin" th:text="|${matchData.homeLolTeam.team} wins|"> Win </option>
+            <option th:value="awayWin" th:text="|${matchData.awayLolTeam.team} wins|"> Win </option>
             <option th:value="Draw" th:text="Draw"> Draw </option>
         </select>
 

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import pl.coderslab.sports_betting.Entity.User;
 import pl.coderslab.sports_betting.Service.CountryService;
 import pl.coderslab.sports_betting.Service.Football.FootballLeagueService;
+import pl.coderslab.sports_betting.Service.Lol.LolLeagueService;
+import pl.coderslab.sports_betting.Service.Lol.LolTeamService;
 import pl.coderslab.sports_betting.Service.Security.UserService;
 import pl.coderslab.sports_betting.Service.Football.FootballTeamService;
 
@@ -21,6 +23,10 @@ public class AppStartup implements ApplicationRunner {
     FootballLeagueService footballLeagueService;
     @Autowired
     FootballTeamService footballTeamService;
+    @Autowired
+    LolLeagueService lolLeagueService;
+    @Autowired
+    LolTeamService lolTeamService;
 
     @Autowired
     public AppStartup(UserService userService) {
@@ -38,6 +44,8 @@ public class AppStartup implements ApplicationRunner {
         countryService.populateDb();
         footballLeagueService.populateDb();
         footballTeamService.populateDb();
+        lolLeagueService.populateDb();
+        lolTeamService.populateDb();
     }
 
     private User testUser1() {

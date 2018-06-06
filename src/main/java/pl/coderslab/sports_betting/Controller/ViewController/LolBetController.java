@@ -6,50 +6,49 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.sports_betting.Entity.Football.FootballBet;
+import pl.coderslab.sports_betting.Entity.Lol.LolBet;
 import pl.coderslab.sports_betting.Entity.User;
-import pl.coderslab.sports_betting.Service.Football.FootballMatchService;
-import pl.coderslab.sports_betting.Service.Football.FootballBetService;
+import pl.coderslab.sports_betting.Service.Lol.LolBetService;
+import pl.coderslab.sports_betting.Service.Lol.LolMatchService;
 import pl.coderslab.sports_betting.Service.Security.UserService;
-
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
 
 @Controller
-@RequestMapping("/footballBet")
-public class FootballBetController {
+@RequestMapping("/lolBet")
+public class LolBetController {
 
     @Autowired
-    FootballMatchService footballMatchService;
+    LolMatchService lolMatchService;
 
     @Autowired
-    FootballBetService footballBetService;
+    LolBetService lolBetService;
 
     @Autowired
     UserService userService;
 
     @GetMapping("/match/{id}")
     public String betForm(@PathVariable Long id, Model model) {
-        model.addAttribute("matchData", footballMatchService.findById(id));
-        model.addAttribute("bet", new FootballBet());
+        model.addAttribute("matchData", lolMatchService.findById(id));
+        model.addAttribute("bet", new LolBet());
         model.addAttribute("user", userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName()));
-        return "Football/FootballBetForm";
+        return "Lol/LolBetForm";
     }
 
     @PostMapping("/match")
-    public String postForm(@Valid @ModelAttribute FootballBet footballBet, BindingResult result) {
+    public String postForm(@Valid @ModelAttribute LolBet lolBet, BindingResult result) {
         if(result.hasErrors()){
-            return "redirect:/footballBet/match/" + footballBet.getFootballMatch().getId();
+            return "redirect:/lolBet/match/" + lolBet.getLolMatch().getId();
         }
         User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
-        BigDecimal balance = user.getMoney().subtract(footballBet.getMoney());
+        BigDecimal balance = user.getMoney().subtract(lolBet.getMoney());
 
         if (balance.compareTo(BigDecimal.ZERO) < 0) {
             return "redirect:/user/noFounds";
         } else {
-            footballBetService.saveBet(footballBet);
-            return "redirect:/football";
+            lolBetService.saveBet(lolBet);
+            return "redirect:/lol";
         }
     }
 }

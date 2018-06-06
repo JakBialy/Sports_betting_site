@@ -9,6 +9,7 @@ import pl.coderslab.sports_betting.Entity.User;
 import pl.coderslab.sports_betting.Repository.Fotball.FootballBetRepository;
 import pl.coderslab.sports_betting.Repository.UserRepository;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
@@ -22,6 +23,7 @@ public class ScheduledFootballBetService {
     @Autowired
     UserRepository userRepository;
 
+    @Transactional
     @Scheduled(cron = ("59 4,9,14,19,24,29,34,39,44,49,54,59 * * * ?"))
     public void checkingBets(){
         List<FootballBet> footballBetList = footballBetRepository.findAllByFootballMatchEndIsGreaterThan(LocalDateTime.now());

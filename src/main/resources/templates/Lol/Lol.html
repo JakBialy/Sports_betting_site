@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:replace="Header.html :: header"></div>
 
-    <h2>Football</h2>
+    <h2>League of Legends</h2>
 
     <div class="card mb-3">
         <div class="card-body">
@@ -15,9 +15,9 @@
                     </thead>
 
                     <tbody>
-                    <tr th:each="country: ${countries}">
-                        <td th:text="${country.name}">Country Name</td>
-                        <td> <a th:href="@{/football/country/{id}(id=${country.id})}">Countries Leagues</a> </td>
+                    <tr th:each="league: ${leagues}">
+                        <td th:text="${league.name}">Country Name</td>
+                        <td> <a th:href="@{/lol/league/{id}(id=${league.id})}">Leagues</a> </td>
                     </tr>
                     </tbody>
                 </table>
@@ -33,10 +33,9 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                     <tr>
-                        <th> Country </th>
                         <th> League </th>
-                        <th> Home footballTeam </th>
-                        <th> Away footballTeam </th>
+                        <th> Home lolTeam </th>
+                        <th> Away lolTeam </th>
                         <th> Start </th>
                         <th> End </th>
                         <th> Bet!</th>
@@ -45,14 +44,13 @@
                     </thead>
 
                     <tbody>
-                    <tr th:each="footballMatch: ${nextMatches}">
-                        <td th:text="${footballMatch.awayFootballTeam.footballLeague.country.name}">Country Name</td>
-                        <td th:text="${footballMatch.awayFootballTeam.footballLeague.name}">League Name</td>
-                        <td th:text="${footballMatch.homeFootballTeam.team}">HomeTeam Name</td>
-                        <td th:text="${footballMatch.awayFootballTeam.team}">AwayTeam Name</td>
-                        <td th:text="${#temporals.format(footballMatch.start, 'dd-MM-yyyy HH:mm')}">Start</td>
-                        <td th:text="${#temporals.format(footballMatch.end, 'dd-MM-yyyy HH:mm')}">End</td>
-                        <td> <a th:href="@{/footballBet/match/{id}(id=${footballMatch.id})}">Bet!</a> </td>
+                    <tr th:each="lolMatch: ${nextMatches}">
+                        <td th:text="${lolMatch.awayLolTeam.lolLeague.name}">League Name</td>
+                        <td th:text="${lolMatch.homeLolTeam.team}">HomeTeam Name</td>
+                        <td th:text="${lolMatch.awayLolTeam.team}">AwayTeam Name</td>
+                        <td th:text="${#temporals.format(lolMatch.start, 'dd-MM-yyyy HH:mm')}">Start</td>
+                        <td th:text="${#temporals.format(lolMatch.end, 'dd-MM-yyyy HH:mm')}">End</td>
+                        <td> <a th:href="@{/lolBet/match/{id}(id=${lolMatch.id})}">Bet!</a> </td>
                     </tr>
                     </tbody>
                 </table>
@@ -68,30 +66,26 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                     <tr>
-                        <th> Country </th>
                         <th> League </th>
-                        <th> Home footballTeam </th>
                         <th> Home score </th>
-                        <th> Away footballTeam </th>
                         <th> Away score </th>
                         <th> Status </th>
                         <th> End </th>
-                        <th> Go to footballMatch!</th>
+                        <th> Bet!</th>
 
                     </tr>
                     </thead>
 
                     <tbody>
-                    <tr th:each="footballMatch: ${liveMatches}">
-                        <td th:text="${footballMatch.awayFootballTeam.footballLeague.country.name}">Country Name</td>
-                        <td th:text="${footballMatch.awayFootballTeam.footballLeague.name}">League Name</td>
-                        <td th:text="${footballMatch.homeFootballTeam.team}">HomeTeam Name</td>
-                        <td th:text="${footballMatch.homeScore}">HomeTeam Score</td>
-                        <td th:text="${footballMatch.awayFootballTeam.team}">AwayTeam Name</td>
-                        <td th:text="${footballMatch.awayScore}">AwayTeam Score</td>
-                        <td th:text="${footballMatch.status}">Status</td>
-                        <td th:text="${#temporals.format(footballMatch.end, 'dd-MM-yyyy HH:mm')}">End</td>
-                        <td> <a th:href="@{/footballBet/footballMatch/{id}(id=${footballMatch.id})}">Bet!</a> </td>
+                    <tr th:each="lolMatch: ${liveMatches}">
+                        <td th:text="${lolMatch.awayLolTeam.lolLeague.name}">League Name</td>
+                        <td th:text="${lolMatch.homeLolTeam.team}">HomeTeam Name</td>
+                        <td th:text="${lolMatch.homeScore}">HomeTeam Score</td>
+                        <td th:text="${lolMatch.awayLolTeam.team}">AwayTeam Name</td>
+                        <td th:text="${lolMatch.awayScore}">AwayTeam Score</td>
+                        <td th:text="${lolMatch.status}">Status</td>
+                        <td th:text="${#temporals.format(lolMatch.end, 'dd-MM-yyyy HH:mm')}">End</td>
+                        <td> <a th:href="@{/lolBet/lolMatch/{id}(id=${lolMatch.id})}">Bet!</a> </td>
                     </tr>
                     </tbody>
                 </table>

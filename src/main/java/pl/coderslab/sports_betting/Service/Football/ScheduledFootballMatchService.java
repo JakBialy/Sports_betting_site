@@ -25,7 +25,7 @@ public class ScheduledFootballMatchService {
     @Autowired
     FootballMatchRepository footballMatchRepository;
 
-    private static int staticCounter = 0;
+    private static int footballStaticCounter = 0;
 
     @Scheduled(cron = ("0 0/5 * 1/1 * ?"))
     public void startMatches() {
@@ -62,42 +62,20 @@ public class ScheduledFootballMatchService {
     @Scheduled(cron = ("57 3,4,8,9,13,14,18,19,23,24,28,29,33,34,38,39,43,44,48,49,53,54,58,59 * * * ?"))
     public void goalsMaker() {
         List<FootballMatch> list = footballMatchRepository.findAllByEndIsGreaterThan(LocalDateTime.now());
-        staticCounter++;
+        footballStaticCounter++;
 
         for (FootballMatch footballMatch : list) {
             Random r = new Random();
-            int goalAway = 0;
-            int goalHome = 0;
+            int goalAway = r.nextInt(3);
+            int goalHome = r.nextInt(3);
 
-            switch ((r.nextInt(3) + 1)) {
-                case 1:
-                    goalAway = 0;
-                    break;
-                case 2:
-                    goalAway = 1;
-                    break;
-                case 3:
-                    goalAway = 2;
-            }
-
-            switch ((r.nextInt(3) + 1)) {
-                case 1:
-                    goalHome = 2;
-                    break;
-                case 2:
-                    goalHome = 1;
-                    break;
-                case 3:
-                    goalHome = 0;
-            }
-
-            if (!(staticCounter % 2 == 0)) {
+            if (!(footballStaticCounter % 2 == 0)) {
                 footballMatch.setAwayHalfScore(footballMatch.getAwayHalfScore() + goalAway);
                 footballMatch.setHomeHalfScore(footballMatch.getHomeHalfScore() + goalHome);
                 footballMatch.setAwayScore(footballMatch.getAwayHalfScore());
                 footballMatch.setHomeScore(footballMatch.getHomeHalfScore());
                 footballMatch.setStatus("Second Half");
-            } else if ((staticCounter % 2 == 0)) {
+            } else if ((footballStaticCounter % 2 == 0)) {
                 footballMatch.setAwayScore(footballMatch.getAwayScore() + goalAway);
                 footballMatch.setHomeScore(footballMatch.getHomeScore() + goalHome);
                 footballMatch.setStatus("Full Time");
