@@ -16,21 +16,23 @@ class FootballMatch {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
+    private long id;
 
-    LocalDateTime start;
+    private LocalDateTime start;
 
-    LocalDateTime end;
+    private LocalDateTime end;
 
-    String status;
+    private String status;
 
-    int homeScore;
+    private int homeScore;
 
-    int homeHalfScore;
+    private int homeHalfScore;
 
-    int awayScore;
+    private int awayScore;
 
-    int awayHalfScore;
+    private int awayHalfScore;
+
+    private boolean checked = false;
 
     @ManyToOne
     @JoinColumn(name = "winner_id")

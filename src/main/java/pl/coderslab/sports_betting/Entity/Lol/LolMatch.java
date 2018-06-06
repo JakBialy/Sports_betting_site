@@ -29,6 +29,8 @@ class LolMatch {
 
     int awayScore;
 
+    private boolean checked = false;
+
     @ManyToOne
     @JoinColumn(name = "winner_id")
     @JsonBackReference

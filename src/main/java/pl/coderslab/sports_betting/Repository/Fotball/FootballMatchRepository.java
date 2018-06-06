@@ -9,7 +9,7 @@ import java.util.List;
 public interface FootballMatchRepository extends JpaRepository<FootballMatch, Long> {
     List<FootballMatch> findAllByStartIsGreaterThan(LocalDateTime localDateTime);
     List<FootballMatch> findAllByEndIsGreaterThan(LocalDateTime localDateTime);
-    List<FootballMatch> findAllByEndIsLessThan(LocalDateTime localDateTime);
+    List<FootballMatch> findAllByEndIsLessThanAndStatusIsFalse(LocalDateTime localDateTime);
     List<FootballMatch> findAllByStatus (String status);
     List<FootballMatch> findAllByHomeFootballTeamIdOrderByStart(Long id);
     List<FootballMatch> findAllByAwayFootballTeamIdOrderByStart(Long id);

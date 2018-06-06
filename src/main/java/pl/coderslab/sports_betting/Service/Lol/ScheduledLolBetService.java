@@ -3,7 +3,9 @@ package pl.coderslab.sports_betting.Service.Lol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
+import pl.coderslab.sports_betting.Entity.Football.FootballBet;
 import pl.coderslab.sports_betting.Entity.Lol.LolBet;
+import pl.coderslab.sports_betting.Entity.Lol.LolMatch;
 import pl.coderslab.sports_betting.Entity.Lol.LolOdds;
 import pl.coderslab.sports_betting.Entity.User;
 import pl.coderslab.sports_betting.Repository.Lol.LolBetRepository;
@@ -24,9 +26,12 @@ public class ScheduledLolBetService {
     UserRepository userRepository;
 
     @Transactional
-    @Scheduled(cron = ("59 4,9,14,19,24,29,34,39,44,49,54,59 * * * ?"))
+//    @Scheduled(cron = ("59 4,9,14,19,24,29,34,39,44,49,54,59 * * * ?"))
+    @Scheduled(cron = ("1 0/5 * 1/1 * ?"))
     public void checkingBets(){
-        List<LolBet> lolBetList = lolBetRepository.findAllByLolMatchEndIsGreaterThan(LocalDateTime.now());
+//        List<LolBet> lolBetList = lolBetRepository.findAllByLolMatchEndIsGreaterThan(LocalDateTime.now());
+        List<LolBet> lolBetList = lolBetRepository.findAllByLolMatchEndIsLessThanAndLolMatchCheckedIsFalse(LocalDateTime.now());
+
         for (LolBet lolBet : lolBetList) {
             LolOdds lolOdds = lolBet.getLolMatch().getLolOdds();
             User user = lolBet.getUser();
@@ -36,6 +41,8 @@ public class ScheduledLolBetService {
                     lolBet.setWinner(true);
                     BigDecimal winOdd = BigDecimal.valueOf(lolOdds.getOddHome());
                     moneyToUser(lolBet, user, winOdd);
+                } else {
+                    lolBet.setWinner(false);
                 }
 
             } else if(lolBet.getType().equals("awayWin")){
@@ -43,9 +50,12 @@ public class ScheduledLolBetService {
                     lolBet.setWinner(true);
                     BigDecimal winOdd = BigDecimal.valueOf(lolOdds.getOddAway());
                     moneyToUser(lolBet, user, winOdd);
+                } else {
+                    lolBet.setWinner(false);
                 }
-
             }
+            LolMatch match = lolBet.getLolMatch();
+            match.setChecked(true);
             lolBetRepository.save(lolBet);
             userRepository.save(user);
         }

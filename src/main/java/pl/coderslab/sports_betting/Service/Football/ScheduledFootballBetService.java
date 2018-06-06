@@ -2,8 +2,10 @@ package pl.coderslab.sports_betting.Service.Football;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import pl.coderslab.sports_betting.Entity.Football.FootballBet;
+import pl.coderslab.sports_betting.Entity.Football.FootballMatch;
 import pl.coderslab.sports_betting.Entity.Football.FootballOdds;
 import pl.coderslab.sports_betting.Entity.User;
 import pl.coderslab.sports_betting.Repository.Fotball.FootballBetRepository;
@@ -24,9 +26,14 @@ public class ScheduledFootballBetService {
     UserRepository userRepository;
 
     @Transactional
-    @Scheduled(cron = ("59 4,9,14,19,24,29,34,39,44,49,54,59 * * * ?"))
+//    @Scheduled(cron = ("59 4,9,14,19,24,29,34,39,44,49,54,59 * * * ?"))
+
+    @Scheduled(cron = ("1 0/5 * 1/1 * ?"))
     public void checkingBets(){
-        List<FootballBet> footballBetList = footballBetRepository.findAllByFootballMatchEndIsGreaterThan(LocalDateTime.now());
+//        List<FootballBet> footballBetList = footballBetRepository.findAllByFootballMatchEndIsGreaterThan(LocalDateTime.now());
+
+        List<FootballBet> footballBetList = footballBetRepository.findAllByFootballMatchEndIsLessThanAndFootballMatchCheckedIsFalse(LocalDateTime.now());
+
         for (FootballBet footballBet : footballBetList) {
             FootballOdds footballOdds = footballBet.getFootballMatch().getFootballOdds();
             User user = footballBet.getUser();
@@ -36,6 +43,8 @@ public class ScheduledFootballBetService {
                     footballBet.setWinner(true);
                     BigDecimal winOdd = BigDecimal.valueOf(footballOdds.getOddHome());
                     moneyToUser(footballBet, user, winOdd);
+                } else {
+                    footballBet.setWinner(false);
                 }
 
             } else if(footballBet.getType().equals("awayWin")){
@@ -43,6 +52,8 @@ public class ScheduledFootballBetService {
                     footballBet.setWinner(true);
                     BigDecimal winOdd = BigDecimal.valueOf(footballOdds.getOddAway());
                     moneyToUser(footballBet, user, winOdd);
+                } else {
+                    footballBet.setWinner(false);
                 }
 
             } else if(footballBet.getType().equals("Draw")){
@@ -50,8 +61,12 @@ public class ScheduledFootballBetService {
                     footballBet.setWinner(true);
                     BigDecimal winOdd = BigDecimal.valueOf(footballOdds.getOddX());
                     moneyToUser(footballBet, user, winOdd);
+                } else {
+                    footballBet.setWinner(false);
                 }
             }
+            FootballMatch match = footballBet.getFootballMatch();
+            match.setChecked(true);
             footballBetRepository.save(footballBet);
             userRepository.save(user);
         }

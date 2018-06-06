@@ -59,11 +59,12 @@ public class ScheduledLolMatchService {
         System.out.println("Another set of matches going on! " + LocalDateTime.now().toString());
     }
 
-    @Scheduled(cron = ("57 3,4,8,9,13,14,18,19,23,24,28,29,33,34,38,39,43,44,48,49,53,54,58,59 * * * ?"))
+    @Scheduled(cron = ("58 3,4,8,9,13,14,18,19,23,24,28,29,33,34,38,39,43,44,48,49,53,54,58,59 * * * ?"))
     public void goalsMaker() {
         List<LolMatch> list = lolMatchRepository.findAllByEndIsGreaterThan(LocalDateTime.now());
-        LolStaticCounter++;
-
+        if (!(list.isEmpty())){
+            LolStaticCounter++;
+        }
         for (LolMatch lolMatch : list) {
             Random r = new Random();
 
@@ -92,7 +93,7 @@ public class ScheduledLolMatchService {
         System.out.println("LolMatch started!" + LocalDateTime.now().toString());
     }
 
-    @Scheduled(cron = ("58 4,9,14,19,24,29,34,39,44,49,54,59 * * * ?"))
+    @Scheduled(cron = ("59 4,9,14,19,24,29,34,39,44,49,54,59 * * * ?"))
     public void matchesResult() {
         List<LolMatch> list = lolMatchRepository.findAllByEndIsGreaterThan(LocalDateTime.now());
 

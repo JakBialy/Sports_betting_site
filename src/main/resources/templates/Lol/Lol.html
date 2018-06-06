@@ -85,7 +85,7 @@
                         <td th:text="${lolMatch.awayScore}">AwayTeam Score</td>
                         <td th:text="${lolMatch.status}">Status</td>
                         <td th:text="${#temporals.format(lolMatch.end, 'dd-MM-yyyy HH:mm')}">End</td>
-                        <td> <a th:href="@{/lolBet/lolMatch/{id}(id=${lolMatch.id})}">Bet!</a> </td>
+                        <td> <a th:href="@{/lolBet/match/{id}(id=${lolMatch.id})}">Bet!</a> </td>
                     </tr>
                     </tbody>
                 </table>
