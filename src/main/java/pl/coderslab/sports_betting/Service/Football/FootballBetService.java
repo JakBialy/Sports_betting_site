@@ -2,6 +2,7 @@ package pl.coderslab.sports_betting.Service.Football;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import pl.coderslab.sports_betting.Entity.Football.FootballBet;
 import pl.coderslab.sports_betting.Entity.User;
@@ -9,6 +10,7 @@ import pl.coderslab.sports_betting.Repository.Fotball.FootballBetRepository;
 import pl.coderslab.sports_betting.Repository.UserRepository;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,8 +31,12 @@ public class FootballBetService {
         footballBet.setDate(LocalDateTime.now());
         if(footballBet.getType().equals("homeWin")){
             footballBet.setFootballTeam(footballBet.getFootballMatch().getHomeFootballTeam());
+            footballBet.setOdd(BigDecimal.valueOf(footballBet.getFootballMatch().getFootballOdds().getOddHome()));
         } else if (footballBet.getType().equals("awayWin")){
             footballBet.setFootballTeam(footballBet.getFootballMatch().getAwayFootballTeam());
+            footballBet.setOdd(BigDecimal.valueOf(footballBet.getFootballMatch().getFootballOdds().getOddAway()));
+        } else {
+            footballBet.setOdd(BigDecimal.valueOf(footballBet.getFootballMatch().getFootballOdds().getOddX()));
         }
         footballBetRepository.save(footballBet);
     }

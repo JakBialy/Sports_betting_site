@@ -31,6 +31,8 @@ class FootballBet {
 
     private Boolean winner;
 
+    private BigDecimal odd;
+
     @ManyToOne
     @JoinColumn(name = "match_id")
     @JsonBackReference

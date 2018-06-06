@@ -28,6 +28,7 @@
                 </thead>
 
                 <tbody>
+                <tr>
                     <td th:text="${match.homeFootballTeam.team}">HomeTeam Name</td>
                     <td th:text="${match.homeScore}">HomeTeam Name</td>
                     <td th:text="${match.homeHalfScore}">HomeTeam Name</td>
@@ -35,13 +36,13 @@
                     <td th:text="${match.awayFootballTeam.team}">AwayTeam Name</td>
                     <td th:text="${match.awayScore}">HomeTeam Name</td>
                     <td th:text="${match.awayHalfScore}">HomeTeam Name</td>
-
                     <td th:text="${match.status}">Status</td>
-                    <!--<td th:switch="${match.winner}">-->
-                        <!--<span th:case='null' >No result yet!</span>-->
-                        <!--<span th:case='true' th:text="${match.winner.team}" >Win</span>-->
-                    <!--</td>-->
-                    <td th:text="${match.winner.team}">Winner</td>
+
+                    <td>
+                        <span th:if="${match.winner == null}" >No result yet!</span>
+                        <span th:if="${match.winner != null}" th:text="${match.winner.team}"></span>
+                    </td>
+
                     <td th:text="${#temporals.format(match.start, 'dd-MM-yyyy HH:mm')}">Start</td>
                     <td th:text="${#temporals.format(match.end, 'dd-MM-yyyy HH:mm')}">End</td>
                     <td> <a th:href="@{/footballBet/match/{id}(id=${match.id})}">Bet!</a> </td>

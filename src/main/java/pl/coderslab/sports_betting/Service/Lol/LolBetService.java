@@ -9,6 +9,7 @@ import pl.coderslab.sports_betting.Repository.Lol.LolBetRepository;
 import pl.coderslab.sports_betting.Repository.UserRepository;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,8 +30,10 @@ public class LolBetService {
         lolBet.setDate(LocalDateTime.now());
         if(lolBet.getType().equals("homeWin")){
             lolBet.setLolTeam(lolBet.getLolMatch().getHomeLolTeam());
+            lolBet.setOdd(BigDecimal.valueOf(lolBet.getLolMatch().getLolOdds().getOddHome()));
         } else if (lolBet.getType().equals("awayWin")){
             lolBet.setLolTeam(lolBet.getLolMatch().getAwayLolTeam());
+            lolBet.setOdd(BigDecimal.valueOf(lolBet.getLolMatch().getLolOdds().getOddAway()));
         }
         lolBetRepository.save(lolBet);
     }
