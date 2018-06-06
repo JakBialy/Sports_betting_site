@@ -46,8 +46,6 @@ public class MyErrorController implements ErrorController {
         return "errorPages/500";
     }
 
-
-
     @Override
     public String getErrorPath() {
             return "/error";

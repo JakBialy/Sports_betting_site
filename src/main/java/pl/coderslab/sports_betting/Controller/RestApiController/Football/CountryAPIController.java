@@ -1,4 +1,4 @@
-package pl.coderslab.sports_betting.Controller.RestApiController;
+package pl.coderslab.sports_betting.Controller.RestApiController.Football;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +11,7 @@ import pl.coderslab.sports_betting.Service.CountryService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/country")
+@RequestMapping("/api/fbCountry")
 public class CountryAPIController {
 
     @Autowired

@@ -5,22 +5,25 @@
 <p class="text-center" th:text="|Welcome ${session.firstName} Do you want to try our API?|"> Welcome </p>
 
 
-<h2 class="text-center"> Football :</h2>
+<p class="text-center"><strong>Examples and information:</strong></p>
 
-<a class="btn btn-primary btn-secondary" href="/api/country/all"> All countries</a>
-<a class="btn btn-primary btn-secondary" href="/api/country/6"> Country example</a>
+<h3 class="text-center"> Football :</h3>
 
-<a class="btn btn-primary btn-secondary" href="/api/league/all"> All leagues</a>
-<a class="btn btn-primary btn-secondary" href="/api/league/8"> League example</a>
-
-<a class="btn btn-primary btn-secondary" href="/api/match/all"> All matches</a>
-<a class="btn btn-primary btn-secondary" href="/api/match/live"> Live matches</a>
-
-<!--<a class="btn btn-primary btn-block" href="/api/match/betweenDate/{date1}/{date2}"> Live matches</a>-->
+<p class="text-center">Countries : "http://localhost:8080/api/fbCountry/all?key=YOUR_API_KEY"</p>
+<p class="text-center"> Country example : "http://localhost:8080/api/fbCountry/6?key=YOUR_API_KEY"</p>
+<p class="text-center">All leagues : "http://localhost:8080/api/fbLeague/all?key=YOUR_API_KEY"</p>
+<p class="text-center">League example : "http://localhost:8080/api/fbLeague/8?key=YOUR_API_KEY"</p>
+<p class="text-center">League example : "http://localhost:8080/api/fbMatch/all?key=YOUR_API_KEY"</p>
+<p class="text-center">League example : "http://localhost:8080//api/fbMatch/live?key=YOUR_API_KEY"</p>
 
 <h2 class="text-center"> League of Legends </h2>
 
-<a class="btn btn-primary btn-secondary" href="/checkApi/generateKey"> Generate API apiKey</a>
+<p class="text-center">All leagues : "http://localhost:8080/api/lolLeague/all?key=YOUR_API_KEY"</p>
+<p class="text-center">League example : "http://localhost:8080/api/lolLeague/8?key=YOUR_API_KEY"</p>
+<p class="text-center">League example : "http://localhost:8080/api/lolMatch/all?key=YOUR_API_KEY"</p>
+<p class="text-center">League example : "http://localhost:8080//api/lolMatch/live?key=YOUR_API_KEY"</p>
+
+<a class="btn btn-primary btn-block" href="/checkApi/generateKey"> Generate API apiKey</a>
 
 <div th:replace="Footer.html :: footer"></div>
 
