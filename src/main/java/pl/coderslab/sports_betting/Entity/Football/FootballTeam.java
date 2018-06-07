@@ -30,7 +30,7 @@ class FootballTeam {
 
     int lost;
 
-    Double winLostRatio;
+    Double winLostRatio = 0.00;
 
     @ManyToOne
     @JoinColumn(name = "league_id")
