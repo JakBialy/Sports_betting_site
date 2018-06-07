@@ -10,11 +10,11 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                 <tr>
-                    <th> Home footballTeam </th>
+                    <th> Home lTeam </th>
                     <th> Home score </th>
                     <th> Home half score </th>
 
-                    <th> Away footballTeam </th>
+                    <th> Away Team </th>
                     <th> Away score </th>
                     <th> Away half score </th>
                     <th> Status </th>
@@ -59,20 +59,22 @@
                 <tr>
                     <th th:text="|${matchData.homeFootballTeam.team} wins|"> footballOdds </th>
                     <th th:text="${matchData.homeFootballTeam.winLostRatio} ? ${matchData.homeFootballTeam.winLostRatio} : 'No ratio yet!'"></th>
+                    <th> % of Win ratio</th>
 
-                    <td th:text="${matchData.footballOdds.oddX}"> footballOdds</td>
-                    
+                    <th> Draw </th>
+
                     <th th:text="|${matchData.awayFootballTeam.team} wins|"> footballOdds </th>
                     <th th:text="${matchData.awayFootballTeam.winLostRatio} ? ${matchData.awayFootballTeam.winLostRatio} : 'No ratio yet!'"></th>
+                    <th> % of Win ratio</th>
 
                     <!--<th> FootballOdds half etc</th>-->
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td th:text="${matchData.footballOdds.oddHome}" colspan="2"> footballOdds</td>
+                    <td th:text="${matchData.footballOdds.oddHome}" colspan="3"> footballOdds</td>
                     <td th:text="${matchData.footballOdds.oddX}"> footballOdds</td>
-                    <td th:text="${matchData.footballOdds.oddAway}" colspan="2"> footballOdds</td>
+                    <td th:text="${matchData.footballOdds.oddAway}" colspan="3"> footballOdds</td>
                 </tr>
                 </tbody>
             </table>

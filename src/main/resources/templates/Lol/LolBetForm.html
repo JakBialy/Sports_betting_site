@@ -11,10 +11,10 @@
                 <thead>
                 <tr>
                     <th> First team </th>
-                    <th> Home score </th>
+                    <th> First score </th>
 
-                    <th> Second </th>
-                    <th> Away score </th>
+                    <th> Second team </th>
+                    <th> Second score </th>
                     <th> Status </th>
                     <th> Winner </th>
 
@@ -54,16 +54,18 @@
                 <tr>
                     <th th:text="|${matchData.homeLolTeam.team} wins|"> footballOdds </th>
                     <th th:text="${matchData.homeLolTeam.winLostRatio} ? ${matchData.homeLolTeam.winLostRatio} : 'No ratio yet!'"></th>
+                    <th> % of Win ratio</th>
 
-                    <th th:text="|${matchData.awayLolTeam.team} wins|"> footballOdds </th>
+                    <th th:text="|${matchData.homeLolTeam.team} wins|"> footballOdds </th>
                     <th th:text="${matchData.awayLolTeam.winLostRatio} ? ${matchData.awayLolTeam.winLostRatio} : 'No ratio yet!'"></th>
+                    <th> % of Win ratio</th>
 
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td th:text="${matchData.lolOdds.oddHome}" colspan="2"> footballOdds</td>
-                    <td th:text="${matchData.lolOdds.oddAway}" colspan="2"> footballOdds</td>
+                    <td th:text="${matchData.lolOdds.oddHome}" colspan="3"> footballOdds</td>
+                    <td th:text="${matchData.lolOdds.oddAway}" colspan="3"> footballOdds</td>
                 </tr>
                 </tbody>
             </table>

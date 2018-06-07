@@ -35,6 +35,7 @@ public class TransactionServiceImpl implements TransactionService {
     public void saveTransaction(Transaction transaction){
         User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         BigDecimal check = user.getMoney().subtract(transaction.getAmount());
+        int transactionNumSize = findAllByUserId(user.getId()).size() + 1;
 
         if ((transaction.getType().equals("TransferBack"))&&(user.getMoney().compareTo(user.getMoney().subtract(transaction.getAmount())) <= 0)){
 
@@ -43,14 +44,14 @@ public class TransactionServiceImpl implements TransactionService {
             saveTransactionSavingPack(transaction, user);
 
         } else if (transaction.getType().equals("Card")){
-            if (transactionRepository.findAll().size() % 3 == 0){
+            if (transactionNumSize % 3 == 0){
                 transaction.setAmount(transaction.getAmount().multiply(BigDecimal.valueOf(1.05)));
             }
             user.setMoney(user.getMoney().add(transaction.getAmount()));
             saveTransactionSavingPack(transaction, user);
 
         } else if (transaction.getType().equals("Transfer")){
-            if (transactionRepository.findAll().size() % 3 == 0){
+            if (transactionNumSize % 3 == 0){
                 transaction.setAmount(transaction.getAmount().multiply(BigDecimal.valueOf(1.05)));
             }
             user.setMoney(user.getMoney().add(transaction.getAmount()));

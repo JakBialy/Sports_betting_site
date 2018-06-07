@@ -36,10 +36,10 @@ class LolTeam {
     @JsonBackReference
     LolLeague lolLeague;
 
-    @OneToMany(mappedBy="homeLolTeam")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="homeLolTeam")
     private List<LolMatch> homeTeamGames = new ArrayList<>();
 
-    @OneToMany(mappedBy="awayLolTeam")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="awayLolTeam")
     private List<LolMatch> awayTeamGames = new ArrayList<>();
 
     @OneToMany(mappedBy="winner")

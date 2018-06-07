@@ -4,12 +4,14 @@ import org.decimal4j.util.DoubleRounder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import pl.coderslab.sports_betting.Entity.Lol.LolMatch;
 import pl.coderslab.sports_betting.Entity.Lol.LolTeam;
 import pl.coderslab.sports_betting.Repository.Lol.LolMatchRepository;
 import pl.coderslab.sports_betting.Repository.Lol.LolTeamRepository;
 import pl.coderslab.sports_betting.Service.Lol.Service.ScheduledLolMatchService;
 
+import javax.persistence.FetchType;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -157,21 +159,18 @@ public class ScheduledLolMatchServiceImpl implements ScheduledLolMatchService {
         System.out.println("Results are ready!" + LocalDateTime.now());
     }
 
-    private void ratioWinLost(LolTeam awayLolTeam, LolTeam homeLolTeam) {
-        if (!(homeLolTeam.getLost() == 0)){
-            Double ratio = (double) (homeLolTeam.getWins()/homeLolTeam.getLost());
-            homeLolTeam.setWinLostRatio(DoubleRounder.round(ratio,2));
-        } else {
-            Double ratio = (double) (homeLolTeam.getWins());
-            homeLolTeam.setWinLostRatio(DoubleRounder.round(ratio,2));
-        }
-        if (!(awayLolTeam.getLost() == 0)){
-            Double ratio = (double) (awayLolTeam.getWins()/awayLolTeam.getLost());
-            awayLolTeam.setWinLostRatio(DoubleRounder.round(ratio,2));
-        } else {
-            Double ratio = (double) (awayLolTeam.getWins());
-            awayLolTeam.setWinLostRatio(DoubleRounder.round(ratio,2));
-        }
+
+    private void ratioWinLost(LolTeam awayLoLTeam, LolTeam homeLoLTeam) {
+        int homeMatchesTotal = homeLoLTeam.getAwayTeamGames().size() + homeLoLTeam.getHomeTeamGames().size();
+        int awayMatchesTotal = awayLoLTeam.getHomeTeamGames().size() + awayLoLTeam.getAwayTeamGames().size();
+        int winsAway = awayLoLTeam.getWins();
+        int winsHome = homeLoLTeam.getWins();
+
+        Double ratioHome = (double)winsHome/(double)homeMatchesTotal * 100;
+        homeLoLTeam.setWinLostRatio(DoubleRounder.round(ratioHome,2));
+
+        Double ratioAway = (double)winsAway/(double)awayMatchesTotal * 100;
+        awayLoLTeam.setWinLostRatio(DoubleRounder.round(ratioAway,2));
     }
 
     private void teamPositioning() {

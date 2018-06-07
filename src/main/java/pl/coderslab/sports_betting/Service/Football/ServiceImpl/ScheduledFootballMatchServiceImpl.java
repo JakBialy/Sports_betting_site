@@ -181,20 +181,18 @@ public class ScheduledFootballMatchServiceImpl implements ScheduledFootballMatch
     }
 
     private void ratioWinLost(FootballTeam awayFootballTeam, FootballTeam homeFootballTeam) {
-        if (!(homeFootballTeam.getLost() == 0)){
-            Double ratio = (double) (homeFootballTeam.getWins()/homeFootballTeam.getLost());
-            homeFootballTeam.setWinLostRatio(DoubleRounder.round(ratio,2));
-        } else {
-            Double ratio = (double) (homeFootballTeam.getWins());
-            homeFootballTeam.setWinLostRatio(DoubleRounder.round(ratio,2));
-        }
-        if (!(awayFootballTeam.getLost() == 0)){
-            Double ratio = (double) (awayFootballTeam.getWins()/awayFootballTeam.getLost());
-            awayFootballTeam.setWinLostRatio(DoubleRounder.round(ratio,2));
-        } else {
-            Double ratio = (double) (awayFootballTeam.getWins());
-            awayFootballTeam.setWinLostRatio(DoubleRounder.round(ratio,2));
-        }
+        int homeMatchesTotal = homeFootballTeam.getAwayTeamGames().size() + homeFootballTeam.getHomeTeamGames().size();
+        int awayMatchesTotal = awayFootballTeam.getHomeTeamGames().size() + awayFootballTeam.getAwayTeamGames().size();
+        int winsAway = awayFootballTeam.getWins();
+        int winsHome = homeFootballTeam.getWins();
+
+        String blabla = "";
+
+            Double ratioHome = (double)winsHome/(double)homeMatchesTotal * 100;
+            homeFootballTeam.setWinLostRatio(DoubleRounder.round(ratioHome,2));
+
+            Double ratioAway = (double)winsAway/(double)awayMatchesTotal * 100;
+            awayFootballTeam.setWinLostRatio(DoubleRounder.round(ratioAway,2));
     }
 
     private void positioning() {
