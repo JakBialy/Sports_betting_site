@@ -10,6 +10,8 @@ import pl.coderslab.sports_betting.Repository.General.UserRepository;
 import pl.coderslab.sports_betting.Service.General.Service.TransactionService;
 
 import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -32,9 +34,18 @@ public class TransactionServiceImpl implements TransactionService {
     @Transactional
     public void saveTransaction(Transaction transaction){
         User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        user.setMoney(user.getMoney().add(transaction.getAmount()));
-        userRepository.save(user);
+        BigDecimal check = user.getMoney().subtract(transaction.getAmount());
 
+        if ((transaction.getType().equals("TransferBack"))&&(user.getMoney().compareTo(user.getMoney().subtract(transaction.getAmount())) <= 0)){
+            user.setMoney(user.getMoney().subtract(transaction.getAmount()));
+            transaction.setAmount(transaction.getAmount().subtract(transaction.getAmount().multiply(BigDecimal.valueOf(2))));
+        } else if (transaction.getType().equals("Card")){
+            user.setMoney(user.getMoney().add(transaction.getAmount()));
+        } else if (transaction.getType().equals("Transfer")){
+            user.setMoney(user.getMoney().add(transaction.getAmount()));
+        }
+
+        userRepository.save(user);
         transaction.setUser(user);
         transaction.setCreated(LocalDateTime.now());
         transactionRepository.save(transaction);
@@ -49,6 +60,4 @@ public class TransactionServiceImpl implements TransactionService {
         List<Transaction> list = transactionRepository.findAllByUserId(id);
         return list;
     }
-
-
 }

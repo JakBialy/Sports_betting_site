@@ -79,22 +79,40 @@ public class UserController {
         }
         return "redirect:/user/userInfo";
     }
-//    @GetMapping("/transferGet")
-//    public String getFoundsToAccount(Model model) {
-//        model.addAttribute("transaction", new Transaction());
-//        return "User/UserTransactionToAccount";
-//    }
-// TODO
-//    @PostMapping("/creditAdd")
-//    public String getFoundsToAccount(@Valid @ModelAttribute Transaction transaction, BindingResult result) {
-//        if (result.hasErrors()) {
-//            return "User/UserTransactionToAccount";
-//        }
-//        if (transaction.getAmount().compareTo(BigDecimal.ZERO) > 0){
-//            transactionService.saveTransaction(transaction);
-//        }
-//        return "redirect:/user/userInfo";
-//    }
+
+    @GetMapping("/transferAdd")
+    public String addFoundsToAccount(Model model) {
+        model.addAttribute("transaction", new Transaction());
+        return "User/UserTransactionToAccount";
+    }
+
+    @PostMapping("/transferAdd")
+    public String addFoundsToAccount(@Valid @ModelAttribute Transaction transaction, BindingResult result) {
+        if (result.hasErrors()) {
+            return "User/UserTransactionToAccount";
+        }
+        if (transaction.getAmount().compareTo(BigDecimal.ZERO) > 0){
+            transactionService.saveTransaction(transaction);
+        }
+        return "redirect:/user/userInfo";
+    }
+
+    @GetMapping("/transferGet")
+    public String getFoundsToAccount(Model model) {
+        model.addAttribute("transaction", new Transaction());
+        return "User/UserTransactionFromAccount";
+    }
+
+    @PostMapping("/transferGet")
+    public String getFoundsToAccount(@Valid @ModelAttribute Transaction transaction, BindingResult result) {
+        if (result.hasErrors()) {
+            return "User/UserTransactionFromAccount";
+        }
+        if (transaction.getAmount().compareTo(BigDecimal.ZERO) > 0){
+            transactionService.saveTransaction(transaction);
+        }
+        return "redirect:/user/userInfo";
+    }
 
     @GetMapping("/userInfo")
     public String userInfo(Model model) {

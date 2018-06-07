@@ -8,13 +8,13 @@
 
 <div class="text-center">
 
-    <form th:action="@{/user/transferAdd}" th:object="${transaction}"	method="post">
+    <form th:action="@{/user/transferGet}" th:object="${transaction}"	method="post">
     <div>
         <label for="money">Amount of money</label>
         <input th:field="*{amount}" id="money" type="number" name="money" placeholder="Amount of money" min="0">
     </div>
 
-        <input type="hidden" th:attr="name='type'" th:value="Transfer" id="type">
+        <input type="hidden" th:attr="name='type'" th:value="TransferBack" id="type">
 
     <div>
         <label class="input-title" for="c-number">Account number*</label>
