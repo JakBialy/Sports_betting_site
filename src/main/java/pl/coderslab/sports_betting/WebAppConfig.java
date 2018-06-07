@@ -1,4 +1,4 @@
-package pl.coderslab.sports_betting.Controller;
+package pl.coderslab.sports_betting;
 
 
 import org.springframework.context.annotation.Configuration;

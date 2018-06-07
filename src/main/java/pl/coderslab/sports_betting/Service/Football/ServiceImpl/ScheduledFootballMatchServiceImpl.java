@@ -28,6 +28,17 @@ public class ScheduledFootballMatchServiceImpl implements ScheduledFootballMatch
 
     private static int footballStaticCounter = 0;
 
+    /**
+     * Method is populating database with set of matches every 5 full minutes
+     * First loop is going two times for each Football league, before going to
+     * nested loop teams are shuffle to make their games random
+     * Every time nested loop is generating five matches
+     * matches starts 3 minutes from actual time and will finish 5 time from actual time
+     * each of team has one home match and one away match, they are selected
+     * to matches by counter to make sure that everyone will play then
+     * match status is set  as a "planned", 2 is added to counter to make next loop getting apropiate teams
+     * finally matches are saved into db
+     */
     @Scheduled(cron = ("0 0/5 * 1/1 * ?"))
     public void startMatches() {
         List<FootballMatch> footballMatchList = new ArrayList<>();
@@ -60,6 +71,15 @@ public class ScheduledFootballMatchServiceImpl implements ScheduledFootballMatch
         System.out.println("Another set of matches going on! " + LocalDateTime.now().toString());
     }
 
+    /**
+     * The method works in the end of every minute (58 sec), so two in total game "life" first is looking
+     * for matches which didn't finished yet, if list is not empty, then counter is increased
+     * for all of the matches are generated two random numbers from 0 to 2
+     * then if counter is odd number goals are added to half score and scores and status is set to "Second Half"
+     * if counter is even number then goals are added only to score and status is set to "Full Time"
+     * in both cases method is adding actual score to new goals
+     * finally method save matches to database
+     */
     @Scheduled(cron = ("58 3,4,8,9,13,14,18,19,23,24,28,29,33,34,38,39,43,44,48,49,53,54,58,59 * * * ?"))
     public void goalsMaker() {
         List<FootballMatch> list = footballMatchRepository.findAllByEndIsGreaterThan(LocalDateTime.now());
@@ -88,6 +108,11 @@ public class ScheduledFootballMatchServiceImpl implements ScheduledFootballMatch
         System.out.println("Another set of goals going on! " + LocalDateTime.now().toString());
     }
 
+    /**
+     * Every 3 full minutes matches which end is in the future have
+     * set status to "first half"
+     * it is saving them to db
+     */
     @Scheduled(cron = ("0 3,8,13,18,23,28,33,38,43,48,53,58 * * * ?"))
     public void matchStartStatus() {
         List<FootballMatch> footballMatchList1 = footballMatchRepository.findAllByEndIsGreaterThan(LocalDateTime.now());
@@ -98,6 +123,20 @@ public class ScheduledFootballMatchServiceImpl implements ScheduledFootballMatch
         System.out.println("FootballMatch started!" + LocalDateTime.now().toString());
     }
 
+    /**
+     * Method is running in the end of match  - every one seconds before full 5 minutes method
+     * method is getting list of all unfinished matches where end is in the future
+     * for every match is getting teams
+     * if away home has more goals than home team then is setting them 1 win and to away team 1 lost
+     * otherwise in reversed case
+     * in case of draw (else) method is adding draw to every team
+     * all matches and teams are saved into db
+     *
+     * after this loop is looking for two leagues and setting
+     * position of teams, comparing them wins (it would be nice to change it later to compare
+     * alse draws and losts in case of having same wins) then setting changes of leagues into datbase
+     *
+     */
     @Scheduled(cron = ("59 4,9,14,19,24,29,34,39,44,49,54,59 * * * ?"))
     public void matchesResult() {
         List<FootballMatch> list = footballMatchRepository.findAllByEndIsGreaterThan(LocalDateTime.now());

@@ -3,7 +3,7 @@ package pl.coderslab.sports_betting.Service.Football.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.coderslab.sports_betting.Entity.Football.Country;
-import pl.coderslab.sports_betting.Repository.CountryRepository;
+import pl.coderslab.sports_betting.Repository.General.CountryRepository;
 import pl.coderslab.sports_betting.Service.Football.Service.CountryService;
 
 import java.util.ArrayList;
@@ -15,8 +15,11 @@ public class CountryServiceImpl implements CountryService {
     @Autowired
     CountryRepository countryRepository;
 
+    /**
+     * Method populate database with countries and save them to
+     * database
+     */
     public void populateDb() {
-
         Country countryOne = new Country();
         countryOne.setName("Somewheria");
 
@@ -30,16 +33,21 @@ public class CountryServiceImpl implements CountryService {
         countryRepository.saveAll(list);
     }
 
+    /**
+     * Sends back all countries from database
+     */
     public List<Country> allCountries(){
         return countryRepository.findAll();
     }
 
+    /**
+     * After input of country id gives back country
+     * @param countryId parameter of selected country
+     * @return returns selected countries
+     */
+
     public Country getCountryById (Long countryId){
-        Optional<Country> country = countryRepository.findById(countryId);
-        Country country1 = new Country();
-        if (country.isPresent()) {
-            country1 = country.get();
-        }
-        return country1;
+        Country country = countryRepository.getOne(countryId);
+        return country;
     }
 }

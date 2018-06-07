@@ -23,6 +23,15 @@ public class ScheduledFootballOddsServiceImpl implements ScheduledFootballOddsSe
     @Autowired
     FootballOddsRepository footballOddsRepository;
 
+    /**
+     * After full 5 minutes method is generating odds
+     * First taking all football matches
+     * then is generating five random doubles from 1 to 3
+     * random double are set into home odd, odd home half, odd X(draw), odd away and odd away half
+     * and rounded with precision of 2
+     * bookmaker is set as a random
+     * footbal odds are saved into databsae
+     */
     @Scheduled(cron = ("1 0/5 * 1/1 * ?"))
     public void makeOdds() {
         List<FootballMatch> list = footballMatchRepository.findAllByStartIsGreaterThan(LocalDateTime.now());

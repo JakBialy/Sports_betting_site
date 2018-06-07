@@ -22,6 +22,12 @@ public class FootballTeamServiceImpl implements FootballTeamService {
     @Autowired
     FootballTeamRepository footballTeamRepository;
 
+    /**
+     * Method is populating database witch teams
+     * In this form it is looking for two leagues
+     * and it is populating databse them with 10 random named for each one
+     * in this case names are from LOTR but can be form whatever source
+     */
     public void populateDb(){
         List<FootballTeam> list = new ArrayList<>();
         FootballLeague footballLeague = new FootballLeague();
@@ -35,7 +41,6 @@ public class FootballTeamServiceImpl implements FootballTeamService {
             }
             for (int j = 1; j <=10 ; j++) {
             FootballTeam footballTeam = new FootballTeam();
-            footballTeam.setTeam("aaa");
             footballTeam.setFootballLeague(footballLeague);
             footballTeam.setTeam("FC " + faker.lordOfTheRings().location());
 
@@ -46,20 +51,30 @@ public class FootballTeamServiceImpl implements FootballTeamService {
         footballTeamRepository.saveAll(list);
     }
 
+    /**
+     * Method is looking for all football teams
+     * @return list of football teams
+     */
     public List<FootballTeam> allTeams(){
         return footballTeamRepository.findAll();
     }
 
+    /**
+     * Method is looking for teams by league id and set them in order by position
+     * @param leagueId Id of league
+     * @return list of teams by league in order
+     */
     public List<FootballTeam> findTeamsByLeagueId(Long leagueId){
         return footballTeamRepository.findAllByFootballLeagueIdOrderByPosition(leagueId);
     }
 
+    /**
+     * Method is looking for specific team by team id
+     * @param teamID team id
+     * @return team
+     */
     public FootballTeam findTeamById(Long teamID){
-        Optional<FootballTeam> team = footballTeamRepository.findById(teamID);
-        FootballTeam footballTeam1 = new FootballTeam();
-        if (team.isPresent()) {
-            footballTeam1 = team.get();
-        }
-        return footballTeam1;
+        FootballTeam team = footballTeamRepository.getOne(teamID);
+        return team;
     }
 }

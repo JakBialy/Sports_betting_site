@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import pl.coderslab.sports_betting.Entity.Lol.LolBet;
 import pl.coderslab.sports_betting.Entity.User;
 import pl.coderslab.sports_betting.Repository.Lol.LolBetRepository;
-import pl.coderslab.sports_betting.Repository.UserRepository;
+import pl.coderslab.sports_betting.Repository.General.UserRepository;
 import pl.coderslab.sports_betting.Service.Lol.Service.LolBetService;
 
 import javax.transaction.Transactional;

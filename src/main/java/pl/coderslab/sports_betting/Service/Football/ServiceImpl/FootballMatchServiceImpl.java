@@ -17,15 +17,28 @@ public class FootballMatchServiceImpl implements FootballMatchService {
     @Autowired
     FootballMatchRepository footballMatchRepository;
 
+    /**
+     * Method is looking for all football matches
+     * @return list of all football matches
+     */
     public List<FootballMatch> allMatches(){
         List<FootballMatch> list = footballMatchRepository.findAll();
         return list;
     }
 
+    /**
+     * Method is looking for all planned matches
+     * @return list of all planned matches
+     */
     public List<FootballMatch> plannedMatches(){
         List<FootballMatch> list = footballMatchRepository.findAllByStatus("planned");
         return list;
     }
+
+    /**
+     * Method is looking for all live matches both in first half and second half phase
+     * @return list of actually played games
+     */
     public List<FootballMatch> liveMatches(){
         List<FootballMatch> firstHalf = footballMatchRepository.findAllByStatus("First Half");
         List<FootballMatch> secondHalf = footballMatchRepository.findAllByStatus("Second Half");
@@ -35,20 +48,42 @@ public class FootballMatchServiceImpl implements FootballMatchService {
         return inGame;
     }
 
+    /**
+     * Method is looking for all home matches of selected team Id
+     * @param teamId Id of football team
+     * @return list of all team home matches
+     */
     public List<FootballMatch> homeMatches(Long teamId){
         List<FootballMatch> list = footballMatchRepository.findAllByHomeFootballTeamIdOrderByStart(teamId);
         return list;
     }
 
+    /**
+     * Method is looking for all away matches of selected team Id
+     * @param teamId Id of football team
+     * @return list of all team away matches
+     */
     public List<FootballMatch> awayMatches(Long teamId){
         List<FootballMatch> list = footballMatchRepository.findAllByAwayFootballTeamIdOrderByStart(teamId);
         return list;
     }
 
-    public FootballMatch findById(Long teamId){
-        FootballMatch footballMatch = footballMatchRepository.getOne(teamId);
+    /**
+     * Looking for match by id
+     * @param matchId selected match Id
+     * @return single football match
+     */
+    public FootballMatch findById(Long matchId){
+        FootballMatch footballMatch = footballMatchRepository.getOne(matchId);
         return footballMatch;
     }
+
+    /**
+     * Method is looking for match which started between some date specified by LocalDateTime
+     * @param localDateTime1 starting point of looking for match
+     * @param localDateTime2 ending point of looking for match
+     * @return list of match which are between specfied date
+     */
 
     public List<FootballMatch> findMatchesWhereStartIsBetween(String localDateTime1, String localDateTime2){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

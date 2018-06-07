@@ -3,13 +3,12 @@ package pl.coderslab.sports_betting.Service.Lol.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
-import pl.coderslab.sports_betting.Entity.Football.FootballBet;
 import pl.coderslab.sports_betting.Entity.Lol.LolBet;
 import pl.coderslab.sports_betting.Entity.Lol.LolMatch;
 import pl.coderslab.sports_betting.Entity.Lol.LolOdds;
 import pl.coderslab.sports_betting.Entity.User;
 import pl.coderslab.sports_betting.Repository.Lol.LolBetRepository;
-import pl.coderslab.sports_betting.Repository.UserRepository;
+import pl.coderslab.sports_betting.Repository.General.UserRepository;
 import pl.coderslab.sports_betting.Service.Lol.Service.ScheduledLolBetService;
 
 import javax.transaction.Transactional;
