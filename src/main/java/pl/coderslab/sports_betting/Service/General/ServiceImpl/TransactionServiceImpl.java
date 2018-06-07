@@ -37,14 +37,29 @@ public class TransactionServiceImpl implements TransactionService {
         BigDecimal check = user.getMoney().subtract(transaction.getAmount());
 
         if ((transaction.getType().equals("TransferBack"))&&(user.getMoney().compareTo(user.getMoney().subtract(transaction.getAmount())) <= 0)){
+
             user.setMoney(user.getMoney().subtract(transaction.getAmount()));
             transaction.setAmount(transaction.getAmount().subtract(transaction.getAmount().multiply(BigDecimal.valueOf(2))));
+            saveTransactionSavingPack(transaction, user);
+
         } else if (transaction.getType().equals("Card")){
+            if (transactionRepository.findAll().size() % 3 == 0){
+                transaction.setAmount(transaction.getAmount().multiply(BigDecimal.valueOf(1.05)));
+            }
             user.setMoney(user.getMoney().add(transaction.getAmount()));
+            saveTransactionSavingPack(transaction, user);
+
         } else if (transaction.getType().equals("Transfer")){
+            if (transactionRepository.findAll().size() % 3 == 0){
+                transaction.setAmount(transaction.getAmount().multiply(BigDecimal.valueOf(1.05)));
+            }
             user.setMoney(user.getMoney().add(transaction.getAmount()));
+            saveTransactionSavingPack(transaction, user);
         }
 
+    }
+
+    private void saveTransactionSavingPack(Transaction transaction, User user) {
         userRepository.save(user);
         transaction.setUser(user);
         transaction.setCreated(LocalDateTime.now());

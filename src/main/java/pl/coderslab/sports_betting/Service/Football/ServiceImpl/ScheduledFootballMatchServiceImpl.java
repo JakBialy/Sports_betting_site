@@ -1,5 +1,6 @@
 package pl.coderslab.sports_betting.Service.Football.ServiceImpl;
 
+import org.decimal4j.util.DoubleRounder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -124,49 +125,76 @@ public class ScheduledFootballMatchServiceImpl implements ScheduledFootballMatch
     }
 
     /**
-     * Method is running in the end of match  - every one seconds before full 5 minutes method
+     * Method is starting in the end of match  - every one seconds before full 5 minutes method
      * method is getting list of all unfinished matches where end is in the future
      * for every match is getting teams
+     *
      * if away home has more goals than home team then is setting them 1 win and to away team 1 lost
      * otherwise in reversed case
      * in case of draw (else) method is adding draw to every team
      * all matches and teams are saved into db
      *
-     * after this loop is looking for two leagues and setting
+     * after this loop method is looking for two leagues and setting
      * position of teams, comparing them wins (it would be nice to change it later to compare
      * alse draws and losts in case of having same wins) then setting changes of leagues into datbase
      *
      */
+    // todo some changes there!
     @Scheduled(cron = ("59 4,9,14,19,24,29,34,39,44,49,54,59 * * * ?"))
     public void matchesResult() {
         List<FootballMatch> list = footballMatchRepository.findAllByEndIsGreaterThan(LocalDateTime.now());
 
         for (FootballMatch footballMatch : list) {
+
          int away = footballMatch.getAwayScore();
          int home = footballMatch.getHomeScore();
+
          FootballTeam awayFootballTeam = footballMatch.getAwayFootballTeam();
          FootballTeam homeFootballTeam = footballMatch.getHomeFootballTeam();
 
-         if (away>home){
-             footballMatch.setWinner(footballMatch.getAwayFootballTeam());
-             awayFootballTeam.setWins(awayFootballTeam.getWins() + 1);
-             homeFootballTeam.setLost(homeFootballTeam.getLost() + 1);
+            scoreMaker(footballMatch, away, home, awayFootballTeam, homeFootballTeam);
+            ratioWinLost(awayFootballTeam, homeFootballTeam);
 
-         } else if (home>away){
-             footballMatch.setWinner(footballMatch.getHomeFootballTeam());
-             homeFootballTeam.setWins(homeFootballTeam.getWins() + 1);
-             awayFootballTeam.setLost(awayFootballTeam.getLost() + 1);
-         } else {
-             awayFootballTeam.setDraws(awayFootballTeam.getDraws() + 1);
-             homeFootballTeam.setDraws(homeFootballTeam.getDraws() + 1);
-         }
             footballMatchRepository.save(footballMatch);
             footballTeamRepository.save(homeFootballTeam);
             footballTeamRepository.save(awayFootballTeam);
         }
-
         positioning();
+
         System.out.println("Results are ready!" + LocalDateTime.now());
+    }
+
+    private void scoreMaker(FootballMatch footballMatch, int away, int home, FootballTeam awayFootballTeam, FootballTeam homeFootballTeam) {
+        if (away>home){
+            footballMatch.setWinner(footballMatch.getAwayFootballTeam());
+            awayFootballTeam.setWins(awayFootballTeam.getWins() + 1);
+            homeFootballTeam.setLost(homeFootballTeam.getLost() + 1);
+
+        } else if (home>away){
+            footballMatch.setWinner(footballMatch.getHomeFootballTeam());
+            homeFootballTeam.setWins(homeFootballTeam.getWins() + 1);
+            awayFootballTeam.setLost(awayFootballTeam.getLost() + 1);
+        } else {
+            awayFootballTeam.setDraws(awayFootballTeam.getDraws() + 1);
+            homeFootballTeam.setDraws(homeFootballTeam.getDraws() + 1);
+        }
+    }
+
+    private void ratioWinLost(FootballTeam awayFootballTeam, FootballTeam homeFootballTeam) {
+        if (!(homeFootballTeam.getLost() == 0)){
+            Double ratio = (double) (homeFootballTeam.getWins()/homeFootballTeam.getLost());
+            homeFootballTeam.setWinLostRatio(DoubleRounder.round(ratio,2));
+        } else {
+            Double ratio = (double) (homeFootballTeam.getWins());
+            homeFootballTeam.setWinLostRatio(DoubleRounder.round(ratio,2));
+        }
+        if (!(awayFootballTeam.getLost() == 0)){
+            Double ratio = (double) (awayFootballTeam.getWins()/awayFootballTeam.getLost());
+            awayFootballTeam.setWinLostRatio(DoubleRounder.round(ratio,2));
+        } else {
+            Double ratio = (double) (awayFootballTeam.getWins());
+            awayFootballTeam.setWinLostRatio(DoubleRounder.round(ratio,2));
+        }
     }
 
     private void positioning() {

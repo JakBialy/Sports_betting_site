@@ -1,5 +1,6 @@
 package pl.coderslab.sports_betting.Service.Lol.ServiceImpl;
 
+import org.decimal4j.util.DoubleRounder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -78,6 +79,7 @@ public class ScheduledLolMatchServiceImpl implements ScheduledLolMatchService {
      * method is adding actual score to new goals
      * finally method save matches to database
      */
+
     @Scheduled(cron = ("58 3,4,8,9,13,14,18,19,23,24,28,29,33,34,38,39,43,44,48,49,53,54,58,59 * * * ?"))
     public void goalsMaker() {
         List<LolMatch> list = lolMatchRepository.findAllByEndIsGreaterThan(LocalDateTime.now());
@@ -131,6 +133,8 @@ public class ScheduledLolMatchServiceImpl implements ScheduledLolMatchService {
      * also draws and lost in case of having same wins) then setting changes of leagues into database
      *
      */
+    // todo some changes here!
+
     @Scheduled(cron = ("59 4,9,14,19,24,29,34,39,44,49,54,59 * * * ?"))
     public void matchesResult() {
         List<LolMatch> list = lolMatchRepository.findAllByEndIsGreaterThan(LocalDateTime.now());
@@ -141,21 +145,36 @@ public class ScheduledLolMatchServiceImpl implements ScheduledLolMatchService {
          LolTeam awayLolTeam = lolMatch.getAwayLolTeam();
          LolTeam homeLolTeam = lolMatch.getHomeLolTeam();
 
-         if (away>home){
-             lolMatch.setWinner(lolMatch.getAwayLolTeam());
-             awayLolTeam.setWins(awayLolTeam.getWins() + 1);
-             homeLolTeam.setLost(homeLolTeam.getLost() + 1);
+            scoreMaker(lolMatch, away, home, awayLolTeam, homeLolTeam);
+            ratioWinLost(awayLolTeam, homeLolTeam);
 
-         } else if (home>away){
-             lolMatch.setWinner(lolMatch.getHomeLolTeam());
-             homeLolTeam.setWins(homeLolTeam.getWins() + 1);
-             awayLolTeam.setLost(awayLolTeam.getLost() + 1);
-         }
             lolMatchRepository.save(lolMatch);
             lolTeamRepository.save(homeLolTeam);
             lolTeamRepository.save(awayLolTeam);
         }
 
+        teamPositioning();
+        System.out.println("Results are ready!" + LocalDateTime.now());
+    }
+
+    private void ratioWinLost(LolTeam awayLolTeam, LolTeam homeLolTeam) {
+        if (!(homeLolTeam.getLost() == 0)){
+            Double ratio = (double) (homeLolTeam.getWins()/homeLolTeam.getLost());
+            homeLolTeam.setWinLostRatio(DoubleRounder.round(ratio,2));
+        } else {
+            Double ratio = (double) (homeLolTeam.getWins());
+            homeLolTeam.setWinLostRatio(DoubleRounder.round(ratio,2));
+        }
+        if (!(awayLolTeam.getLost() == 0)){
+            Double ratio = (double) (awayLolTeam.getWins()/awayLolTeam.getLost());
+            awayLolTeam.setWinLostRatio(DoubleRounder.round(ratio,2));
+        } else {
+            Double ratio = (double) (awayLolTeam.getWins());
+            awayLolTeam.setWinLostRatio(DoubleRounder.round(ratio,2));
+        }
+    }
+
+    private void teamPositioning() {
         for (int i = 1; i <= 2; i++) {
             List<LolTeam> lolTeamList = new ArrayList<>();
             if (i==1){
@@ -172,6 +191,18 @@ public class ScheduledLolMatchServiceImpl implements ScheduledLolMatchService {
                 lolTeamRepository.save(lolTeam);
             }
         }
-        System.out.println("Results are ready!" + LocalDateTime.now());
+    }
+
+    private void scoreMaker(LolMatch lolMatch, int away, int home, LolTeam awayLolTeam, LolTeam homeLolTeam) {
+        if (away>home){
+            lolMatch.setWinner(lolMatch.getAwayLolTeam());
+            awayLolTeam.setWins(awayLolTeam.getWins() + 1);
+            homeLolTeam.setLost(homeLolTeam.getLost() + 1);
+
+        } else if (home>away){
+            lolMatch.setWinner(lolMatch.getHomeLolTeam());
+            homeLolTeam.setWins(homeLolTeam.getWins() + 1);
+            awayLolTeam.setLost(awayLolTeam.getLost() + 1);
+        }
     }
 }

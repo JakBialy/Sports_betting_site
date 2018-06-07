@@ -3,7 +3,14 @@
     <div th:replace="Header.html :: header"></div>
 
     <h3 class="text-center" th:text="| Team : ${team.team} League: ${team.lolLeague.name}| ">Team</h3>
-    <h3 class="text-center" th:text="| Team position : ${team.position} |">Team</h3>
+    <h4 class="text-center" th:text="| Team position : ${team.position} |">Team</h4>
+
+    <!--<h4 class="text-center" th:switch="${team.winLostRatio}">-->
+        <!--<span  th:case="null">Team win/lost ratio: No games played yet!</span>-->
+        <!--<span  th:case="!null" th:text="|Team win/lost ratio : ${team.winLostRatio}|"> Ratio </span>-->
+    <!--</h4>-->
+
+    <h4  class="text-center" th:text="${team.winLostRatio} ? ${team.winLostRatio} : 'No ratio yet!'"></h4>
 
     <a class="btn btn-primary btn-block" th:href="@{/user/addLolFavorite/{id}(id=${team.id})}">Add to favorite</a>
 

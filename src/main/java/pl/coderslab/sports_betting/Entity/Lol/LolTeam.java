@@ -29,6 +29,8 @@ class LolTeam {
 
     int lost;
 
+    Double winLostRatio;
+
     @ManyToOne
     @JoinColumn(name = "league_id")
     @JsonBackReference

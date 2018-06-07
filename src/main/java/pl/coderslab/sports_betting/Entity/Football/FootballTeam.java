@@ -29,7 +29,9 @@ class FootballTeam {
     int draws;
 
     int lost;
-    
+
+    Double winLostRatio;
+
     @ManyToOne
     @JoinColumn(name = "league_id")
     @JsonBackReference
@@ -52,8 +54,4 @@ class FootballTeam {
         return footballBets;
     }
 
-
-// can be a problem for swagger
-//    @ManyToMany(mappedBy="footballTeams")
-//    private List<User> users = new ArrayList<>();
 }
