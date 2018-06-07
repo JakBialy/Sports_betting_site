@@ -29,7 +29,7 @@ class FootballTeam {
     int draws;
 
     int lost;
-
+    
     @ManyToOne
     @JoinColumn(name = "league_id")
     @JsonBackReference

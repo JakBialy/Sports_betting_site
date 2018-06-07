@@ -15,6 +15,11 @@ public class CountryServiceImpl implements CountryService {
     @Autowired
     CountryRepository countryRepository;
 
+    // for test purposes
+    public CountryServiceImpl(CountryRepository countryRepository) {
+        this.countryRepository = countryRepository;
+    }
+
     /**
      * Method populate database with countries and save them to
      * database

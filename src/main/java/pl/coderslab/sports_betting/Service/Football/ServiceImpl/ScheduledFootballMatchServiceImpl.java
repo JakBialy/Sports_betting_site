@@ -165,6 +165,11 @@ public class ScheduledFootballMatchServiceImpl implements ScheduledFootballMatch
             footballTeamRepository.save(awayFootballTeam);
         }
 
+        positioning();
+        System.out.println("Results are ready!" + LocalDateTime.now());
+    }
+
+    private void positioning() {
         for (int i = 1; i <= 2; i++) {
             List<FootballTeam> footballTeamList = new ArrayList<>();
             if (i==1){
@@ -181,6 +186,5 @@ public class ScheduledFootballMatchServiceImpl implements ScheduledFootballMatch
                 footballTeamRepository.save(footballTeam);
             }
         }
-        System.out.println("Results are ready!" + LocalDateTime.now());
     }
 }
