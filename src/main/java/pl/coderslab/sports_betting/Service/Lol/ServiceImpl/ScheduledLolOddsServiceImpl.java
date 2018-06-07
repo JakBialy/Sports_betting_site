@@ -23,6 +23,15 @@ public class ScheduledLolOddsServiceImpl implements ScheduledLollOddsService {
     @Autowired
     LolOddsRepository lolOddsRepository;
 
+    /**
+     * After full 5 minutes method is generating odds
+     * First taking all foll matches
+     * then is generating five random doubles from 1 to 4
+     * random double are set into home odd, odd home half, odd X(draw), odd away and odd away half
+     * and rounded with precision of 2
+     * bookmaker is set as a random
+     * fol odds are saved into databsae
+     */
     @Scheduled(cron = ("1 0/5 * 1/1 * ?"))
     public void makeOdds() {
         List<LolMatch> list = lolMatchRepository.findAllByStartIsGreaterThan(LocalDateTime.now());

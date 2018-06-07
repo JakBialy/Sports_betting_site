@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.coderslab.sports_betting.Entity.Football.FootballTeam;
 import pl.coderslab.sports_betting.Entity.Lol.LolTeam;
 import pl.coderslab.sports_betting.Entity.Role;
@@ -18,7 +19,7 @@ import pl.coderslab.sports_betting.Service.Security.Service.UserService;
 
 
 import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
+
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -212,27 +213,65 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-
+    /**
+     * Methods remove football team from favorites  user account
+     * First is looking for active user then is getting user favorite football teams
+     * Then is getting football team by id ( favorite team to remove)
+     * Removes team from favorites, set new lists and save user into db
+     * @param teamId Id of team to delete from favorite
+     */
     @Override
-    public void removeFromFavorite(Long id){
+    public void removeFromFootballFavorite(Long teamId){
         User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         List<FootballTeam> footballTeams = user.getFavoriteFootballTeams();
-        FootballTeam footballTeam = footballTeamRepository.getOne(id);
+        FootballTeam footballTeam = footballTeamRepository.getOne(teamId);
         footballTeams.remove(footballTeam);
         user.setFavoriteFootballTeams(footballTeams);
         userRepository.save(user);
     }
 
-    public void addToFriends(Long id){
+    /**
+     * Methods remove lol team from favorites user account
+     * First is looking for active user then is getting user favorite lol teams
+     * Then is getting lol team by id ( favorite lol team to remove)
+     * Removes team from favorites, set new lists and save user into db
+     * @param teamId Id of team to delete from favorite
+     */
+    @Override
+    public void removeFromLolFavorite(Long teamId){
+        User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        List<LolTeam> lolTeams = user.getFavoriteLolTeams();
+        LolTeam lolTeam = lolTeamRepository.getOne(teamId);
+        lolTeams.remove(lolTeam);
+        user.setFavoriteLolTeams(lolTeams);
+        userRepository.save(user);
+    }
+
+    /**
+     * Method is adding friend to user Object
+     * This gets for active user, then is getting user friends
+     * then friend is obtain, if there is no this user object in actual friends
+     * then friend(User) is add to friend list of active user and save into database
+     * @param id
+     */
+    public void addToFriends(Long friendId){
         User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         List<User> friends = user.getFriends();
-        User friend = userRepository.getOne(id);
+        User friend = userRepository.getOne(friendId);
         if (!(friends.contains(friend))){
             friends.add(friend);
             user.setFriends(friends);
             userRepository.save(user);
         }
     }
+
+    /**
+     * Method gets all user friend
+     * first is looking for active user, then is getting user friends and friends of user
+     * then with use of a loop is merging two list into all list to get both user friends and friends of user
+     * if some of a friends are repated then this users are not merged
+     * @return list of all user friends (added by user or friend)
+     */
 
     public List<User> getAllUserFriends(){
         User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
@@ -251,6 +290,13 @@ public class UserServiceImpl implements UserService {
         return all;
     }
 
+    /**
+     * Method is checking favorite betting sport
+     * First obtains active user, then looking for size of football bets and lol bets
+     * if size of one of them is bigger then prints out "football" or "lol"
+     * if they are the same then printing "no"
+     * @return String with some word "football" "lol" or "no"
+     */
     public String checkFavorite(){
         User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         int footballBetsSize = footballBetRepository.findAll().size();
@@ -266,6 +312,11 @@ public class UserServiceImpl implements UserService {
         return  favorite;
     }
 
+    /**
+     * Methods find user by ID
+     * @param id user Id
+     * @return object user
+     */
     public User findById(Long id){
         return userRepository.getOne(id);
     }

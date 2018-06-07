@@ -10,6 +10,11 @@ import javax.validation.constraints.NotNull;
 @Table(name = "messages")
 public @Data
 class Message {
+    /**
+     * Message is responsible for creating object which
+     * can be read by two Users
+     * Two dependencies are connected with same class - User
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;

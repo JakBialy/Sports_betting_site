@@ -13,6 +13,9 @@ import java.util.List;
 public @Data
 class FootballTeam {
 
+    /**
+     * Entity FootballTeam gives are statistics about team,
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;

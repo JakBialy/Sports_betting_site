@@ -10,6 +10,11 @@ import javax.persistence.*;
 public @Data
 class FootballOdds {
 
+    /**
+     * Football Odds are storing data about odds
+     * created by random generator (odd scheduled service)
+     * Football Odds are connected with footballMatch (to have access to actual odds)
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

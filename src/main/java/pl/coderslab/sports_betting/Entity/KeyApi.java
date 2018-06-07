@@ -7,6 +7,11 @@ import javax.persistence.*;
 @Entity
 public @Data
 class KeyApi {
+    /**
+     * KeyApi is responsible for make object
+     * to create APIkey, String code is the key(name key was forbidden)
+     * and is depended with User, to have access and see which user has which APIkeys
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;

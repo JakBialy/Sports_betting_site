@@ -14,6 +14,10 @@ import java.time.LocalDateTime;
 public @Data
 class Transaction {
 
+    /**
+     * Transaction is Object used to create a history of money transacions
+     * Main purpose is to storage date for later display
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;

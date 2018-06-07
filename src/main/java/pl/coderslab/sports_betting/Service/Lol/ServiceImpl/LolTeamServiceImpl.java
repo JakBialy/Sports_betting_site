@@ -22,6 +22,12 @@ public class LolTeamServiceImpl implements LolTeamService {
     @Autowired
     LolTeamRepository lolTeamRepository;
 
+    /**
+     * Method is populating database with teams
+     * In this form it is looking for two leagues
+     * and it is populating databse them with 10 random named for each one
+     * in this case names are from eSports but can be form whatever source
+     */
     public void populateDb(){
         List<LolTeam> list = new ArrayList<>();
         LolLeague lolLeague = new LolLeague();
@@ -44,14 +50,28 @@ public class LolTeamServiceImpl implements LolTeamService {
         lolTeamRepository.saveAll(list);
     }
 
+    /**
+     * Method is looking for all lol teams
+     * @return list of lol teams
+     */
     public List<LolTeam> allTeams(){
         return lolTeamRepository.findAll();
     }
 
+    /**
+     * Method is looking for teams by league id and set them in order by position
+     * @param leagueId Id of league
+     * @return list of teams by league in order
+     */
     public List<LolTeam> findTeamsByLeagueId(Long leagueId){
         return lolTeamRepository.findAllByLolLeagueIdOrderByPosition(leagueId);
     }
 
+    /**
+     * Method is looking for specific team by team id
+     * @param teamID team id
+     * @return team
+     */
     public LolTeam findTeamById(Long teamID){
         LolTeam team = lolTeamRepository.getOne(teamID);
         return team;

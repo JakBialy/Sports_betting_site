@@ -11,7 +11,7 @@ import pl.coderslab.sports_betting.Repository.Fotball.FootballBetRepository;
 import pl.coderslab.sports_betting.Repository.General.UserRepository;
 import pl.coderslab.sports_betting.Service.Football.Service.ScheduledFootballBetService;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;

@@ -3,13 +3,14 @@ package pl.coderslab.sports_betting.Service.Football.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.coderslab.sports_betting.Entity.Football.FootballBet;
 import pl.coderslab.sports_betting.Entity.User;
 import pl.coderslab.sports_betting.Repository.Fotball.FootballBetRepository;
 import pl.coderslab.sports_betting.Repository.General.UserRepository;
 import pl.coderslab.sports_betting.Service.Football.Service.FootballBetService;
 
-import javax.transaction.Transactional;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;

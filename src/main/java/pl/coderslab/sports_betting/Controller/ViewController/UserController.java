@@ -20,6 +20,7 @@ import pl.coderslab.sports_betting.Service.Security.Service.UserService;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
@@ -73,9 +74,27 @@ public class UserController {
         if (result.hasErrors()) {
             return "User/UserTransactionCardAdd";
         }
-        transactionService.saveTransaction(transaction);
+        if (transaction.getAmount().compareTo(BigDecimal.ZERO) > 0){
+            transactionService.saveTransaction(transaction);
+        }
         return "redirect:/user/userInfo";
     }
+//    @GetMapping("/transferGet")
+//    public String getFoundsToAccount(Model model) {
+//        model.addAttribute("transaction", new Transaction());
+//        return "User/UserTransactionToAccount";
+//    }
+// TODO
+//    @PostMapping("/creditAdd")
+//    public String getFoundsToAccount(@Valid @ModelAttribute Transaction transaction, BindingResult result) {
+//        if (result.hasErrors()) {
+//            return "User/UserTransactionToAccount";
+//        }
+//        if (transaction.getAmount().compareTo(BigDecimal.ZERO) > 0){
+//            transactionService.saveTransaction(transaction);
+//        }
+//        return "redirect:/user/userInfo";
+//    }
 
     @GetMapping("/userInfo")
     public String userInfo(Model model) {
@@ -124,9 +143,15 @@ public class UserController {
         return "User/UserFavorites";
     }
 
-    @GetMapping("/favoriteRemove/{id}")
-    public String removeFavorite(@PathVariable Long id) {
-        userService.removeFromFavorite(id);
+    @GetMapping("/footballFavoriteRemove/{id}")
+    public String removeFootballFavorite(@PathVariable Long id) {
+        userService.removeFromFootballFavorite(id);
+        return "redirect:/user/favorites";
+    }
+
+    @GetMapping("/lolFavoriteRemove/{id}")
+    public String removeLolFavorite(@PathVariable Long id) {
+        userService.removeFromLolFavorite(id);
         return "redirect:/user/favorites";
     }
 

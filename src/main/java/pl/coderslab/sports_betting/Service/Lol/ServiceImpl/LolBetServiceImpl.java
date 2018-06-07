@@ -9,7 +9,7 @@ import pl.coderslab.sports_betting.Repository.Lol.LolBetRepository;
 import pl.coderslab.sports_betting.Repository.General.UserRepository;
 import pl.coderslab.sports_betting.Service.Lol.Service.LolBetService;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,6 +22,14 @@ public class LolBetServiceImpl implements LolBetService {
     @Autowired
     UserRepository userRepository;
 
+    /**
+     * Method is saving bet, first is looking if status of match is equal to "planned"
+     * if it is true then is looking for active user, subtract money from user account, then
+     * is setting user and local time, then is saving odd and team,
+     * finally save bet to database
+     * @param lolBet object of lolBet
+     *
+     */
     @Transactional
     public void saveBet(LolBet lolBet){
         if (lolBet.getLolMatch().getStatus().equals("planned")){
@@ -42,11 +50,21 @@ public class LolBetServiceImpl implements LolBetService {
         }
     }
 
+    /**
+     * Method is finding all bets by object User
+     * @param user selected object User
+     * @return list selected user bets
+     */
     public List<LolBet> findAllByUser(User user){
         List<LolBet> list = lolBetRepository.findAllByUser(user);
         return list;
     }
 
+    /**
+     * Method is finding all bets by user id
+     * @param userId selected  userId
+     * @return list of selected user bets
+     */
     public List<LolBet> findAllByUserId(Long userId){
         List<LolBet> list = lolBetRepository.findAllByUserId(userId);
         return list;

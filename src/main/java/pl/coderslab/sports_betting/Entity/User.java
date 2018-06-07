@@ -18,6 +18,9 @@ import java.util.Set;
 @Table(name = "users")
 public @Data class User {
 
+    /**
+     * Class User has basic informations about user, wide used in this application
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")

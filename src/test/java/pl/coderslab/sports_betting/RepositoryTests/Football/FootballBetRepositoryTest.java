@@ -29,8 +29,14 @@ public class FootballBetRepositoryTest {
     @Test
     public void shouldFindBetsUserById(){
         User user = new User();
-        user.setId(1L);
-//        entityManager.persist(user);
+        // id is given by database
+        user.setUsername("bbb@bbb.pl");
+        user.setFirstName("AAA");
+        user.setLastName("BBB");
+        user.setNick("CCC");
+        user.setPassword("DDD");
+
+
         List<FootballBet> list = new ArrayList<>();
         FootballBet bet1 = new FootballBet();
         FootballBet bet2 = new FootballBet();
@@ -42,9 +48,9 @@ public class FootballBetRepositoryTest {
         bet2.setType("Draw");
         bet1.setMoney(BigDecimal.valueOf(10));
 
+        entityManager.persist(user);
         entityManager.persist(bet1);
         entityManager.persist(bet2);
-//        entityManager.persist(list);
 
         List<FootballBet> result = footballBetRepository.findAllByUser(user);
         assertEquals(2, result.size());

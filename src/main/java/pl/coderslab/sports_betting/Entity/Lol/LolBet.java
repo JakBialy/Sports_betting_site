@@ -17,6 +17,15 @@ import java.time.LocalDateTime;
 public @Data
 class LolBet {
 
+    /**
+     * LolBet is a class for saving bet parameter
+     * String type is type of bet (win,lost)
+     * Money store amount of money betted
+     * LocalDateTime stores time when bet was made
+     * Boolean Winner is a boolean variable which is set to true/false after bet results(in scheduled bet service)
+     * Odd stores odd ratio for specific bet(based on bet type)
+     * Class LolBet is connected with LolMatch, User and LolTeam
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

@@ -26,7 +26,7 @@ public class ScheduledFootballOddsServiceImpl implements ScheduledFootballOddsSe
     /**
      * After full 5 minutes method is generating odds
      * First taking all football matches
-     * then is generating five random doubles from 1 to 3
+     * then is generating five random doubles from 1 to 4
      * random double are set into home odd, odd home half, odd X(draw), odd away and odd away half
      * and rounded with precision of 2
      * bookmaker is set as a random

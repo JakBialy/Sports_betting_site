@@ -15,6 +15,13 @@ import java.util.List;
 public @Data
 class LolMatch {
 
+    /**
+     * FootballMatch is storing lol match parameters used
+     * to monitoring matches, setting and calculating bets
+     *
+     * boolean checked is predefined as a false - after bet check (bet scheduled service)
+     * parameter is changed into true
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;

@@ -30,7 +30,9 @@ public interface UserService {
 
     public void addToFootballFavorites(Long id);
 
-    public void removeFromFavorite(Long id);
+    public void removeFromFootballFavorite(Long id);
+
+    public void removeFromLolFavorite(Long id);
 
     public void addToFriends(Long id);
 

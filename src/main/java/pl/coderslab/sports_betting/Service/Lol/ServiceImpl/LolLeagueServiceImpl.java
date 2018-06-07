@@ -15,6 +15,10 @@ public class LolLeagueServiceImpl implements LolLeagueService {
     @Autowired
     LolLeagueRepository lolLeagueRepository;
 
+    /**
+     * Method populate database with leagues and save them to
+     * database
+     */
     public void populateDb() {
 
         LolLeague lolLeagueOne = new LolLeague();
@@ -30,10 +34,19 @@ public class LolLeagueServiceImpl implements LolLeagueService {
         lolLeagueRepository.saveAll(list);
     }
 
+    /**
+     * Method is looking for all lol leagues
+     * @return list of all lol leagues
+     */
     public List<LolLeague> allLeagues(){
         return lolLeagueRepository.findAll();
     }
 
+    /**
+     * Looking for single lol league by league id
+     * @param leagueID league id
+     * @return single lol league
+     */
     public LolLeague findLeagueById(Long leagueID){
         Optional<LolLeague> league = lolLeagueRepository.findById(leagueID);
         LolLeague lolLeague1 = new LolLeague();

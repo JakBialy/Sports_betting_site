@@ -27,7 +27,7 @@
                     <td th:text="${footballTeam.draws}">HomeTeam Name</td>
                     <td th:text="${footballTeam.lost}">AwayTeam Name</td>
                     <td> <a th:href="@{/football/team/{id}(id=${footballTeam.id})}">Team details</a> </td>
-                    <td> <a th:href="@{/user/favoriteRemove/{id}(id=${footballTeam.id})}">Remove</a> </td>
+                    <td> <a th:href="@{/user/footballFavoriteRemove/{id}(id=${footballTeam.id})}">Remove</a> </td>
                 </tr>
                 </tbody>
             </table>
@@ -58,7 +58,7 @@
                     <td th:text="${lolTeam.wins}">League Name</td>
                     <td th:text="${lolTeam.lost}">AwayTeam Name</td>
                     <td> <a th:href="@{/lol/team/{id}(id=${lolTeam.id})}">Team details</a> </td>
-                    <td> <a th:href="@{/user/favoriteRemove/{id}(id=${lolTeam.id})}">Remove</a> </td>
+                    <td> <a th:href="@{/user/lolFavoriteRemove/{id}(id=${lolTeam.id})}">Remove</a> </td>
                 </tr>
                 </tbody>
             </table>

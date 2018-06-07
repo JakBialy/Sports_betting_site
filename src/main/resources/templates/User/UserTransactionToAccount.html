@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Header.html :: header"></div>
+
+<h4 th:text="|${session.firstName}, please write below your card details :|" class="text-center"> Welcome </h4>
+
+
+
+<div class="text-center">
+
+    <form th:action="@{/user/creditAdd}" th:object="${transaction}"	method="post">
+    <div>
+        <label for="money">Amount of money</label>
+        <input th:field="*{amount}" id="money" type="number" name="money" placeholder="Amount of money" min="0">
+    </div>
+
+        <input type="hidden" th:attr="name='type'" th:value="Transfer" id="type">
+
+    <div>
+        <label class="input-title" for="c-number">Account number*</label>
+        <input type="text" name="c-number" id="c-number"  placeholder="XX XXXX XXXX XXXX " maxlength="14" required>
+    </div>
+
+
+        <div>
+            <input type="submit" value="Accept" />
+        </div>
+    </form>
+</div>
+
+<div th:replace="Footer.html :: footer"></div>
+
+

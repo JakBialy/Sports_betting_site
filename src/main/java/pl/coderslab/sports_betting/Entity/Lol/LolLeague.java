@@ -13,6 +13,11 @@ import java.util.List;
 @Table(name = "lolLeagues")
 public @Data class LolLeague {
 
+    /**
+     * LolLeague has one main variable - String name
+     * other are conections to Country and FootballName
+     * Is used to name football leagues
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;

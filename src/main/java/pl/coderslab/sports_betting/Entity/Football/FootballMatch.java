@@ -14,6 +14,13 @@ import java.util.List;
 public @Data
 class FootballMatch {
 
+    /**
+     * FootballMatch is storing football match parameters used
+     * to monitoring matches, setting and calculating bets
+     *
+     * boolean checked is predefined as a false - after bet check (bet scheduled service)
+     * parameter is changed into true
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
