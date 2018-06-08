@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="Header.html :: header"></div>
+
+<h3> Your bets : </h3>
+
+<p class="text-center"> <strong>Football</strong> </p>
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th> Type </th>
+                    <th> Money paid by friend</th>
+                    <th> Share percentage</th>
+                    <th> To Win</th>
+                    <th> Date </th>
+                    <th> Win </th>
+                    <th> Accept bet! </th>
+                    <th> Link to Match </th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+                <tr th:each="footballBet: ${footballFriendsBets}">
+                    <td th:text="${footballBet.type}">Bet type</td>
+                    <td th:text="${footballBet.money}">Bet money</td>
+                    <td th:text="${footballBet.percentage}">Bet money</td>
+
+                    <td>
+                        <div th:with="result=${footballBet.money * footballBet.odd}">
+                            <span th:text="${result}"></span>
+                        </div>
+                    </td>
+
+                    <td th:text="${#temporals.format(footballBet.date, 'dd-MM-yyyy HH:mm')}">Start</td>
+                    <td th:switch="${footballBet.winner}">
+                        <span th:case='null' >No result yet!</span>
+                        <span th:case='true' >Yes</span>
+                        <span th:case='false' >No</span>
+                    </td>
+
+                    <td th:switch="${footballBet.accepted}">
+
+                        <span th:case="false">
+                    <a th:href="@{/footballBet/matchGroupAccept/{id}(id=${footballBet.id})}">Accept bet</a>
+                        </span>
+
+                        <span th:case="true"> Already accepted </span>
+
+                    </td>
+
+                    <td> <a th:href="@{/football/match/{id}(id=${footballBet.footballMatch.id})}">See Match details</a> </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--<p class="text-center"> <strong>League of Legends</strong> </p>-->
+<!--<div class="card mb-3">-->
+    <!--<div class="card-body">-->
+        <!--<div class="table-responsive">-->
+            <!--<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th> Type </th>-->
+                    <!--<th> Money</th>-->
+                    <!--<th> To Win</th>-->
+                    <!--<th> Date </th>-->
+                    <!--<th> Win </th>-->
+                    <!--<th> Link to Match </th>-->
+                <!--</tr>-->
+
+                <!--</thead>-->
+
+                <!--<tbody>-->
+                <!--<tr th:each="lolBet: ${lolBets}">-->
+                    <!--<td th:text="${lolBet.type}">Bet type</td>-->
+                    <!--<td th:text="${lolBet.money}">Bet money</td>-->
+
+                    <!--<td>-->
+                        <!--<div th:with="result=${lolBet.money * lolBet.odd}">-->
+                            <!--<span th:text="${result}"></span>-->
+                        <!--</div>-->
+                    <!--</td>-->
+
+                    <!--<td th:text="${#temporals.format(lolBet.date, 'dd-MM-yyyy HH:mm')}">Start</td>-->
+
+                    <!--<td th:switch="${lolBet.winner}">-->
+                        <!--<span th:case='null' >No result yet!</span>-->
+                        <!--<span th:case='true' >Yes</span>-->
+                        <!--<span th:case='false' >No</span>-->
+                    <!--</td>-->
+                    <!--<td> <a th:href="@{/lol/match/{id}(id=${lolBet.lolMatch.id})}">See Match details</a> </td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+
+<div th:replace="Footer.html :: footer"></div>

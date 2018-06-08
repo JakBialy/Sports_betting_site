@@ -71,4 +71,15 @@ public class FootballBetServiceImpl implements FootballBetService {
         List<FootballBet> list = footballBetRepository.findAllByUserId(userId);
         return list;
     }
+
+    public FootballBet findByUserId(Long userId){
+        FootballBet bet = footballBetRepository.getOne(userId);
+        return bet;
+    }
+
+    public List<FootballBet> findAllUnacceptedByExtraUser(){
+        User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        List<FootballBet> list = footballBetRepository.findAllByAcceptedIsFalseAndExtraIs(user);
+        return list;
+    }
 }

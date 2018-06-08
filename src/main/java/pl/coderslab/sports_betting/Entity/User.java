@@ -60,6 +60,9 @@ public @Data class User {
     @OneToMany(mappedBy="user")
     private List<FootballBet> footballBets = new ArrayList<>();
 
+    @OneToMany(mappedBy="extra")
+    private List<FootballBet> groupBets = new ArrayList<>();
+
     @OneToMany(mappedBy="user")
     private List<Transaction> transactions = new ArrayList<>();
 

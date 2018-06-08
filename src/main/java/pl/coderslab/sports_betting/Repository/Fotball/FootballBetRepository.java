@@ -11,8 +11,9 @@ import java.util.List;
 @Repository
 public interface FootballBetRepository extends JpaRepository<FootballBet, Long> {
     List<FootballBet> findAllByFootballMatchEndIsGreaterThan(LocalDateTime localDateTime);
-    List<FootballBet> findAllByFootballMatchEndIsLessThanAndFootballMatchCheckedIsFalse(LocalDateTime localDateTime);
+    List<FootballBet> findAllByFootballMatchEndIsLessThanAndFootballMatchCheckedIsFalseAndAcceptedIsTrue(LocalDateTime localDateTime);
     List<FootballBet> findAllByFootballMatch_StatusIsNotLike(String notFinished);
+    List<FootballBet> findAllByAcceptedIsFalseAndExtraIs(User extraUser);
     List<FootballBet> findAllByUser (User user);
     List<FootballBet> findAllByUserId (Long Id);
 }

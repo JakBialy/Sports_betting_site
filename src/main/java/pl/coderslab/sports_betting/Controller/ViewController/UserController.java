@@ -215,4 +215,10 @@ public class UserController {
         model.addAttribute("send", messageService.getAllSendMessages(user.getId()));
         return "User/UserMessagesList";
     }
+
+    @GetMapping("/betsFromFriends/")
+    public String showBetsFromFriends(Model model) {
+        model.addAttribute("footballFriendsBets",footballBetService.findAllUnacceptedByExtraUser());
+        return "User/UserFriendsBetList";
+    }
 }

@@ -79,9 +79,8 @@
 </div>
 
 
-
 <!--Betting form-->
-    <form th:action="@{/footballBet/match/}" th:object="${bet}"	method="post">
+    <form th:action="@{/footballBet/groupMatch/}" th:object="${bet}"	method="post">
 
     <label> Bet type:</label>
         <select th:field="*{type}">
@@ -91,12 +90,29 @@
         </select>
 
         <p th:text="|Your account has: ${user.money}|"></p>
+
         <div>
             <label for="money">Amount of money to footballBet:</label>
             <input class="form-control"  th:field="*{money}" id="money" type="number" name="money" placeholder="Amount of money">
             <p th:if="${#fields.hasErrors('money')}" th:errors="*{money}"> error message</p>
         </div>
 
+        <select th:field="*{extra}" >
+            <option th:each="user : ${user.getFriends()}"
+                    th:value="${user.id}" th:text="${user.nick}"> User Nick</option>
+        </select>
+
+        <select th:field="*{percentage}">
+            <option th:value="0.1" > 10% </option>
+            <option th:value="0.25"> 25% </option>
+            <option th:value="0.5"> 50% </option>
+            <option th:value="0.75"> 75% </option>
+            <option th:value="0.9"> 90% </option>
+        </select>
+
+        <input type="hidden" th:value="false" th:attr="name='accepted'"/>
+
+        <input type="hidden" th:value="true" th:attr="name='groupBet'"/>
 
         <input type="hidden" th:value="${matchData.id}" th:attr="name='footballMatch'" />
 

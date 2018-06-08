@@ -39,7 +39,7 @@ public class ScheduledFootballBetServiceImpl implements ScheduledFootballBetServ
     @Transactional
     @Scheduled(cron = ("1 0/5 * 1/1 * ?"))
     public void checkingBets(){
-        List<FootballBet> footballBetList = footballBetRepository.findAllByFootballMatchEndIsLessThanAndFootballMatchCheckedIsFalse(LocalDateTime.now());
+        List<FootballBet> footballBetList = footballBetRepository.findAllByFootballMatchEndIsLessThanAndFootballMatchCheckedIsFalseAndAcceptedIsTrue(LocalDateTime.now());
 
         for (FootballBet footballBet : footballBetList) {
             FootballOdds footballOdds = footballBet.getFootballMatch().getFootballOdds();

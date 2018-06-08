@@ -13,4 +13,8 @@ public interface FootballBetService {
 
     public List<FootballBet> findAllByUserId(Long userId);
 
+    public List<FootballBet> findAllUnacceptedByExtraUser();
+
+    public FootballBet findByUserId(Long userId);
+
     }

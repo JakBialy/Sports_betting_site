@@ -42,6 +42,12 @@ class FootballBet {
 
     private BigDecimal odd;
 
+    private float percentage;
+
+    private Boolean accepted = true;
+
+    private Boolean groupBet = false;
+
     @ManyToOne
     @JoinColumn(name = "match_id")
     @JsonBackReference
@@ -51,6 +57,11 @@ class FootballBet {
     @JoinColumn(name = "user_id")
     @JsonBackReference
     User user;
+
+    @ManyToOne
+    @JoinColumn(name = "extra_id")
+    @JsonBackReference
+    User extra;
 
     @ManyToOne
     @JoinColumn(name = "team_id")
