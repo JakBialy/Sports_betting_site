@@ -16,6 +16,7 @@ import pl.coderslab.sports_betting.Service.Security.Service.UserService;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 @Controller
@@ -80,6 +81,7 @@ public class FootballBetController {
     }
 
     // shouldn't be here that much logic!
+    //
     @Transactional
     @GetMapping("/matchGroupAccept/{id}")
     public String groupBetAccept(@PathVariable Long id, Model model) {
@@ -90,7 +92,9 @@ public class FootballBetController {
         BigDecimal toGetFromUser = BigDecimal.valueOf((percentage * moneyPaidByFriend.floatValue())/(100-percentage));
         User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
 
-        if (user.getMoney().compareTo(BigDecimal.ZERO) < 0) {
+        BigDecimal balance = user.getMoney().subtract(toGetFromUser);
+
+        if (balance.compareTo(BigDecimal.ZERO) < 0) {
             return "redirect:/user/noFounds";
         } else {
             FootballBet bet = new FootballBet();

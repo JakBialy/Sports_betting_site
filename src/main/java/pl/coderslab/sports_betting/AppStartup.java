@@ -61,7 +61,7 @@ public class AppStartup implements ApplicationRunner {
 
     private User testUser2() {
         User user = new User();
-        user.setUsername("andrzej@gmail.com");
+        user.setUsername("andrzej@andrzej.com");
         user.setPassword("123");
         user.setNick("Andrzej93");
         user.setFirstName("Andrzej");

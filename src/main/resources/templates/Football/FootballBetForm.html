@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:replace="Header.html :: header"></div>
 
-<h2 th:text="| You are betting in footballMatch ${matchData.homeFootballTeam.team} vs ${matchData.awayFootballTeam.team} in ${matchData.awayFootballTeam.footballLeague.name}|"> betting info</h2>
+<h2 th:text="| You are betting in Match ${matchData.homeFootballTeam.team} vs ${matchData.awayFootballTeam.team} in ${matchData.awayFootballTeam.footballLeague.name}|"> betting info</h2>
 
 <div class="card mb-3">
     <div class="card-body">
@@ -10,7 +10,7 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                 <tr>
-                    <th> Home lTeam </th>
+                    <th> Home Team </th>
                     <th> Home score </th>
                     <th> Home half score </th>
 
@@ -92,7 +92,7 @@
 
         <p th:text="|Your account has: ${user.money}|"></p>
         <div>
-            <label for="money">Amount of money to footballBet:</label>
+            <label for="money">Amount of money to Bet:</label>
             <input class="form-control"  th:field="*{money}" id="money" type="number" name="money" placeholder="Amount of money">
             <p th:if="${#fields.hasErrors('money')}" th:errors="*{money}"> error message</p>
         </div>
@@ -101,7 +101,7 @@
         <input type="hidden" th:value="${matchData.id}" th:attr="name='footballMatch'" />
 
         <div class="text-center">
-            <input type="submit" value="Make footballBet!" />
+            <input type="submit" value="Make Bet!" />
         </div>
             </form>
 

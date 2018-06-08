@@ -61,7 +61,8 @@ class LolMatch {
     private List<LolBet> lolBetList = new ArrayList<>();
 
     @JsonIgnore
-    public List<LolBet> getFootballBetList() {
+    public List<LolBet> getLolBetList() {
         return lolBetList;
     }
+
 }
