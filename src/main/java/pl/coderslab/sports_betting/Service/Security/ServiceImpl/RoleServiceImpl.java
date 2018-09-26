@@ -10,6 +10,8 @@ import pl.coderslab.sports_betting.Service.Security.Service.RoleService;
 @Service
 public class RoleServiceImpl implements RoleService {
 
+    // COMMIT TEST
+
     private final RoleRepository roleRepository;
 
     /**
