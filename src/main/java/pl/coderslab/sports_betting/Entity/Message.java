@@ -15,7 +15,7 @@ class Message {
      * can be read by two Users
      * Two dependencies are connected with same class - User
      */
-    @Id
+       @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 

@@ -37,9 +37,10 @@ public class ScheduledFootballMatchServiceImpl implements ScheduledFootballMatch
      * matches starts 3 minutes from actual time and will finish 5 time from actual time
      * each of team has one home match and one away match, they are selected
      * to matches by counter to make sure that everyone will play then
-     * match status is set  as a "planned", 2 is added to counter to make next loop getting apropiate teams
+     * match status is set  as a "planned", 2 is added to counter to make next loop getting appropiate teams
      * finally matches are saved into db
      */
+
     @Scheduled(cron = ("0 0/5 * 1/1 * ?"))
     public void startMatches() {
         List<FootballMatch> footballMatchList = new ArrayList<>();
@@ -54,10 +55,10 @@ public class ScheduledFootballMatchServiceImpl implements ScheduledFootballMatch
             } else {
                 footballTeamList = footballTeamRepository.findAllByFootballLeagueName("Randomship");
                 Collections.shuffle(footballTeamList);
+                // shuffle teams to make them random every time
                 counter = 0;
             }
             for (int j = 1; j <= 5; j++) {
-                // shuffle teams to make them random every time
                 FootballMatch footballMatch = new FootballMatch();
                 footballMatch.setStart(LocalDateTime.now().plusMinutes(3));
                 footballMatch.setEnd(LocalDateTime.now().plusMinutes(5));
