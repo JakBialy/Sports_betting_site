@@ -14,4 +14,6 @@ User can place bet,load account, see simple team statistics, add teams into favo
 User can interact with other users (make bets together, send messages, add them into friends)
 Project generates own API for possible external clients secured by api key
 
+Admin role is available in this project, Admin can remove users, look into history of their bets, wallet charges and can create new admins.
+
 Feel free to download and try!
