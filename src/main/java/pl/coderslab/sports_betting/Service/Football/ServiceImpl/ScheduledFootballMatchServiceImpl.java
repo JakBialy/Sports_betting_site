@@ -204,7 +204,7 @@ public class ScheduledFootballMatchServiceImpl implements ScheduledFootballMatch
             } else if (i==2) {
                 footballTeamList = footballTeamRepository.findAllByFootballLeagueName("Randomship");
             }
-            footballTeamList.sort(comparing(FootballTeam::getWins).reversed());
+            footballTeamList.sort(comparing(FootballTeam::getWins).thenComparing(FootballTeam::getDraws).thenComparing(FootballTeam::getLost).reversed());
 
             int position = 0;
             for (FootballTeam footballTeam : footballTeamList) {
