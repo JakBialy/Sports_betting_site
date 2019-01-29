@@ -27,16 +27,25 @@ import java.util.List;
 @RequestMapping(value = "/user")
 public class UserController {
 
-    @Autowired
+    private final
     UserService userService;
-    @Autowired
+    private final
     FootballBetService footballBetService;
-    @Autowired
+    private final
     LolBetService lolBetService;
-    @Autowired
+    private final
     TransactionService transactionService;
-    @Autowired
+    private final
     MessageService messageService;
+
+    @Autowired
+    public UserController(UserService userService, FootballBetService footballBetService, LolBetService lolBetService, TransactionService transactionService, MessageService messageService) {
+        this.userService = userService;
+        this.footballBetService = footballBetService;
+        this.lolBetService = lolBetService;
+        this.transactionService = transactionService;
+        this.messageService = messageService;
+    }
 
     @GetMapping("/bets")
     public String userBets(Model model) {

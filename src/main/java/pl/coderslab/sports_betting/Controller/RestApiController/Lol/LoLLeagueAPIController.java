@@ -14,8 +14,13 @@ import java.util.List;
 @RequestMapping("/api/lolLeague")
 public class LoLLeagueAPIController {
 
-    @Autowired
+    private final
     LolLeagueService lolLeagueService;
+
+    @Autowired
+    public LoLLeagueAPIController(LolLeagueService lolLeagueService) {
+        this.lolLeagueService = lolLeagueService;
+    }
 
     @GetMapping(path = "/all")
     public List<LolLeague> getAllLeagues() {

@@ -9,11 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.coderslab.sports_betting.Entity.Football.FootballBet;
 import pl.coderslab.sports_betting.Entity.Lol.LolBet;
 import pl.coderslab.sports_betting.Entity.User;
-import pl.coderslab.sports_betting.Service.Football.Service.CountryService;
 import pl.coderslab.sports_betting.Service.Football.Service.FootballBetService;
-import pl.coderslab.sports_betting.Service.Football.Service.FootballLeagueService;
-import pl.coderslab.sports_betting.Service.Football.Service.FootballTeamService;
-
 import pl.coderslab.sports_betting.Service.Lol.Service.LolBetService;
 import pl.coderslab.sports_betting.Service.Security.Service.UserService;
 
@@ -24,18 +20,19 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
 
-    @Autowired
-    CountryService countryService;
-    @Autowired
-    FootballLeagueService footballLeagueService;
-    @Autowired
-    FootballTeamService footballTeamService;
-    @Autowired
+    private final
     UserService userService;
-    @Autowired
+    private final
     LolBetService lolBetService;
-    @Autowired
+    private final
     FootballBetService footballBetService;
+
+    @Autowired
+    public AdminController(UserService userService, LolBetService lolBetService, FootballBetService footballBetService) {
+        this.userService = userService;
+        this.lolBetService = lolBetService;
+        this.footballBetService = footballBetService;
+    }
 
     @GetMapping("")
     public String adminIndex() {

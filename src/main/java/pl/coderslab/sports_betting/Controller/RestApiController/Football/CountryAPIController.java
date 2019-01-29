@@ -14,8 +14,13 @@ import java.util.List;
 @RequestMapping("/api/fbCountry")
 public class CountryAPIController {
 
-    @Autowired
+    private final
     CountryService countryService;
+
+    @Autowired
+    public CountryAPIController(CountryService countryService) {
+        this.countryService = countryService;
+    }
 
     @GetMapping(path = "/all")
     public	List<Country> getAllCountries() {

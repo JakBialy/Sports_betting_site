@@ -16,21 +16,26 @@ import pl.coderslab.sports_betting.Service.Security.Service.UserService;
 
 import javax.validation.Valid;
 import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/footballBet")
 public class FootballBetController {
 
-    @Autowired
+    private final
     FootballMatchService footballMatchService;
 
-    @Autowired
+    private final
     FootballBetService footballBetService;
 
-    @Autowired
+    private final
     UserService userService;
+
+    @Autowired
+    public FootballBetController(FootballMatchService footballMatchService, FootballBetService footballBetService, UserService userService) {
+        this.footballMatchService = footballMatchService;
+        this.footballBetService = footballBetService;
+        this.userService = userService;
+    }
 
     @GetMapping("/match/{id}")
     public String betForm(@PathVariable Long id, Model model) {
@@ -45,6 +50,8 @@ public class FootballBetController {
         if(result.hasErrors()){
             return "redirect:/footballBet/match/" + footballBet.getFootballMatch().getId();
         }
+        // what if there will be principal as an object?
+        // TODO
         User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
         BigDecimal balance = user.getMoney().subtract(footballBet.getMoney());
 
@@ -81,17 +88,17 @@ public class FootballBetController {
     }
 
     // shouldn't be here that much logic!
-    //
+    // should be put into service
+    // TODO
     @Transactional
     @GetMapping("/matchGroupAccept/{id}")
-    public String groupBetAccept(@PathVariable Long id, Model model) {
+    public String groupBetAccept(@PathVariable Long id) {
         FootballBet footballBet = footballBetService.findByUserId(id);
         footballBet.setAccepted(true);
         Float percentage = (1 - footballBet.getPercentage())*100;
         BigDecimal moneyPaidByFriend = footballBet.getMoney();
         BigDecimal toGetFromUser = BigDecimal.valueOf((percentage * moneyPaidByFriend.floatValue())/(100-percentage));
         User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
-
         BigDecimal balance = user.getMoney().subtract(toGetFromUser);
 
         if (balance.compareTo(BigDecimal.ZERO) < 0) {

@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.coderslab.sports_betting.Service.Football.Service.CountryService;
 import pl.coderslab.sports_betting.Service.Lol.Service.LolLeagueService;
 import pl.coderslab.sports_betting.Service.Lol.Service.LolMatchService;
 import pl.coderslab.sports_betting.Service.Lol.Service.LolTeamService;
@@ -16,14 +15,19 @@ import pl.coderslab.sports_betting.Service.Lol.Service.LolTeamService;
 @RequestMapping(value = "/lol")
 public class LolController {
 
-    @Autowired
+    private final
     LolMatchService lolMatchService;
-    @Autowired
-    CountryService countryService;
-    @Autowired
+    private final
     LolLeagueService lolLeagueService;
-    @Autowired
+    private final
     LolTeamService lolTeamService;
+
+    @Autowired
+    public LolController(LolMatchService lolMatchService, LolLeagueService lolLeagueService, LolTeamService lolTeamService) {
+        this.lolMatchService = lolMatchService;
+        this.lolLeagueService = lolLeagueService;
+        this.lolTeamService = lolTeamService;
+    }
 
 
     @GetMapping("")

@@ -19,14 +19,21 @@ import java.math.BigDecimal;
 @RequestMapping("/lolBet")
 public class LolBetController {
 
-    @Autowired
+    private final
     LolMatchService lolMatchService;
 
-    @Autowired
+    private final
     LolBetService lolBetService;
 
-    @Autowired
+    private final
     UserService userService;
+
+    @Autowired
+    public LolBetController(LolMatchService lolMatchService, LolBetService lolBetService, UserService userService) {
+        this.lolMatchService = lolMatchService;
+        this.lolBetService = lolBetService;
+        this.userService = userService;
+    }
 
     @GetMapping("/match/{id}")
     public String betForm(@PathVariable Long id, Model model) {

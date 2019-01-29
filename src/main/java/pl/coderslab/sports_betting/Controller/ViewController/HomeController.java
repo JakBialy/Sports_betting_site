@@ -16,10 +16,17 @@ import javax.validation.Valid;
 
 @Controller
 public class HomeController {
-    @Autowired
+
+    private final
     UserService userService;
-    @Autowired
+    private final
     KeyApiService keyApiService;
+
+    @Autowired
+    public HomeController(UserService userService, KeyApiService keyApiService) {
+        this.userService = userService;
+        this.keyApiService = keyApiService;
+    }
 
     @GetMapping("/index")
     public String index(Model model,HttpSession httpSession) {
@@ -41,7 +48,6 @@ public class HomeController {
 
     @GetMapping("/register")
     public String userForm(Model model) {
-
         model.addAttribute("user", new User());
         return "Register";
     }

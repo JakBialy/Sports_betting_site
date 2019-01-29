@@ -16,23 +16,29 @@ import pl.coderslab.sports_betting.Service.Football.Service.FootballTeamService;
 @RequestMapping(value = "/football")
 public class FootballController {
 
-    @Autowired
+    private final
     FootballMatchService footballMatchService;
-    @Autowired
+    private final
     CountryService countryService;
-    @Autowired
+    private final
     FootballLeagueService footballLeagueService;
-    @Autowired
+    private final
     FootballTeamService footballTeamService;
+
+    @Autowired
+    public FootballController(FootballMatchService footballMatchService, CountryService countryService, FootballLeagueService footballLeagueService, FootballTeamService footballTeamService) {
+        this.footballMatchService = footballMatchService;
+        this.countryService = countryService;
+        this.footballLeagueService = footballLeagueService;
+        this.footballTeamService = footballTeamService;
+    }
 
 
     @GetMapping("")
     public String homeFootball(Model model) {
-
         model.addAttribute("countries", countryService.allCountries());
         model.addAttribute("nextMatches", footballMatchService.plannedMatches());
         model.addAttribute("liveMatches", footballMatchService.liveMatches());
-
         return "Football/Football";
     }
 

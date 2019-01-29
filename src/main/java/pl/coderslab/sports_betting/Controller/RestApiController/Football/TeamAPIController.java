@@ -14,8 +14,13 @@ import java.util.List;
 @RequestMapping("/api/fbTeam")
 public class TeamAPIController {
 
-    @Autowired
+    private final
     FootballTeamService footballTeamService;
+
+    @Autowired
+    public TeamAPIController(FootballTeamService footballTeamService) {
+        this.footballTeamService = footballTeamService;
+    }
 
     @GetMapping(path = "/all")
     public List<FootballTeam> getAllTeams() {
