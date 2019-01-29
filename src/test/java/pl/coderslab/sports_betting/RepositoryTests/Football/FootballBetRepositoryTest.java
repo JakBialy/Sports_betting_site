@@ -9,10 +9,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import pl.coderslab.sports_betting.Entity.Football.FootballBet;
 import pl.coderslab.sports_betting.Entity.Football.FootballMatch;
 import pl.coderslab.sports_betting.Entity.User;
-import pl.coderslab.sports_betting.Repository.Fotball.FootballBetRepository;
+import pl.coderslab.sports_betting.Repository.Football.FootballBetRepository;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;

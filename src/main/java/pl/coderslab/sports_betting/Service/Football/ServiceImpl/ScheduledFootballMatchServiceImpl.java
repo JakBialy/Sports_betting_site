@@ -6,8 +6,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import pl.coderslab.sports_betting.Entity.Football.FootballMatch;
 import pl.coderslab.sports_betting.Entity.Football.FootballTeam;
-import pl.coderslab.sports_betting.Repository.Fotball.FootballMatchRepository;
-import pl.coderslab.sports_betting.Repository.Fotball.FootballTeamRepository;
+import pl.coderslab.sports_betting.Repository.Football.FootballMatchRepository;
+import pl.coderslab.sports_betting.Repository.Football.FootballTeamRepository;
 import pl.coderslab.sports_betting.Service.Football.Service.ScheduledFootballMatchService;
 
 import java.time.LocalDateTime;

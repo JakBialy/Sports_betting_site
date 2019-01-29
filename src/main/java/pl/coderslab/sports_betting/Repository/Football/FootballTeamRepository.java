@@ -1,4 +1,4 @@
-package pl.coderslab.sports_betting.Repository.Fotball;
+package pl.coderslab.sports_betting.Repository.Football;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

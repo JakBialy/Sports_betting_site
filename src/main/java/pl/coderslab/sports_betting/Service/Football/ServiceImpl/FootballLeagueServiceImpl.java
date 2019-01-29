@@ -4,12 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.coderslab.sports_betting.Entity.Football.FootballLeague;
 import pl.coderslab.sports_betting.Repository.General.CountryRepository;
-import pl.coderslab.sports_betting.Repository.Fotball.FootballLeagueRepository;
+import pl.coderslab.sports_betting.Repository.Football.FootballLeagueRepository;
 import pl.coderslab.sports_betting.Service.Football.Service.FootballLeagueService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class FootballLeagueServiceImpl implements FootballLeagueService {

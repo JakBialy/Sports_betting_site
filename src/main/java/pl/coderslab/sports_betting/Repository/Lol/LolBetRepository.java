@@ -11,8 +11,6 @@ import java.util.List;
 
 @Repository
 public interface LolBetRepository extends JpaRepository<LolBet, Long> {
-    List<LolBet> findAllByLolMatchEndIsGreaterThan(LocalDateTime localDateTime);
-    List<LolBet> findAllByLolMatch_StatusIsNotLike(String notFinished);
     List<LolBet> findAllByUser(User user);
     List<LolBet> findAllByUserId(Long Id);
     List<LolBet> findAllByLolMatchEndIsLessThanAndLolMatchCheckedIsFalse(LocalDateTime localDateTime);

@@ -3,7 +3,7 @@ package pl.coderslab.sports_betting.Service.Football.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.coderslab.sports_betting.Entity.Football.FootballMatch;
-import pl.coderslab.sports_betting.Repository.Fotball.FootballMatchRepository;
+import pl.coderslab.sports_betting.Repository.Football.FootballMatchRepository;
 import pl.coderslab.sports_betting.Service.Football.Service.FootballMatchService;
 
 import java.time.LocalDateTime;

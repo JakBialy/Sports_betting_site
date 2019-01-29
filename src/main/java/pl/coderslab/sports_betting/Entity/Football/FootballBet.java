@@ -32,7 +32,7 @@ class FootballBet {
     @NotEmpty
     private String type;
 
-    @Min(1)
+    @Min(0)
     @NotNull
     private BigDecimal money;
 

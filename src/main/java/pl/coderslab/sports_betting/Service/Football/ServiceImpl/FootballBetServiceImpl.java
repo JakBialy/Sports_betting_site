@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.coderslab.sports_betting.Entity.Football.FootballBet;
 import pl.coderslab.sports_betting.Entity.User;
-import pl.coderslab.sports_betting.Repository.Fotball.FootballBetRepository;
+import pl.coderslab.sports_betting.Repository.Football.FootballBetRepository;
 import pl.coderslab.sports_betting.Repository.General.UserRepository;
 import pl.coderslab.sports_betting.Service.Football.Service.FootballBetService;
 

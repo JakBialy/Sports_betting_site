@@ -1,4 +1,4 @@
-package pl.coderslab.sports_betting.Repository.Fotball;
+package pl.coderslab.sports_betting.Repository.Football;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -10,7 +10,6 @@ import java.util.List;
 
 @Repository
 public interface FootballBetRepository extends JpaRepository<FootballBet, Long> {
-    List<FootballBet> findAllByFootballMatchEndIsGreaterThan(LocalDateTime localDateTime);
     List<FootballBet> findAllByFootballMatchEndIsLessThanAndFootballMatchCheckedIsFalseAndAcceptedIsTrue(LocalDateTime localDateTime);
     List<FootballBet> findAllByFootballMatch_StatusIsNotLike(String notFinished);
     List<FootballBet> findAllByAcceptedIsFalseAndExtraIs(User extraUser);

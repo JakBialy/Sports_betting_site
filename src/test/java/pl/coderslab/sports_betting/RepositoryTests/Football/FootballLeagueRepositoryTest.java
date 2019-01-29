@@ -9,7 +9,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.coderslab.sports_betting.Entity.Football.Country;
 import pl.coderslab.sports_betting.Entity.Football.FootballLeague;
-import pl.coderslab.sports_betting.Repository.Fotball.FootballLeagueRepository;
+import pl.coderslab.sports_betting.Repository.Football.FootballLeagueRepository;
 
 import java.util.List;
 

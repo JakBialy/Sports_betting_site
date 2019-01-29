@@ -52,7 +52,6 @@ public class CountryServiceImpl implements CountryService {
      */
 
     public Country getCountryById (Long countryId){
-        Country country = countryRepository.getOne(countryId);
-        return country;
+        return countryRepository.getOne(countryId);
     }
 }

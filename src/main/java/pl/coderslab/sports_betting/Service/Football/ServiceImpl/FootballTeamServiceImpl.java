@@ -5,13 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.coderslab.sports_betting.Entity.Football.FootballLeague;
 import pl.coderslab.sports_betting.Entity.Football.FootballTeam;
-import pl.coderslab.sports_betting.Repository.Fotball.FootballLeagueRepository;
-import pl.coderslab.sports_betting.Repository.Fotball.FootballTeamRepository;
+import pl.coderslab.sports_betting.Repository.Football.FootballLeagueRepository;
+import pl.coderslab.sports_betting.Repository.Football.FootballTeamRepository;
 import pl.coderslab.sports_betting.Service.Football.Service.FootballTeamService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class FootballTeamServiceImpl implements FootballTeamService {
