@@ -5,19 +5,12 @@ import pl.coderslab.sports_betting.Entity.Football.FootballMatch;
 import java.util.List;
 
 public interface FootballMatchService {
-
-    public List<FootballMatch> allMatches();
-
-    public List<FootballMatch> plannedMatches();
-
-    public List<FootballMatch> liveMatches();
-
-    public List<FootballMatch> homeMatches(Long teamId);
-
-    public List<FootballMatch> awayMatches(Long teamId);
-
-    public FootballMatch findById(Long teamId);
-
-    public List<FootballMatch> findMatchesWhereStartIsBetween(String localDateTime1, String localDateTime2);
+     List<FootballMatch> allMatches();
+     List<FootballMatch> plannedMatches();
+     List<FootballMatch> liveMatches();
+     List<FootballMatch> homeMatches(Long teamId);
+     List<FootballMatch> awayMatches(Long teamId);
+     FootballMatch findById(Long teamId);
+     List<FootballMatch> findMatchesWhereStartIsBetween(String localDateTime1, String localDateTime2);
 
     }

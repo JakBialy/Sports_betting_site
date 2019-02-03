@@ -16,11 +16,14 @@ import java.util.List;
 
 @Service
 public class LolBetServiceImpl implements LolBetService {
-    @Autowired
-    LolBetRepository lolBetRepository;
+    private final LolBetRepository lolBetRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    UserRepository userRepository;
+    public LolBetServiceImpl(LolBetRepository lolBetRepository, UserRepository userRepository) {
+        this.lolBetRepository = lolBetRepository;
+        this.userRepository = userRepository;
+    }
 
     /**
      * Method is saving bet, first is looking if status of match is equal to "planned"
@@ -56,8 +59,7 @@ public class LolBetServiceImpl implements LolBetService {
      * @return list selected user bets
      */
     public List<LolBet> findAllByUser(User user){
-        List<LolBet> list = lolBetRepository.findAllByUser(user);
-        return list;
+        return lolBetRepository.findAllByUser(user);
     }
 
     /**
@@ -66,7 +68,6 @@ public class LolBetServiceImpl implements LolBetService {
      * @return list of selected user bets
      */
     public List<LolBet> findAllByUserId(Long userId){
-        List<LolBet> list = lolBetRepository.findAllByUserId(userId);
-        return list;
+        return lolBetRepository.findAllByUserId(userId);
     }
 }

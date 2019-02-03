@@ -12,8 +12,12 @@ import java.util.Optional;
 
 @Component
 public class LolLeagueServiceImpl implements LolLeagueService {
+    private final LolLeagueRepository lolLeagueRepository;
+
     @Autowired
-    LolLeagueRepository lolLeagueRepository;
+    public LolLeagueServiceImpl(LolLeagueRepository lolLeagueRepository) {
+        this.lolLeagueRepository = lolLeagueRepository;
+    }
 
     /**
      * Method populate database with leagues and save them to

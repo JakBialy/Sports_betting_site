@@ -34,7 +34,7 @@ public class ApiFiltr implements Filter {
         String key = request.getParameter("key");
         boolean check = this.keyApiService.checkKey(key);
 
-        if (check == false) {
+        if (!check) {
             response.sendError(400, "Please check you APIkey");
         } else {
             filterChain.doFilter(servletRequest, servletResponse);

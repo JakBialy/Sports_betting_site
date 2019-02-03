@@ -27,14 +27,10 @@ import java.util.*;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    FootballTeamRepository footballTeamRepository;
-    @Autowired
-    LolTeamRepository lolTeamRepository;
-    @Autowired
-    FootballBetRepository footballBetRepository;
-    @Autowired
-    LolBetRepository lolBetRepository;
+    private final FootballTeamRepository footballTeamRepository;
+    private final LolTeamRepository lolTeamRepository;
+    private final FootballBetRepository footballBetRepository;
+    private final LolBetRepository lolBetRepository;
 
     private static final String DEFAULT_USER_ROLE_NAME = "ROLE_USER";
     private static final String ADMIN = "ROLE_ADMIN";
@@ -43,13 +39,17 @@ public class UserServiceImpl implements UserService {
     private final RoleService roleService;
     private final BCryptPasswordEncoder passwordEncoder;
 
-
+    @Autowired
     public UserServiceImpl(UserRepository userRepository,
                            RoleService roleService,
-                           BCryptPasswordEncoder passwordEncoder) {
+                           BCryptPasswordEncoder passwordEncoder, FootballTeamRepository footballTeamRepository, LolTeamRepository lolTeamRepository, FootballBetRepository footballBetRepository, LolBetRepository lolBetRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.roleService = roleService;
+        this.footballTeamRepository = footballTeamRepository;
+        this.lolTeamRepository = lolTeamRepository;
+        this.footballBetRepository = footballBetRepository;
+        this.lolBetRepository = lolBetRepository;
     }
 
     /**

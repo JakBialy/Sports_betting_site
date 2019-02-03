@@ -23,7 +23,7 @@ class FootballMatch {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     private LocalDateTime start;
 
@@ -44,17 +44,17 @@ class FootballMatch {
     @ManyToOne
     @JoinColumn(name = "winner_id")
     @JsonBackReference
-    FootballTeam winner;
+    private FootballTeam winner;
 
     @ManyToOne
     @JoinColumn(name = "homeTeam_id")
     @JsonBackReference
-    FootballTeam homeFootballTeam;
+    private FootballTeam homeFootballTeam;
 
     @ManyToOne
     @JoinColumn(name = "awayTeam_id")
     @JsonBackReference
-    FootballTeam awayFootballTeam;
+    private FootballTeam awayFootballTeam;
 
     @OneToOne(mappedBy="footballMatch")
     private FootballOdds footballOdds;

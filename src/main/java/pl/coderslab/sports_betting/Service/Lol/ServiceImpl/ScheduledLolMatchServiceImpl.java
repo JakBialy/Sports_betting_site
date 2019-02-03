@@ -22,14 +22,15 @@ import static java.util.Comparator.comparing;
 
 @Service
 public class ScheduledLolMatchServiceImpl implements ScheduledLolMatchService {
-
-    @Autowired
-    LolTeamRepository lolTeamRepository;
-
-    @Autowired
-    LolMatchRepository lolMatchRepository;
-
+    private final LolTeamRepository lolTeamRepository;
+    private final LolMatchRepository lolMatchRepository;
     private static int LolStaticCounter = 0;
+
+    @Autowired
+    public ScheduledLolMatchServiceImpl(LolTeamRepository lolTeamRepository, LolMatchRepository lolMatchRepository) {
+        this.lolTeamRepository = lolTeamRepository;
+        this.lolMatchRepository = lolMatchRepository;
+    }
 
     /**
      * Method is populating database with set of matches every 5 full minutes

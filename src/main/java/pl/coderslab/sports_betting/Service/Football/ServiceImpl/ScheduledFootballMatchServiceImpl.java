@@ -21,13 +21,15 @@ import static java.util.Comparator.comparing;
 @Service
 public class ScheduledFootballMatchServiceImpl implements ScheduledFootballMatchService {
 
-    @Autowired
-    FootballTeamRepository footballTeamRepository;
-
-    @Autowired
-    FootballMatchRepository footballMatchRepository;
-
+    private final FootballTeamRepository footballTeamRepository;
+    private final FootballMatchRepository footballMatchRepository;
     private static int footballStaticCounter = 0;
+
+    @Autowired
+    public ScheduledFootballMatchServiceImpl(FootballTeamRepository footballTeamRepository, FootballMatchRepository footballMatchRepository) {
+        this.footballTeamRepository = footballTeamRepository;
+        this.footballMatchRepository = footballMatchRepository;
+    }
 
     /**
      * Method is populating database with set of matches every 5 full minutes
@@ -187,13 +189,11 @@ public class ScheduledFootballMatchServiceImpl implements ScheduledFootballMatch
         int winsAway = awayFootballTeam.getWins();
         int winsHome = homeFootballTeam.getWins();
 
-        String blabla = "";
+        double ratioHome = (double)winsHome/(double)homeMatchesTotal * 100;
+        homeFootballTeam.setWinLostRatio(DoubleRounder.round(ratioHome,2));
 
-            Double ratioHome = (double)winsHome/(double)homeMatchesTotal * 100;
-            homeFootballTeam.setWinLostRatio(DoubleRounder.round(ratioHome,2));
-
-            Double ratioAway = (double)winsAway/(double)awayMatchesTotal * 100;
-            awayFootballTeam.setWinLostRatio(DoubleRounder.round(ratioAway,2));
+        double ratioAway = (double)winsAway/(double)awayMatchesTotal * 100;
+        awayFootballTeam.setWinLostRatio(DoubleRounder.round(ratioAway,2));
     }
 
     private void positioning() {

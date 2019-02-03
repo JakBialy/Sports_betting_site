@@ -16,12 +16,14 @@ import java.util.Random;
 
 @Service
 public class ScheduledFootballOddsServiceImpl implements ScheduledFootballOddsService {
+    private final FootballMatchRepository footballMatchRepository;
+    private final FootballOddsRepository footballOddsRepository;
 
     @Autowired
-    FootballMatchRepository footballMatchRepository;
-
-    @Autowired
-    FootballOddsRepository footballOddsRepository;
+    public ScheduledFootballOddsServiceImpl(FootballMatchRepository footballMatchRepository, FootballOddsRepository footballOddsRepository) {
+        this.footballMatchRepository = footballMatchRepository;
+        this.footballOddsRepository = footballOddsRepository;
+    }
 
     /**
      * After full 5 minutes method is generating odds
@@ -36,11 +38,11 @@ public class ScheduledFootballOddsServiceImpl implements ScheduledFootballOddsSe
     public void makeOdds() {
         List<FootballMatch> list = footballMatchRepository.findAllByStartIsGreaterThan(LocalDateTime.now());
         for (FootballMatch load: list) {
-            Double random1 = 1 + new Random().nextDouble() * (4 - 1);
-            Double random2 = 1 + new Random().nextDouble() * (4 - 1);
-            Double random3 = 1 + new Random().nextDouble() * (4 - 1);
-            Double random4 = 1 + new Random().nextDouble() * (4 - 1);
-            Double random5 = 1 + new Random().nextDouble() * (4 - 1);
+            double random1 = 1 + new Random().nextDouble() * (4 - 1);
+            double random2 = 1 + new Random().nextDouble() * (4 - 1);
+            double random3 = 1 + new Random().nextDouble() * (4 - 1);
+            double random4 = 1 + new Random().nextDouble() * (4 - 1);
+            double random5 = 1 + new Random().nextDouble() * (4 - 1);
 
             FootballOdds odd = new FootballOdds();
             odd.setOddHome(DoubleRounder.round(random1, 2));

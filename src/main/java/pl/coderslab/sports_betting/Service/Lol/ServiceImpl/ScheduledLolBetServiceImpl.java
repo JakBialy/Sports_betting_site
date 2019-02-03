@@ -20,11 +20,14 @@ import java.util.List;
 @Controller
 public class ScheduledLolBetServiceImpl implements ScheduledLolBetService {
 
-    @Autowired
-    LolBetRepository lolBetRepository;
-    @Autowired
-    UserRepository userRepository;
+    private final LolBetRepository lolBetRepository;
+    private final UserRepository userRepository;
 
+    @Autowired
+    public ScheduledLolBetServiceImpl(LolBetRepository lolBetRepository, UserRepository userRepository) {
+        this.lolBetRepository = lolBetRepository;
+        this.userRepository = userRepository;
+    }
 
     /**
      * Method is checking lol bets every full 5 minutes(ex 5:00, 10:00)

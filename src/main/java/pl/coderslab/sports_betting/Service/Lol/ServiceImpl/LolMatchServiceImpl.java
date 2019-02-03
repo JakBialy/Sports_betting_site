@@ -12,17 +12,19 @@ import java.util.List;
 
 @Service
 public class LolMatchServiceImpl implements LolMatchService {
+    private final LolMatchRepository lolMatchRepository;
 
     @Autowired
-    LolMatchRepository lolMatchRepository;
+    public LolMatchServiceImpl(LolMatchRepository lolMatchRepository) {
+        this.lolMatchRepository = lolMatchRepository;
+    }
 
     /**
      * Method is looking for all lol matches
      * @return list of all lol matches
      */
     public List<LolMatch> allMatches(){
-        List<LolMatch> list = lolMatchRepository.findAll();
-        return list;
+        return lolMatchRepository.findAll();
     }
 
     /**
@@ -30,16 +32,14 @@ public class LolMatchServiceImpl implements LolMatchService {
      * @return list of all planned matches
      */
     public List<LolMatch> plannedMatches(){
-        List<LolMatch> list = lolMatchRepository.findAllByStatus("planned");
-        return list;
+        return lolMatchRepository.findAllByStatus("planned");
     }
     /**
      * Method is looking for all live matches
      * @return list of actually played games
      */
     public List<LolMatch> liveMatches(){
-        List<LolMatch> live = lolMatchRepository.findAllByStatus("In game");
-        return live;
+        return lolMatchRepository.findAllByStatus("In game");
     }
 
     /**
@@ -48,8 +48,7 @@ public class LolMatchServiceImpl implements LolMatchService {
      * @return list of all team home matches
      */
     public List<LolMatch> homeMatches(Long teamId){
-        List<LolMatch> list = lolMatchRepository.findAllByHomeLolTeamIdOrderByStart(teamId);
-        return list;
+        return lolMatchRepository.findAllByHomeLolTeamIdOrderByStart(teamId);
     }
 
     /**
@@ -58,8 +57,7 @@ public class LolMatchServiceImpl implements LolMatchService {
      * @return list of all team away matches
      */
     public List<LolMatch> awayMatches(Long teamId){
-        List<LolMatch> list = lolMatchRepository.findAllByAwayLolTeamIdOrderByStart(teamId);
-        return list;
+        return lolMatchRepository.findAllByAwayLolTeamIdOrderByStart(teamId);
     }
 
     /**
@@ -68,8 +66,7 @@ public class LolMatchServiceImpl implements LolMatchService {
      * @return single lol match
      */
     public LolMatch findById(Long matchId){
-        LolMatch lolMatch = lolMatchRepository.getOne(matchId);
-        return lolMatch;
+        return lolMatchRepository.getOne(matchId);
     }
 
     /**
@@ -82,7 +79,6 @@ public class LolMatchServiceImpl implements LolMatchService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime dateTime1 = LocalDateTime.parse(localDateTime1, formatter);
         LocalDateTime dateTime2 = LocalDateTime.parse(localDateTime2, formatter);
-        List<LolMatch> list = lolMatchRepository.findAllByStartIsBetween(dateTime1,dateTime2);
-        return list;
+        return lolMatchRepository.findAllByStartIsBetween(dateTime1,dateTime2);
     }
 }

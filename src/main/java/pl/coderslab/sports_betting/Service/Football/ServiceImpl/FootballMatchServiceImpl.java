@@ -13,17 +13,19 @@ import java.util.List;
 
 @Service
 public class FootballMatchServiceImpl implements FootballMatchService {
+    private final FootballMatchRepository footballMatchRepository;
 
     @Autowired
-    FootballMatchRepository footballMatchRepository;
+    public FootballMatchServiceImpl(FootballMatchRepository footballMatchRepository) {
+        this.footballMatchRepository = footballMatchRepository;
+    }
 
     /**
      * Method is looking for all football matches
      * @return list of all football matches
      */
     public List<FootballMatch> allMatches(){
-        List<FootballMatch> list = footballMatchRepository.findAll();
-        return list;
+        return footballMatchRepository.findAll();
     }
 
     /**
@@ -31,8 +33,7 @@ public class FootballMatchServiceImpl implements FootballMatchService {
      * @return list of all planned matches
      */
     public List<FootballMatch> plannedMatches(){
-        List<FootballMatch> list = footballMatchRepository.findAllByStatus("planned");
-        return list;
+        return footballMatchRepository.findAllByStatus("planned");
     }
 
     /**
@@ -54,8 +55,7 @@ public class FootballMatchServiceImpl implements FootballMatchService {
      * @return list of all team home matches
      */
     public List<FootballMatch> homeMatches(Long teamId){
-        List<FootballMatch> list = footballMatchRepository.findAllByHomeFootballTeamIdOrderByStart(teamId);
-        return list;
+        return footballMatchRepository.findAllByHomeFootballTeamIdOrderByStart(teamId);
     }
 
     /**
@@ -64,8 +64,7 @@ public class FootballMatchServiceImpl implements FootballMatchService {
      * @return list of all team away matches
      */
     public List<FootballMatch> awayMatches(Long teamId){
-        List<FootballMatch> list = footballMatchRepository.findAllByAwayFootballTeamIdOrderByStart(teamId);
-        return list;
+        return footballMatchRepository.findAllByAwayFootballTeamIdOrderByStart(teamId);
     }
 
     /**
@@ -74,8 +73,7 @@ public class FootballMatchServiceImpl implements FootballMatchService {
      * @return single football match
      */
     public FootballMatch findById(Long matchId){
-        FootballMatch footballMatch = footballMatchRepository.getOne(matchId);
-        return footballMatch;
+        return footballMatchRepository.getOne(matchId);
     }
 
     /**
@@ -89,7 +87,6 @@ public class FootballMatchServiceImpl implements FootballMatchService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime dateTime1 = LocalDateTime.parse(localDateTime1, formatter);
         LocalDateTime dateTime2 = LocalDateTime.parse(localDateTime2, formatter);
-        List<FootballMatch> list = footballMatchRepository.findAllByStartIsBetween(dateTime1,dateTime2);
-        return list;
+        return footballMatchRepository.findAllByStartIsBetween(dateTime1,dateTime2);
     }
 }

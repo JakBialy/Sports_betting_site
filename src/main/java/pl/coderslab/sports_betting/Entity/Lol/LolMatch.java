@@ -24,34 +24,34 @@ class LolMatch {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
+    private Long id;
 
-    LocalDateTime start;
+    private LocalDateTime start;
 
-    LocalDateTime end;
+    private LocalDateTime end;
 
-    String status;
+    private String status;
 
-    int homeScore;
+    private int homeScore;
 
-    int awayScore;
+    private int awayScore;
 
     private boolean checked = false;
 
     @ManyToOne
     @JoinColumn(name = "winner_id")
     @JsonBackReference
-    LolTeam winner;
+    private LolTeam winner;
 
     @ManyToOne
     @JoinColumn(name = "homeTeam_id")
     @JsonBackReference
-    LolTeam homeLolTeam;
+    private LolTeam homeLolTeam;
 
     @ManyToOne
     @JoinColumn(name = "awayTeam_id")
     @JsonBackReference
-    LolTeam awayLolTeam;
+    private LolTeam awayLolTeam;
 
     @OneToOne(mappedBy="lolMatch")
     private LolOdds lolOdds;

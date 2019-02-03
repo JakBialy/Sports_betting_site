@@ -27,13 +27,13 @@ public @Data class FootballLeague extends League {
     @ManyToOne
     @JoinColumn(name = "country_id")
     @JsonBackReference
-    Country country;
+    private Country country;
 
     /**
      * Association with football teams in league
      */
     @OneToMany(mappedBy = "footballLeague")
-    List<FootballTeam> footballTeams = new ArrayList<>();
+    private List<FootballTeam> footballTeams = new ArrayList<>();
 
     // this kind of builder works just fine, but can't wait for stable super builder from lombok
     @Builder

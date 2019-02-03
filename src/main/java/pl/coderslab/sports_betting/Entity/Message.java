@@ -17,12 +17,12 @@ class Message {
      */
        @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    private Long id;
 
     @NotEmpty
-    String text;
+    private String text;
 
-    boolean open;
+    private boolean open;
 
     @NotNull
     @ManyToOne

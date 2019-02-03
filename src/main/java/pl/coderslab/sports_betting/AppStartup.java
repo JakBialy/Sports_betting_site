@@ -17,20 +17,20 @@ public class AppStartup implements ApplicationRunner {
 
     private final UserService userService;
 
-    @Autowired
-    CountryService countryService;
-    @Autowired
-    FootballLeagueService footballLeagueService;
-    @Autowired
-    FootballTeamService footballTeamService;
-    @Autowired
-    LolLeagueService lolLeagueService;
-    @Autowired
-    LolTeamService lolTeamService;
+    private final CountryService countryService;
+    private final FootballLeagueService footballLeagueService;
+    private final FootballTeamService footballTeamService;
+    private final LolLeagueService lolLeagueService;
+    private final LolTeamService lolTeamService;
 
     @Autowired
-    public AppStartup(UserService userService) {
+    public AppStartup(UserService userService, CountryService countryService, FootballLeagueService footballLeagueService, FootballTeamService footballTeamService, LolLeagueService lolLeagueService, LolTeamService lolTeamService) {
         this.userService = userService;
+        this.countryService = countryService;
+        this.footballLeagueService = footballLeagueService;
+        this.footballTeamService = footballTeamService;
+        this.lolLeagueService = lolLeagueService;
+        this.lolTeamService = lolTeamService;
     }
 
     @Override

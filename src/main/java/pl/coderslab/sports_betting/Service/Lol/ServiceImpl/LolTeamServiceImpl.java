@@ -11,16 +11,17 @@ import pl.coderslab.sports_betting.Service.Lol.Service.LolTeamService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class LolTeamServiceImpl implements LolTeamService {
+    private final LolLeagueRepository lolLeagueRepository;
+    private final LolTeamRepository lolTeamRepository;
 
     @Autowired
-    LolLeagueRepository lolLeagueRepository;
-
-    @Autowired
-    LolTeamRepository lolTeamRepository;
+    public LolTeamServiceImpl(LolLeagueRepository lolLeagueRepository, LolTeamRepository lolTeamRepository) {
+        this.lolLeagueRepository = lolLeagueRepository;
+        this.lolTeamRepository = lolTeamRepository;
+    }
 
     /**
      * Method is populating database with teams
@@ -46,7 +47,6 @@ public class LolTeamServiceImpl implements LolTeamService {
             list.add(lolTeam);
             }
         }
-
         lolTeamRepository.saveAll(list);
     }
 
@@ -73,7 +73,6 @@ public class LolTeamServiceImpl implements LolTeamService {
      * @return team
      */
     public LolTeam findTeamById(Long teamID){
-        LolTeam team = lolTeamRepository.getOne(teamID);
-        return team;
+        return lolTeamRepository.getOne(teamID);
     }
 }

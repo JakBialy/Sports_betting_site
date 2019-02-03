@@ -12,10 +12,9 @@ import java.util.Optional;
 
 @Component
 public class CountryServiceImpl implements CountryService {
-    @Autowired
-    CountryRepository countryRepository;
+    private final CountryRepository countryRepository;
 
-    // for test purposes
+    @Autowired
     public CountryServiceImpl(CountryRepository countryRepository) {
         this.countryRepository = countryRepository;
     }

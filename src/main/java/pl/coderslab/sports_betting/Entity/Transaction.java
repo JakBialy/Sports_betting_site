@@ -20,18 +20,18 @@ class Transaction {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    private Long id;
 
-    LocalDateTime created;
+    private LocalDateTime created;
 
     @NotNull
-    BigDecimal amount;
+    private BigDecimal amount;
 
     @NotEmpty
-    String type;
+    private String type;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonBackReference
-    User user;
+    private User user;
 }

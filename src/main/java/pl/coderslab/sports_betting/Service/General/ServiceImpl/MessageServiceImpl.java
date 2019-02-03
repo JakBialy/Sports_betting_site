@@ -10,9 +10,12 @@ import java.util.List;
 
 @Service
 public class MessageServiceImpl implements MessageService {
+    private final MessageRepository messageRepository;
 
     @Autowired
-    MessageRepository messageRepository;
+    public MessageServiceImpl(MessageRepository messageRepository) {
+        this.messageRepository = messageRepository;
+    }
 
     /**
      * Method is saving object message into databse

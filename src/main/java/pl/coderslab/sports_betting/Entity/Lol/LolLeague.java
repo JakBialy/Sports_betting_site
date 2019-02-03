@@ -25,7 +25,7 @@ public @Data class LolLeague extends League {
      * Association with League of Legends teams for specific league
      */
     @OneToMany(mappedBy = "lolLeague")
-    List<LolTeam> lolTeams = new ArrayList<>();
+    private List<LolTeam> lolTeams = new ArrayList<>();
 
     // this kind of builder works just fine, but can't wait for stable super builder from lombok
     public LolLeague(Long id, @NotEmpty String name, List<LolTeam> lolTeams) {

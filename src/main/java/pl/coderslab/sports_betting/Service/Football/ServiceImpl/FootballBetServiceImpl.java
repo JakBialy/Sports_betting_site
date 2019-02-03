@@ -17,11 +17,14 @@ import java.util.List;
 
 @Service
 public class FootballBetServiceImpl implements FootballBetService {
-    @Autowired
-    FootballBetRepository footballBetRepository;
+    private final FootballBetRepository footballBetRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    UserRepository userRepository;
+    public FootballBetServiceImpl(FootballBetRepository footballBetRepository, UserRepository userRepository) {
+        this.footballBetRepository = footballBetRepository;
+        this.userRepository = userRepository;
+    }
 
     /**
      * Method is saving bet, first is looking if status of match is equal to "planned"

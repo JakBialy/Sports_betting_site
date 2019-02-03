@@ -6,6 +6,5 @@ import pl.coderslab.sports_betting.Entity.Football.Country;
 
 @Repository
 public interface CountryRepository extends JpaRepository<Country, Long> {
-
     Country findOneByName(String name);
 }

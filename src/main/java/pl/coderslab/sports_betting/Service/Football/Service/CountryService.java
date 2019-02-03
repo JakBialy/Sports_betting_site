@@ -5,11 +5,7 @@ import pl.coderslab.sports_betting.Entity.Football.Country;
 import java.util.List;
 
 public interface CountryService {
-
-    public void populateDb();
-
-    public List<Country> allCountries();
-
-    public Country getCountryById (Long countryId);
-
-    }
+    void populateDb();
+    List<Country> allCountries();
+    Country getCountryById (Long countryId);
+}

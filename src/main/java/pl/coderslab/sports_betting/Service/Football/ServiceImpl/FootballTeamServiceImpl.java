@@ -14,12 +14,14 @@ import java.util.List;
 
 @Service
 public class FootballTeamServiceImpl implements FootballTeamService {
+    private final FootballLeagueRepository footballLeagueRepository;
+    private final FootballTeamRepository footballTeamRepository;
 
     @Autowired
-    FootballLeagueRepository footballLeagueRepository;
-
-    @Autowired
-    FootballTeamRepository footballTeamRepository;
+    public FootballTeamServiceImpl(FootballLeagueRepository footballLeagueRepository, FootballTeamRepository footballTeamRepository) {
+        this.footballLeagueRepository = footballLeagueRepository;
+        this.footballTeamRepository = footballTeamRepository;
+    }
 
     /**
      * Method is populating database witch teams
@@ -73,7 +75,6 @@ public class FootballTeamServiceImpl implements FootballTeamService {
      * @return team
      */
     public FootballTeam findTeamById(Long teamID){
-        FootballTeam team = footballTeamRepository.getOne(teamID);
-        return team;
+        return footballTeamRepository.getOne(teamID);
     }
 }

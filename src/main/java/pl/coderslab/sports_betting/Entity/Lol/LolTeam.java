@@ -19,22 +19,22 @@ class LolTeam {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    private Long id;
 
-    String team;
+    private String team;
 
-    int position;
+    private int position;
 
-    int wins;
+    private int wins;
 
-    int lost;
+    private int lost;
 
-    Double winLostRatio = 0.00;
+    private Double winLostRatio = 0.00;
 
     @ManyToOne
     @JoinColumn(name = "league_id")
     @JsonBackReference
-    LolLeague lolLeague;
+    private LolLeague lolLeague;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy="homeLolTeam")
     private List<LolMatch> homeTeamGames = new ArrayList<>();

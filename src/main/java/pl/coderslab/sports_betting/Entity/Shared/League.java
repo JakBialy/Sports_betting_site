@@ -20,11 +20,11 @@ public @Data
 abstract class League {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    private Long id;
 
     /**
      * League name
      */
     @NotEmpty
-    String name;
+    private String name;
 }

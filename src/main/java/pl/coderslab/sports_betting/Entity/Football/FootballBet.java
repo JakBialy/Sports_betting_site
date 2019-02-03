@@ -29,7 +29,7 @@ class FootballBet extends Bet {
     @ManyToOne
     @JoinColumn(name = "match_id")
     @JsonBackReference
-    FootballMatch footballMatch;
+    private FootballMatch footballMatch;
 
     /**
      *  Extra user - for group betting, user which was added by initial one
@@ -37,7 +37,7 @@ class FootballBet extends Bet {
     @ManyToOne
     @JoinColumn(name = "extra_id")
     @JsonBackReference
-    User extra;
+    private User extra;
 
     /**
      * Reference for team that was bet on
@@ -45,7 +45,7 @@ class FootballBet extends Bet {
     @ManyToOne
     @JoinColumn(name = "team_id")
     @JsonBackReference
-    FootballTeam footballTeam;
+    private FootballTeam footballTeam;
 
     // this kind of builder works just fine, but can't wait for stable super builder from lombok
     @Builder

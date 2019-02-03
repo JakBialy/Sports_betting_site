@@ -17,11 +17,11 @@ public @Data class Country {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    private Long id;
 
     @NotEmpty
-    String name;
+    private String name;
 
     @OneToMany(mappedBy = "country")
-    List<FootballLeague> footballLeagues = new ArrayList<>();
+    private List<FootballLeague> footballLeagues = new ArrayList<>();
 }

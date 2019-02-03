@@ -11,10 +11,14 @@ import pl.coderslab.sports_betting.Service.General.Service.KeyApiService;
 
 @Service
 public class KeyApiServiceImpl implements KeyApiService {
+    private final ApiRepository apiRepository;
+    private final UserRepository userRepository;
+
     @Autowired
-    ApiRepository apiRepository;
-    @Autowired
-    UserRepository userRepository;
+    public KeyApiServiceImpl(ApiRepository apiRepository, UserRepository userRepository) {
+        this.apiRepository = apiRepository;
+        this.userRepository = userRepository;
+    }
 
     /**
      * Method is generating random key for our API
@@ -39,7 +43,7 @@ public class KeyApiServiceImpl implements KeyApiService {
      * @return boolean check
      */
     public boolean checkKey(String key){
-         Boolean check = false;
+         boolean check = false;
         if (apiRepository.findOneByCode(key) != null) {
             check = true;
         }

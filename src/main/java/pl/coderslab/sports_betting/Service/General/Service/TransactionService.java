@@ -5,10 +5,6 @@ import pl.coderslab.sports_betting.Entity.Transaction;
 import java.util.List;
 
 public interface TransactionService {
-
-    public void saveTransaction(Transaction transaction);
-
-    public List<Transaction> findAllByUserId(Long id);
-
-
-    }
+     void saveTransaction(Transaction transaction);
+     List<Transaction> findAllByUserId(Long id);
+}

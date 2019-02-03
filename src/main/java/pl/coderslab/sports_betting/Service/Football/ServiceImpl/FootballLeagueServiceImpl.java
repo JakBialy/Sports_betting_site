@@ -12,11 +12,15 @@ import java.util.List;
 
 @Component
 public class FootballLeagueServiceImpl implements FootballLeagueService {
-    @Autowired
-    CountryRepository countryRepository;
+
+    private final CountryRepository countryRepository;
+    private final FootballLeagueRepository footballLeagueRepository;
 
     @Autowired
-    FootballLeagueRepository footballLeagueRepository;
+    public FootballLeagueServiceImpl(CountryRepository countryRepository, FootballLeagueRepository footballLeagueRepository) {
+        this.countryRepository = countryRepository;
+        this.footballLeagueRepository = footballLeagueRepository;
+    }
 
     /**
      * Method populate database with leagues and save them to

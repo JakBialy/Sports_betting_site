@@ -16,12 +16,14 @@ import java.util.Random;
 
 @Service
 public class ScheduledLolOddsServiceImpl implements ScheduledLollOddsService {
+    private final LolMatchRepository lolMatchRepository;
+    private final LolOddsRepository lolOddsRepository;
 
     @Autowired
-    LolMatchRepository lolMatchRepository;
-
-    @Autowired
-    LolOddsRepository lolOddsRepository;
+    public ScheduledLolOddsServiceImpl(LolMatchRepository lolMatchRepository, LolOddsRepository lolOddsRepository) {
+        this.lolMatchRepository = lolMatchRepository;
+        this.lolOddsRepository = lolOddsRepository;
+    }
 
     /**
      * After full 5 minutes method is generating odds
@@ -36,11 +38,11 @@ public class ScheduledLolOddsServiceImpl implements ScheduledLollOddsService {
     public void makeOdds() {
         List<LolMatch> list = lolMatchRepository.findAllByStartIsGreaterThan(LocalDateTime.now());
         for (LolMatch load: list) {
-            Double random1 = 1 + new Random().nextDouble() * (4 - 1);
-            Double random2 = 1 + new Random().nextDouble() * (4 - 1);
-            Double random3 = 1 + new Random().nextDouble() * (4 - 1);
-            Double random4 = 1 + new Random().nextDouble() * (4 - 1);
-            Double random5 = 1 + new Random().nextDouble() * (4 - 1);
+            double random1 = 1 + new Random().nextDouble() * (4 - 1);
+            double random2 = 1 + new Random().nextDouble() * (4 - 1);
+            double random3 = 1 + new Random().nextDouble() * (4 - 1);
+            double random4 = 1 + new Random().nextDouble() * (4 - 1);
+            double random5 = 1 + new Random().nextDouble() * (4 - 1);
 
             LolOdds odd = new LolOdds();
             odd.setOddHome(DoubleRounder.round(random1, 2));

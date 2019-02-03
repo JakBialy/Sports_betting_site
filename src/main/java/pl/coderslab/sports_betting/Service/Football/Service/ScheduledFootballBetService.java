@@ -6,9 +6,5 @@ import pl.coderslab.sports_betting.Entity.User;
 import java.math.BigDecimal;
 
 public interface ScheduledFootballBetService {
-
-    public void checkingBets();
-
-    public void moneyToUser(FootballBet footballBet, User user, BigDecimal winOdd);
-
-    }
+     void moneyToUser(FootballBet footballBet, User user, BigDecimal winOdd);
+}

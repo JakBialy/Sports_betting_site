@@ -20,10 +20,14 @@ import java.util.List;
 @Controller
 public class ScheduledFootballBetServiceImpl implements ScheduledFootballBetService {
 
+    private final FootballBetRepository footballBetRepository;
+    private final UserRepository userRepository;
+
     @Autowired
-    FootballBetRepository footballBetRepository;
-    @Autowired
-    UserRepository userRepository;
+    public ScheduledFootballBetServiceImpl(FootballBetRepository footballBetRepository, UserRepository userRepository) {
+        this.footballBetRepository = footballBetRepository;
+        this.userRepository = userRepository;
+    }
 
     /**
      * Method is checking football bets every full 5 minutes(ex 5:00, 10:00)

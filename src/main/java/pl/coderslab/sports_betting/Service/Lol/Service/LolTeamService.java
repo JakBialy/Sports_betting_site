@@ -5,13 +5,8 @@ import pl.coderslab.sports_betting.Entity.Lol.LolTeam;
 import java.util.List;
 
 public interface LolTeamService {
-
-    public void populateDb();
-
-    public List<LolTeam> allTeams();
-
-    public List<LolTeam> findTeamsByLeagueId(Long leagueId);
-
-    public LolTeam findTeamById(Long teamID);
-
-    }
+     void populateDb();
+     List<LolTeam> allTeams();
+     List<LolTeam> findTeamsByLeagueId(Long leagueId);
+     LolTeam findTeamById(Long teamID);
+}

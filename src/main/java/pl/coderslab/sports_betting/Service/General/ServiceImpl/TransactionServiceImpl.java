@@ -18,10 +18,14 @@ import java.util.List;
 @Service
 public class TransactionServiceImpl implements TransactionService {
 
+    private final TransactionRepository transactionRepository;
+    private final UserRepository userRepository;
+
     @Autowired
-    TransactionRepository transactionRepository;
-    @Autowired
-    UserRepository userRepository;
+    public TransactionServiceImpl(TransactionRepository transactionRepository, UserRepository userRepository) {
+        this.transactionRepository = transactionRepository;
+        this.userRepository = userRepository;
+    }
 
     /**
      * Method is saving transaction
@@ -73,7 +77,6 @@ public class TransactionServiceImpl implements TransactionService {
      * @return list of transactions
      */
     public List<Transaction> findAllByUserId(Long id){
-        List<Transaction> list = transactionRepository.findAllByUserId(id);
-        return list;
+        return transactionRepository.findAllByUserId(id);
     }
 }
