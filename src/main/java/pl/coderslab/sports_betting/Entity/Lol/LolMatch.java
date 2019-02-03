@@ -3,6 +3,9 @@ package pl.coderslab.sports_betting.Entity.Lol;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import pl.coderslab.sports_betting.Entity.Shared.Match;
 
 
 import javax.persistence.*;
@@ -10,57 +13,58 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * LolMatch is storing football match parameters used
+ * to monitoring matches, setting and calculating bets,
+ * inheriting common variables from Match class
+ */
 @Entity
 @Table(name = "lolMatches")
 public @Data
-class LolMatch {
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+class LolMatch extends Match {
 
     /**
-     * FootballMatch is storing lol match parameters used
-     * to monitoring matches, setting and calculating bets
-     *
-     * boolean checked is predefined as a false - after bet check (bet scheduled service)
-     * parameter is changed into true
+     * team which won match
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    private LocalDateTime start;
-
-    private LocalDateTime end;
-
-    private String status;
-
-    private int homeScore;
-
-    private int awayScore;
-
-    private boolean checked = false;
-
     @ManyToOne
     @JoinColumn(name = "winner_id")
     @JsonBackReference
     private LolTeam winner;
 
+    /**
+     * home team
+     */
     @ManyToOne
     @JoinColumn(name = "homeTeam_id")
     @JsonBackReference
     private LolTeam homeLolTeam;
 
+    /**
+     * away team
+     */
     @ManyToOne
     @JoinColumn(name = "awayTeam_id")
     @JsonBackReference
     private LolTeam awayLolTeam;
 
+    /**
+     * odds generated for this match
+     */
     @OneToOne(mappedBy="lolMatch")
     private LolOdds lolOdds;
 
+    /**
+     * list of bets set for this match
+     */
     @OneToMany(mappedBy="lolMatch")
-    // blocking list of bets for external API
     private List<LolBet> lolBetList = new ArrayList<>();
 
-    @JsonIgnore
+    /**
+     * showed here just for blocking list of bets for external API
+     * @return list of lol bets
+     */    @JsonIgnore
     public List<LolBet> getLolBetList() {
         return lolBetList;
     }
