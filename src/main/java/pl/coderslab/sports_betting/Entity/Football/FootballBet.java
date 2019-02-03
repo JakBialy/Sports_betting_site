@@ -1,52 +1,28 @@
 package pl.coderslab.sports_betting.Entity.Football;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import pl.coderslab.sports_betting.Entity.Shared.Bet;
 import pl.coderslab.sports_betting.Entity.User;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "footballBets")
+@NoArgsConstructor
 public @Data
-class FootballBet {
+class FootballBet extends Bet {
 
     /**
-     * Football bet is a class for saving bet parameter
-     * String type is type of bet (win,draw,lost)
-     * Money store amount of money betted
-     * LocalDateTime stores time when bet was made
-     * Boolean Winner is a boolean variable which is set to true/false after bet results(in scheduled bet service)
-     * Odd stores odd ratio for specific bet(based on bet type)
-     * Class FootballBet is connected with FootballMatch, User and FootballTeam
+     * FootballBet is a class for saving football bet parameter, common variables are inherited
+     * from Bet abstract class, class FootballBet is connected with FootballMatch, User, User(extra) and FootballTeam
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @NotEmpty
-    private String type;
-
-    @Min(0)
-    @NotNull
-    private BigDecimal money;
-
-    private LocalDateTime date;
-
-    private Boolean winner;
-
-    private BigDecimal odd;
-
-    private float percentage;
-
-    private Boolean accepted = true;
-
-    private Boolean groupBet = false;
 
     @ManyToOne
     @JoinColumn(name = "match_id")
@@ -58,6 +34,9 @@ class FootballBet {
     @JsonBackReference
     User user;
 
+    /**
+     *  extra - for group betting, user which was added by initial one
+     */
     @ManyToOne
     @JoinColumn(name = "extra_id")
     @JsonBackReference
@@ -67,4 +46,16 @@ class FootballBet {
     @JoinColumn(name = "team_id")
     @JsonBackReference
     FootballTeam footballTeam;
+
+    // this kind of builder works just fine, but can't wait for stable super builder from lombok
+    @Builder
+    public FootballBet(Long id, String type, BigDecimal money, LocalDateTime date,
+                       Boolean winner, BigDecimal odd, Boolean groupBet, float percentage, Boolean accepted,
+                       FootballMatch footballMatch, User user, User extra, FootballTeam footballTeam) {
+        super(id, type, money, date, winner, odd, groupBet, percentage, accepted);
+        this.footballMatch = footballMatch;
+        this.user = user;
+        this.extra = extra;
+        this.footballTeam = footballTeam;
+    }
 }

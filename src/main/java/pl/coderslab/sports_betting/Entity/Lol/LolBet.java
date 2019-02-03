@@ -1,47 +1,29 @@
 package pl.coderslab.sports_betting.Entity.Lol;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Builder;
 import lombok.Data;
 
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import pl.coderslab.sports_betting.Entity.Shared.Bet;
 import pl.coderslab.sports_betting.Entity.User;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "lolBets")
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
 public @Data
-class LolBet {
+class LolBet extends Bet {
 
     /**
-     * LolBet is a class for saving bet parameter
-     * String type is type of bet (win,lost)
-     * Money store amount of money betted
-     * LocalDateTime stores time when bet was made
-     * Boolean Winner is a boolean variable which is set to true/false after bet results(in scheduled bet service)
-     * Odd stores odd ratio for specific bet(based on bet type)
-     * Class LolBet is connected with LolMatch, User and LolTeam
+     * LolBet is a class for saving League of Legends bet parameter, common variables are inherited
+     * from Bet abstract class, class LolBet is connected with LolMatch, User and LolTeam
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @NotEmpty
-    private String type;
-
-    @Min(1)
-    @NotNull
-    private BigDecimal money;
-
-    private BigDecimal odd;
-
-    private LocalDateTime date;
-
-    private Boolean winner;
 
     @ManyToOne
     @JoinColumn(name = "match_id")
@@ -57,4 +39,14 @@ class LolBet {
     @JoinColumn(name = "team_id")
     @JsonBackReference
     LolTeam lolTeam;
+
+    // this kind of builder works just fine, but can't wait for stable super builder from lombok
+    @Builder
+    public LolBet(Long id, String type, BigDecimal money, LocalDateTime date, Boolean winner, BigDecimal odd,
+                  float percentage, Boolean accepted, Boolean groupBet, LolMatch lolMatch, User user, LolTeam lolTeam) {
+        super(id, type, money, date, winner, odd, groupBet, percentage, accepted);
+        this.lolMatch = lolMatch;
+        this.user = user;
+        this.lolTeam = lolTeam;
+    }
 }
