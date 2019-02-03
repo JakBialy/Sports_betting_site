@@ -7,21 +7,25 @@ import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Specific class for football, storing information about country
+ */
 @Entity
 @Table(name = "countries")
 public @Data class Country {
-    /** Country is a class for football matches
-     *  Name is a name of country, and country has relation one to many with footballLeagues
-     */
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    /**
+     * name of country
+     */
     @NotEmpty
     private String name;
 
+    /**
+     * association with football leagues in specific country
+     */
     @OneToMany(mappedBy = "country")
     private List<FootballLeague> footballLeagues = new ArrayList<>();
 }
