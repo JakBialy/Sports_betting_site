@@ -13,6 +13,10 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * LolBet is a class for saving League of Legends bet parameter, common variables are inherited
+ * from Bet abstract class, class LolBet is connected with LolMatch, User and LolTeam
+ */
 @Entity
 @Table(name = "lolBets")
 @EqualsAndHashCode(callSuper = true)
@@ -21,20 +25,16 @@ public @Data
 class LolBet extends Bet {
 
     /**
-     * LolBet is a class for saving League of Legends bet parameter, common variables are inherited
-     * from Bet abstract class, class LolBet is connected with LolMatch, User and LolTeam
+     * Association with match that was bet
      */
-
     @ManyToOne
     @JoinColumn(name = "match_id")
     @JsonBackReference
     LolMatch lolMatch;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonBackReference
-    User user;
-
+    /**
+     * Reference for team that was bet on
+     */
     @ManyToOne
     @JoinColumn(name = "team_id")
     @JsonBackReference
@@ -44,9 +44,8 @@ class LolBet extends Bet {
     @Builder
     public LolBet(Long id, String type, BigDecimal money, LocalDateTime date, Boolean winner, BigDecimal odd,
                   float percentage, Boolean accepted, Boolean groupBet, LolMatch lolMatch, User user, LolTeam lolTeam) {
-        super(id, type, money, date, winner, odd, groupBet, percentage, accepted);
+        super(id, type, money, date, winner, odd, groupBet, percentage, accepted, user);
         this.lolMatch = lolMatch;
-        this.user = user;
         this.lolTeam = lolTeam;
     }
 }

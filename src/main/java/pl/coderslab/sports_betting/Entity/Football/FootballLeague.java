@@ -1,36 +1,45 @@
 package pl.coderslab.sports_betting.Entity.Football;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import pl.coderslab.sports_betting.Entity.Shared.League;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * FootballLeague represents data about specific football league, and
+ * is inheriting common variables from League class
+ */
 @Entity
 @Table(name = "footballLeagues")
-public @Data class FootballLeague {
-
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+public @Data class FootballLeague extends League {
     /**
-     * FootballLeague has one main variable - String name
-     * other are conections to Country and FootballName
-     * Is used to name football leagues
+     * Association with country, relevant for league
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
-
-    @NotEmpty
-    String name;
-
     @ManyToOne
     @JoinColumn(name = "country_id")
     @JsonBackReference
     Country country;
 
+    /**
+     * Association with football teams in league
+     */
     @OneToMany(mappedBy = "footballLeague")
     List<FootballTeam> footballTeams = new ArrayList<>();
 
+    // this kind of builder works just fine, but can't wait for stable super builder from lombok
+    @Builder
+    public FootballLeague(Long id, @NotEmpty String name, Country country, List<FootballTeam> footballTeams) {
+        super(id, name);
+        this.country = country;
+        this.footballTeams = footballTeams;
+    }
 }

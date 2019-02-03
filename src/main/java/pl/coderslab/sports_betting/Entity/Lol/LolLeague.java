@@ -1,6 +1,9 @@
 package pl.coderslab.sports_betting.Entity.Lol;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import pl.coderslab.sports_betting.Entity.Shared.League;
 
 
 import javax.persistence.*;
@@ -9,23 +12,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * LolLeague represents data about specific League of Legends league, and
+ * is inheriting common variables from League class
+ */
 @Entity
 @Table(name = "lolLeagues")
-public @Data class LolLeague {
-
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+public @Data class LolLeague extends League {
     /**
-     * LolLeague has one main variable - String name
-     * other are conections to Country and FootballName
-     * Is used to name football leagues
+     * Association with League of Legends teams for specific league
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
-
-    @NotEmpty
-    String name;
-
     @OneToMany(mappedBy = "lolLeague")
     List<LolTeam> lolTeams = new ArrayList<>();
 
+    // this kind of builder works just fine, but can't wait for stable super builder from lombok
+    public LolLeague(Long id, @NotEmpty String name, List<LolTeam> lolTeams) {
+        super(id, name);
+        this.lolTeams = lolTeams;
+    }
 }

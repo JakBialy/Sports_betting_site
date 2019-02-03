@@ -1,28 +1,27 @@
 package pl.coderslab.sports_betting.Entity.Shared;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.coderslab.sports_betting.Entity.User;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * Abstract class collecting common data for all type of bets
+ */
+
 @MappedSuperclass
 @AllArgsConstructor
 @NoArgsConstructor
 public @Data
 abstract class Bet{
-    /**
-     * Abstract class collecting common data for all type of bets
-     */
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -70,4 +69,13 @@ abstract class Bet{
      * is bet accepted
      */
     private Boolean accepted = true;
+
+
+    /**
+     * User which make a bet
+     */
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonBackReference
+    User user;
 }
