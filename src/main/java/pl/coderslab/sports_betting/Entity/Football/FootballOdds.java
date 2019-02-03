@@ -1,38 +1,54 @@
 package pl.coderslab.sports_betting.Entity.Football;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import pl.coderslab.sports_betting.Entity.Shared.Odds;
 
 import javax.persistence.*;
 
+/**
+ * class for odds for football matches, which are generated in odd scheduled service
+ * inheriting basic fields from Odds abstract class
+ */
 @Entity
 @Table(name = "footballOdds")
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
 public @Data
-class FootballOdds {
+class FootballOdds extends Odds {
 
     /**
-     * Football Odds are storing data about odds
-     * created by random generator (odd scheduled service)
-     * Football Odds are connected with footballMatch (to have access to actual odds)
+     * odds for betting on home team for half time of a game
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private double oddHomeHalf;
 
-    private String bookmaker;
+    /**
+     * odds for betting on away team for half time of a game
+     */
+    private double oddAwayHalf;
 
-    private Double oddHome;
+    /**
+     * odds for draw
+     */
+    private double oddX;
 
-    private Double oddHomeHalf;
-
-    private Double oddX;
-
-    private Double oddAway;
-
-    private Double oddAwayHalf;
-
+    /**
+     * association with football match connected with odds
+     */
     @OneToOne
     @JoinColumn(name = "match_id")
     @JsonBackReference
     private FootballMatch footballMatch;
+
+    @Builder
+    public FootballOdds(Long id, String bookmaker, double oddHome, double oddAway, double oddHomeHalf, double oddAwayHalf, double oddX, FootballMatch footballMatch) {
+        super(id, bookmaker, oddHome, oddAway);
+        this.oddHomeHalf = oddHomeHalf;
+        this.oddAwayHalf = oddAwayHalf;
+        this.oddX = oddX;
+        this.footballMatch = footballMatch;
+    }
 }
