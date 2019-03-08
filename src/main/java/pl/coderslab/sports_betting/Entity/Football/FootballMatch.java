@@ -5,10 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import pl.coderslab.sports_betting.Entity.Shared.Match;
+import pl.coderslab.sports_betting.Entity.SharedAbstractEntites.Match;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +18,9 @@ import java.util.List;
  */
 @Entity
 @Table(name = "footballMatches")
-public @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
+public @Data
 class FootballMatch extends Match {
 
     /**

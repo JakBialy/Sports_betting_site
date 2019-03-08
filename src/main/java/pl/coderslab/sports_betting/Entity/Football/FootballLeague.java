@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import pl.coderslab.sports_betting.Entity.Shared.League;
+import pl.coderslab.sports_betting.Entity.SharedAbstractEntites.League;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;

@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>pl.coderslab</groupId>
-    <artifactId>spring-security-jdbc-exercise</artifactId>
+    <artifactId>sports-betting</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 

@@ -1,4 +1,4 @@
-package pl.coderslab.sports_betting.Entity.Shared;
+package pl.coderslab.sports_betting.Entity.SharedAbstractEntites;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -5,11 +5,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import pl.coderslab.sports_betting.Entity.Shared.Match;
+import pl.coderslab.sports_betting.Entity.SharedAbstractEntites.Match;
 
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +19,9 @@ import java.util.List;
  */
 @Entity
 @Table(name = "lolMatches")
-public @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
+public @Data
 class LolMatch extends Match {
 
     /**
@@ -64,7 +63,8 @@ class LolMatch extends Match {
     /**
      * showed here just for blocking list of bets for external API
      * @return list of lol bets
-     */    @JsonIgnore
+     */
+    @JsonIgnore
     public List<LolBet> getLolBetList() {
         return lolBetList;
     }

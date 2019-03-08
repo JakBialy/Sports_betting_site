@@ -1,4 +1,4 @@
-package pl.coderslab.sports_betting.Entity.Shared;
+package pl.coderslab.sports_betting.Entity.SharedAbstractEntites;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;

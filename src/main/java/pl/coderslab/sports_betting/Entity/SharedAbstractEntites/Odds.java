@@ -1,4 +1,4 @@
-package pl.coderslab.sports_betting.Entity.Shared;
+package pl.coderslab.sports_betting.Entity.SharedAbstractEntites;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,23 +8,32 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NotEmpty;
 
 /**
- * Abstract class collecting common data for all type of leagues
+ * Abstract class storing common variables for all type of odds
+ * which are created by random generator (odd scheduled service)
  */
 @MappedSuperclass
 @AllArgsConstructor
 @NoArgsConstructor
 public @Data
-abstract class League {
+abstract class Odds {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     /**
-     * League name
+     * bookmaker for odds
      */
-    @NotEmpty
-    private String name;
+    private String bookmaker;
+
+    /**
+     * odds for home team
+     */
+    private double oddHome;
+
+    /**
+     * odds for away team
+     */
+    private double oddAway;
 }
