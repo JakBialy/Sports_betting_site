@@ -18,4 +18,4 @@ Admin role is available in this project, Admin can remove users, look into histo
 
 Feel free to download and try!
 
-Now is in rebuilding - is going to be well tested by unit tests and re-written to use more abstraction and clean-up code
+Now is in rebuilding - is going to be well tested by unit tests and re-written to use more abstraction and clean-up code, dockerize and put into Heroku server
