@@ -17,3 +17,5 @@ Project generates own API for possible external clients secured by api key
 Admin role is available in this project, Admin can remove users, look into history of their bets, wallet charges and can create new admins.
 
 Feel free to download and try!
+
+Now is in rebuilding - is going to be well tested by unit tests and re-written to use more abstraction and clean-up code
