@@ -1,6 +1,9 @@
 # Sports betting site
 The final project of Java programming course
 
+Docker images are available at :
+https://cloud.docker.com/u/jakbialy/repository/list
+
 Elements used in the project:
 Spring  boot project with several extra dependencies : 
 Hibernate,Lombook,Security, Thymeleaf, Jackson,  Javafaker, Tests, Swagger (temporarily disabled), with dependencies managment by Maven, Front-End is made on bootstrap  modified free template (SbAdmin), relation database is managed by MySQL.
@@ -18,4 +21,4 @@ Admin role is available in this project, Admin can remove users, look into histo
 
 Feel free to download and try!
 
-Now is in rebuilding - is going to be well tested by unit tests and re-written to use more abstraction and clean-up code, dockerize and put into Heroku server
+Now is in rebuilding - is going to be well tested by unit tests and re-written to use more abstraction, clean up code and put into Heroku server
