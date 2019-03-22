@@ -2,7 +2,7 @@
 The final project of Java programming course
 
 Docker images are available at :
-https://cloud.docker.com/u/jakbialy/repository/list
+https://hub.docker.com/u/jakbialy
 
 Elements used in the project:
 Spring  boot project with several extra dependencies : 
@@ -22,3 +22,10 @@ Admin role is available in this project, Admin can remove users, look into histo
 Feel free to download and try!
 
 Now is in rebuilding - is going to be well tested by unit tests and re-written to use more abstraction, clean up code and put into Heroku server
+What to do in rebuilding:
+- Add unit tests, at least to all services
+- Add integration tests, using for example liquid database
+- Add extra abstraction layer to services
+- Use dto objects for API instead of regular models
+- Solve minor bugs
+- Build extra branch which uses postgreSQL (for deploying to Heroku)
