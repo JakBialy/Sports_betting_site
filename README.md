@@ -29,3 +29,5 @@ What to do in rebuilding:
 - Use dto objects for API instead of regular models
 - Solve minor bugs
 - Build extra branch which uses postgreSQL (for deploying to Heroku)
+
+There's also a lot of minor issues, probably this project need re-writing to achieve good standards
